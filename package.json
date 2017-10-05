@@ -25,7 +25,7 @@
     "karma-phantomjs-launcher": "^1.0.4"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "6.0.0"
   },
   "description": "Orienteering rancing system for results from SFR and WinOrient systems",
   "version": "1.0.0",
@@ -70,7 +70,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oleksandrstarov/orienteering_ranking.git"
+    "url": "https://gitlab.com/oleksandrstarov/orienteering_ranking.git"
   },
   "keywords": [
     "orienteering",
@@ -79,7 +79,7 @@
   "author": "OS",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oleksandrstarov/orienteering_ranking/issues"
+    "url": "https://gitlab.com/oleksandrstarov/orienteering_ranking/issues"
   },
-  "homepage": "https://github.com/oleksandrstarov/orienteering_ranking#readme"
+  "homepage": "https://gitlab.com/oleksandrstarov/orienteering_ranking/wikis/home"
 }
