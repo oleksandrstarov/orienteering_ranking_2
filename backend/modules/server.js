@@ -16,7 +16,7 @@ var serverProps= {
      cacheTime: 1200
 };
 var hostname = process.env.OPENSHIFT_NODEJS_IP  || this.serverSettings.hostname || process.env.IP || 'localhost';
-var port = process.env.OPENSHIFT_NODEJS_PORT || this.serverSettings.port || process.env.PORT || 3000;
+var port = process.env.OPENSHIFT_NODEJS_PORT || this.serverSettings.port || process.env.PORT || 8080;
 
 var app = express();
 app.use(compression());
