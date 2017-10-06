@@ -16,16 +16,27 @@
   "engines": {
     "node": "6.0.0"
   },
-  "description": "Orienteering ranking system for results from SFR and WinOrient systems",
+  "description": "Orienteering rancing system for results from SFR and WinOrient systems",
   "version": "1.0.0",
   "main": "backend/application.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "angular": "1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-chart.js": "^1.1.1",
+    "angular-material": "^1.1.5",
+    "angular-messages": "^1.6.1",
+    "angular-resource": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
     "assert": "^1.4.1",
     "body-parser": "^1.15.1",
+    "bootstrap": "^3.3.6",
     "buffer": "^4.6.0",
+    "chart.js": "^2.5.0",
     "cheerio": "^0.20.0",
     "compression": "^1.6.2",
     "del": "^2.2.0",
@@ -34,6 +45,8 @@
     "font-awesome": "^4.6.3",
     "http": "0.0.0",
     "iconv-lite": "^0.4.18",
+    "jquery": "^1.12.4",
+    "mongodb": "^2.1.21",
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
     "node-schedule": "^1.1.0",
@@ -41,6 +54,7 @@
     "request": "^2.72.0"
   },
   "scripts": {
+    "test": "karma start my.conf.js karma run",
     "start": "node backend/application.js"
   },
   "repository": {

@@ -196,6 +196,7 @@ app.get('*', function(req, res){
 module.exports.startServer = function(){
     app.listen(port, hostname, function(){
         console.log('server running at http://'+hostname+":"+port+"/");
+        console.log(__dirname);
     });
 };
 
