@@ -17,7 +17,7 @@ var serverProps= {
 };
 
 var hostname = this.serverSettings.hostname || process.env.IP || 'localhost';
-var port =  this.serverSettings.port || process.env.PORT || 3000;
+var port =  this.serverSettings.port || process.env.PORT || 8080;
 
 var app = express();
 app.use(compression());
