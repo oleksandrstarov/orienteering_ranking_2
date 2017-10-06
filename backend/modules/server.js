@@ -15,8 +15,8 @@ this.serverSettings = {
 var serverProps= {
      cacheTime: 1200
 };
-var hostname = process.env.OPENSHIFT_NODEJS_IP  || this.serverSettings.hostname || process.env.IP || 'localhost';
-var port = process.env.OPENSHIFT_NODEJS_PORT || this.serverSettings.port || process.env.PORT || 3000;
+var hostname = this.serverSettings.hostname || process.env.IP || 'localhost';
+var port =  this.serverSettings.port || process.env.PORT || 3000;
 
 var app = express();
 app.use(compression());
@@ -33,7 +33,7 @@ app.use(express.static(__dirname + "./../../dist"));
 app.use(bodyParser.json());
 
 var auth = function(req, res, next) {
-  if (!process.env.OPENSHIFT_NODEJS_IP || req.session && req.session.user === "admin01" && req.session.admin){
+  if (req.session && req.session.user === "admin01" && req.session.admin){
     return next();  
   }else{
     return res.sendStatus(401);  
