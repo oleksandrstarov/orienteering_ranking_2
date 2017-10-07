@@ -36,7 +36,7 @@ cron.scheduleJob(rule, function(){
 });
 
 //manual start
-server.startServer();
+//server.startServer();
 
 db.initDB(function(){
     updater.updateData();

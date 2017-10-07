@@ -20,9 +20,9 @@ var sqlSettings = {
 
 var sqlSettingsOS = {
     host     :  process.env.OPENSHIFT_MYSQL_DB_HOST,
-    user     : 'adminFL8Dm1m',
-    password : '5wWNg1cqJ6y5',
-    database : 'ranking'
+    user     : 'user',
+    password : 'root',
+    database : 'ORIENTEERING'
 };
 
 var groupSettings = [
@@ -92,7 +92,7 @@ module.exports.getSettings =function(){
 };
 
 module.exports.getSQLSettings =function(){
-    if(process.env.OPENSHIFT_MYSQL_DB_HOST){
+    if(process.env.NODE_ENV){
         return sqlSettingsOS;
     }
     return sqlSettings;
