@@ -23,6 +23,7 @@ connection.end();
 //////////////////////////////////////////////////
 */
 var connection;
+console.log('database file');
 
 function handleDisconnect() {
   console.log(settings);
