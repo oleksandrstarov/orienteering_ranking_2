@@ -631,7 +631,7 @@ module.exports.addResults = function(competition, callback){
       + "'" + group.data[j].result + "'" + ', '
       +  group.data[j].place + ', '
       +  group.data[j].points + ', '
-      + "'" +  'L' + "'" + ', '
+      + "'" +  'MIDDLE' + "'" + ', '
       +  "'" + group.data[j].timeBehind + "', "
       +  "'" + group.name + "'" + ', '
       + 'NOW()'
