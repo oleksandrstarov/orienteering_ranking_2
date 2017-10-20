@@ -17,7 +17,14 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 
 /***/ }),
 
-/***/ "../../../../../src/app/about/about.component.css":
+/***/ "../../../../../src/app/about/about.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  about works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/about/about.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -32,13 +39,6 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/about/about.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  about works!\n</p>\n"
 
 /***/ }),
 
@@ -69,7 +69,7 @@ AboutComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-about',
         template: __webpack_require__("../../../../../src/app/about/about.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/about/about.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/about/about.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], AboutComponent);
@@ -106,14 +106,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: __WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" /* HomeComponent */] },
-    { path: 'runners', component: __WEBPACK_IMPORTED_MODULE_3__runners_runners_component__["a" /* RunnersComponent */] },
-    { path: 'runner/:id', component: __WEBPACK_IMPORTED_MODULE_5__runner_runner_component__["a" /* RunnerComponent */] },
-    { path: 'competitions', component: __WEBPACK_IMPORTED_MODULE_4__competitions_competitions_component__["a" /* CompetitionsComponent */] },
-    { path: 'competition/:id', component: __WEBPACK_IMPORTED_MODULE_6__competition_competition_component__["a" /* CompetitionComponent */] },
+    { path: 'runners', component: __WEBPACK_IMPORTED_MODULE_3__runners_runners_component__["a" /* RunnersComponent */],
+        children: [
+            { path: ':id', component: __WEBPACK_IMPORTED_MODULE_5__runner_runner_component__["a" /* RunnerComponent */] }
+        ]
+    },
+    { path: 'competitions', component: __WEBPACK_IMPORTED_MODULE_4__competitions_competitions_component__["a" /* CompetitionsComponent */],
+        children: [
+            { path: ':id', component: __WEBPACK_IMPORTED_MODULE_6__competition_competition_component__["a" /* CompetitionComponent */] }
+        ]
+    },
     { path: 'about', component: __WEBPACK_IMPORTED_MODULE_7__about_about_component__["a" /* AboutComponent */] },
-    { path: '**', redirectTo: 'runners', pathMatch: 'full' }
+    { path: '**', redirectTo: '' }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -131,7 +137,14 @@ AppRoutingModule = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/app.component.css":
+/***/ "../../../../../src/app/app.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<app-menu></app-menu>\n<main id=\"main\">\n    <router-outlet ></router-outlet>\n</main>\n\n\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/app.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -139,20 +152,13 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#main {\n  position: relative;\n  top: 56px; }\n", ""]);
 
 // exports
 
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/app.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div>\n  <a [routerLink]=\"'/home'\">Home</a>|\n  <a [routerLink]=\"'/runners'\">Runners</a>|\n  <a [routerLink]=\"'/competitions'\">Competitions</a>|\n  <a [routerLink]=\"'/about'\">About</a>\n</div>\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -179,7 +185,7 @@ AppComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/app.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/app.component.scss")]
     })
 ], AppComponent);
 
@@ -195,20 +201,22 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__runners_runners_component__ = __webpack_require__("../../../../../src/app/runners/runners.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__runner_runner_component__ = __webpack_require__("../../../../../src/app/runner/runner.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__competitions_competitions_component__ = __webpack_require__("../../../../../src/app/competitions/competitions.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__competition_competition_component__ = __webpack_require__("../../../../../src/app/competition/competition.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about_component__ = __webpack_require__("../../../../../src/app/about/about.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__service_service_component__ = __webpack_require__("../../../../../src/app/service/service.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__runners_runners_component__ = __webpack_require__("../../../../../src/app/runners/runners.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__runner_runner_component__ = __webpack_require__("../../../../../src/app/runner/runner.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__competitions_competitions_component__ = __webpack_require__("../../../../../src/app/competitions/competitions.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__competition_competition_component__ = __webpack_require__("../../../../../src/app/competition/competition.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__about_about_component__ = __webpack_require__("../../../../../src/app/about/about.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__menu_menu_component__ = __webpack_require__("../../../../../src/app/menu/menu.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -228,21 +236,22 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_4__home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_5__runners_runners_component__["a" /* RunnersComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__runner_runner_component__["a" /* RunnerComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__competitions_competitions_component__["a" /* CompetitionsComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__competition_competition_component__["a" /* CompetitionComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__about_about_component__["a" /* AboutComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__service_service_component__["a" /* ServiceComponent */]
+            __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_5__home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__runners_runners_component__["a" /* RunnersComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__runner_runner_component__["a" /* RunnerComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__competitions_competitions_component__["a" /* CompetitionsComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__competition_competition_component__["a" /* CompetitionComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__about_about_component__["a" /* AboutComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__menu_menu_component__["a" /* MenuComponent */]
         ],
         imports: [
+            __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__app_routing_module__["a" /* AppRoutingModule */]
         ],
         providers: [],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -250,7 +259,14 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/competition/competition.component.css":
+/***/ "../../../../../src/app/competition/competition.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  competition works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/competition/competition.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -265,13 +281,6 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/competition/competition.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  competition works!\n</p>\n"
 
 /***/ }),
 
@@ -302,7 +311,7 @@ CompetitionComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-competition',
         template: __webpack_require__("../../../../../src/app/competition/competition.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/competition/competition.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/competition/competition.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], CompetitionComponent);
@@ -311,7 +320,14 @@ CompetitionComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/competitions/competitions.component.css":
+/***/ "../../../../../src/app/competitions/competitions.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n   <a [routerLink]=\"'/competitions/123'\">123</a>|\n   <a [routerLink]=\"'/competitions/23'\">23</a>\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/competitions/competitions.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -326,13 +342,6 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/competitions/competitions.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n   <a [routerLink]=\"'/competition/123'\">123</a>|\n   <a [routerLink]=\"'/competition/23'\">23</a>\n</p>\n"
 
 /***/ }),
 
@@ -363,7 +372,7 @@ CompetitionsComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-competitions',
         template: __webpack_require__("../../../../../src/app/competitions/competitions.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/competitions/competitions.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/competitions/competitions.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], CompetitionsComponent);
@@ -372,7 +381,14 @@ CompetitionsComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/home/home.component.css":
+/***/ "../../../../../src/app/home/home.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  home works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/home/home.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -387,13 +403,6 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/home/home.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  home works!\n</p>\n"
 
 /***/ }),
 
@@ -424,7 +433,7 @@ HomeComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-home',
         template: __webpack_require__("../../../../../src/app/home/home.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/home/home.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/home/home.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], HomeComponent);
@@ -433,7 +442,75 @@ HomeComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/runner/runner.component.css":
+/***/ "../../../../../src/app/menu/menu.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-light navbar-expand bg-light\">\n  <a class=\"navbar-brand\" [routerLink]=\"'/home'\"><img src=\"./favicon.ico\" width=\"25\" height=\"25\"/></a>\n  <ul class=\"navbar-nav mx-auto justify-content-center\">\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"'/home'\" routerLinkActive=\"active\">\n        <i class=\"fa fa-home fa-lg\" aria-hidden=\"true\"></i>\n        <span class=\"description\">Главная</span>\n      </a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"'/runners'\" routerLinkActive=\"active\">\n        <i class=\"fa fa-bar-chart fa-lg\" aria-hidden=\"true\"></i>\n        <span class=\"description\">Рейтинг</span>\n      </a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"'/competitions'\" routerLinkActive=\"active\">\n        <i class=\"fa fa-calendar fa-lg\" aria-hidden=\"true\"></i>\n        <span class=\"description\">Соревнования</span>\n      </a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"'/about'\" routerLinkActive=\"active\">\n        <i class=\"fa fa-life-ring fa-lg\" aria-hidden=\"true\"></i>\n        <span class=\"description\">О приложении</span>\n      </a>\n    </li>\n  </ul>\n</nav>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/menu/menu.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@media (max-width: 800px) {\n  .description {\n    display: none; } }\n\n@media (max-width: 450px) {\n  .navbar-nav .nav-item {\n    margin-left: 1em;\n    margin-right: 1em; } }\n\n@media (min-width: 451px) {\n  .navbar-nav .nav-item {\n    margin-left: 2em;\n    margin-right: 2em; } }\n\n.navbar-brand {\n  position: absolute; }\n\n.navbar {\n  width: 100%;\n  position: fixed; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/menu/menu.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MenuComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var MenuComponent = (function () {
+    function MenuComponent() {
+    }
+    MenuComponent.prototype.ngOnInit = function () {
+    };
+    return MenuComponent;
+}());
+MenuComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-menu',
+        template: __webpack_require__("../../../../../src/app/menu/menu.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/menu/menu.component.scss")]
+    }),
+    __metadata("design:paramtypes", [])
+], MenuComponent);
+
+//# sourceMappingURL=menu.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/runner/runner.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  runner works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/runner/runner.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -448,13 +525,6 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/runner/runner.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  runner works!\n</p>\n"
 
 /***/ }),
 
@@ -485,7 +555,7 @@ RunnerComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-runner',
         template: __webpack_require__("../../../../../src/app/runner/runner.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/runner/runner.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/runner/runner.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], RunnerComponent);
@@ -494,7 +564,14 @@ RunnerComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/runners/runners.component.css":
+/***/ "../../../../../src/app/runners/runners.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n   <a [routerLink]=\"'/runners/123'\">123</a>|\n   <a [routerLink]=\"'/runners/23'\">23</a>\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/runners/runners.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -509,13 +586,6 @@ exports.push([module.i, "", ""]);
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/runners/runners.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n   <a [routerLink]=\"'/runner/123'\">123</a>|\n   <a [routerLink]=\"'/runner/23'\">23</a>\n</p>\n"
 
 /***/ }),
 
@@ -546,73 +616,12 @@ RunnersComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-runners',
         template: __webpack_require__("../../../../../src/app/runners/runners.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/runners/runners.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/runners/runners.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], RunnersComponent);
 
 //# sourceMappingURL=runners.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/service/service.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/service/service.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  service works!\n</p>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/service/service.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ServiceComponent = (function () {
-    function ServiceComponent() {
-    }
-    ServiceComponent.prototype.ngOnInit = function () {
-    };
-    return ServiceComponent;
-}());
-ServiceComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
-        selector: 'app-service',
-        template: __webpack_require__("../../../../../src/app/service/service.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/service/service.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], ServiceComponent);
-
-//# sourceMappingURL=service.component.js.map
 
 /***/ }),
 

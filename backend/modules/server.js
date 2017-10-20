@@ -190,7 +190,7 @@ app.put('/adminLogin', function(req, res){
 });
 
 app.get('*', function(req, res){
-    res.status(404).sendFile(path.resolve(__dirname + "./../../dist/404.html"));
+    res.status(404).sendFile(path.resolve(__dirname + "./../../dist/index.html"));
 });
 
 module.exports.startServer = function(){

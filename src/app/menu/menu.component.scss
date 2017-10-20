@@ -1,0 +1,32 @@
+@media (max-width: 800px) {
+    .description {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .navbar-nav {
+        .nav-item {
+            margin-left : 1em;
+            margin-right : 1em;
+        }
+    }
+}
+
+@media (min-width: 451px) {
+    .navbar-nav {
+        .nav-item {
+            margin-left : 2em;
+            margin-right : 2em;
+        }
+    }
+}
+
+.navbar-brand {
+    position: absolute;
+}
+
+.navbar {
+    width: 100%;
+    position: fixed;
+}
