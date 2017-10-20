@@ -23,25 +23,28 @@ connection.end();
 //////////////////////////////////////////////////
 */
 var connection;
+console.log('database file');
 
 function handleDisconnect() {
+  console.log(settings);
+  console.log('handle');
   connection = sql.createConnection(settings); // Recreate the connection, since
                                                   // the old one cannot be reused.
 
   connection.connect(function(err) {              // The server is either down
     if(err) {                                     // or restarting (takes a while sometimes).
-      //console.log('error when connecting to db:', err);
+      console.log('error when connecting to db:', err);
       setTimeout(handleDisconnect, 2000);
       return;                             // We introduce a delay before attempting to reconnect,
     }
     switchToDB(connection, function(){
       var now = new Date();
-      //console.log('Reconnected to ORIENTEERING at ' + now.getDate() + " time: " +now.getHours() +":" +now.getMinutes());
+      console.log('Reconnected to ORIENTEERING at ' + now.getDate() + " time: " +now.getHours() +":" +now.getMinutes());
     });                                      // to avoid a hot loop, and to allow our node script to
   });                                     // process asynchronous requests in the meantime.
                                           // If you're also serving http, display a 503 error.
   connection.on('error', function(err) {
-    //console.log('db error', err);
+    console.log('db error', err);
     if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
       handleDisconnect();                         // lost due to either server restart, or a
     } else {                                      // connnection idle timeout (the wait_timeout
@@ -628,7 +631,7 @@ module.exports.addResults = function(competition, callback){
       + "'" + group.data[j].result + "'" + ', '
       +  group.data[j].place + ', '
       +  group.data[j].points + ', '
-      + "'" +  'L' + "'" + ', '
+      + "'" +  'MIDDLE' + "'" + ', '
       +  "'" + group.data[j].timeBehind + "', "
       +  "'" + group.name + "'" + ', '
       + 'NOW()'

@@ -211,9 +211,10 @@ angular.module('app')
     });
     
     $scope.getRunners = function(){
-      return runnerService.getRunners().get().$promise.then(function(responce){
+      return runnerService.getRunners().get().$promise.then(function(response){
+        console.log(response);
         var isMan = self.info.details[0].SEX == "M";
-        self.runners = isMan?responce.man:responce.woman;
+        self.runners = isMan?response.man:response.woman;
       });
     }
     
@@ -559,15 +560,17 @@ angular.module('app')
     
     
 
-    service.getRunners().query(
+    service.getRunners().get(
         function(response){
             console.log(response);
-            $scope.info = response;
+            $scope.info = response.man;
+            $scope.info = $scope.info.concat(response.woman);
         },
         function(response){
           if(response.status === 401){
             $state.go('app');
           }
+          console.log(response);
         }
     );
   }])

@@ -2,30 +2,19 @@
   "name": "workspace",
   "private": true,
   "devDependencies": {
-    "angular-mocks": "^1.6.5",
     "gulp": "^3.9.1",
-    "gulp-cache": "^0.2.10",
-    "gulp-concat": "^2.6.0",
+    "gulp-clean-css": "^3.9.0",
     "gulp-jshint": "^1.12.0",
-    "gulp-karma": "^0.0.4",
     "gulp-minify-css": "^1.2.4",
     "gulp-ng-annotate": "^1.1.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-rename": "^1.2.2",
     "gulp-rev": "^5.1.0",
     "gulp-uglify": "^1.5.3",
     "gulp-usemin": "^0.3.23",
     "gulp-useref": "^3.1.0",
-    "gulp-util": "^3.0.7",
-    "jasmine-core": "^2.6.4",
-    "jshint-stylish": "^1.0.2",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.4"
+    "jshint-stylish": "^1.0.2"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "6.0.0"
   },
   "description": "Orienteering ranking system for results from SFR and WinOrient systems",
   "version": "1.0.0",
@@ -34,11 +23,11 @@
     "test": "test"
   },
   "dependencies": {
-    "angular": "1.6.4",
-    "angular-animate": "^1.6.4",
+    "angular": "1.6.5",
+    "angular-animate": "1.6.4",
     "angular-aria": "^1.6.4",
     "angular-chart.js": "^1.1.1",
-    "angular-material": "^1.1.4",
+    "angular-material": "^1.1.5",
     "angular-messages": "^1.6.1",
     "angular-resource": "^1.5.7",
     "angular-route": "^1.5.7",
@@ -56,7 +45,7 @@
     "font-awesome": "^4.6.3",
     "http": "0.0.0",
     "iconv-lite": "^0.4.18",
-    "jquery": "^1.9.1",
+    "jquery": "^1.12.4",
     "mongodb": "^2.1.21",
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
@@ -70,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oleksandrstarov/orienteering_ranking.git"
+    "url": "https://gitlab.com/oleksandrstarov/orienteering_ranking.git"
   },
   "keywords": [
     "orienteering",
@@ -79,7 +68,7 @@
   "author": "OS",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oleksandrstarov/orienteering_ranking/issues"
+    "url": "https://gitlab.com/oleksandrstarov/orienteering_ranking/issues"
   },
-  "homepage": "https://github.com/oleksandrstarov/orienteering_ranking#readme"
+  "homepage": "https://gitlab.com/oleksandrstarov/orienteering_ranking/wikis/home"
 }

@@ -1,20 +1,14 @@
-// Generated on 2016-05-26 using generator-angular 0.15.1
 'use strict';
 
 var gulp = require('gulp'),
-    minifycss = require('gulp-minify-css'),
+    minifycss = require('gulp-clean-css'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     uglify = require('gulp-uglify'),
     usemin = require('gulp-usemin'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
     rev = require('gulp-rev'),
     del = require('del'),
-    ngannotate = require('gulp-ng-annotate'),
-    Server = require('karma').Server;;
+    ngannotate = require('gulp-ng-annotate');
     
     
 gulp.task('jshint', function() {
@@ -29,7 +23,7 @@ gulp.task('clean', function() {
 });
 
 // Default task
-gulp.task('default', ['test', 'clean'], function() {
+gulp.task('default', ['clean'], function() {
     gulp.start('usemin', 'imagemin', 'adminApp','copyfonts');
 });
 
@@ -92,15 +86,3 @@ gulp.task('web', ['clean'], function () {
   gulp.start('usemin', 'imagemin', 'copyfonts');
 });
 
-gulp.task('test', function (done) {
-  new Server({
-    configFile: __dirname + '/my.conf.js',
-    singleRun: true
-  }, done).start();
-});
-
-/*gulp.task('build', ['clean'], function () {
-  gulp.start('images', 'copyfonts', 'client:build');
-});
-
-gulp.task('default', ['build']);*/
