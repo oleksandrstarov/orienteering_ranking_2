@@ -1,6 +1,10 @@
-<app-menu></app-menu>
-<main id="main">
-    <router-outlet ></router-outlet>
-</main>
+<app-loader *ngIf="!isLoaded"></app-loader>
+<div [hidden]="!isLoaded">
+    <app-menu></app-menu>
+    <main id="main">
+        <router-outlet ></router-outlet>
+    </main>
+</div>
+
 
 

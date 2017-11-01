@@ -1,0 +1,57 @@
+$loading-screen-bg: #F9F9F9;
+
+.loader-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .loader {
+        &.bounce-in{
+                animation-name: bounceIn;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-timing-function: ease-out;
+            }
+        &-background {
+            width: 106px;
+            height: 106px;
+            overflow: hidden;
+            border-radius: 100%;
+            padding: 2px;
+            background-color: #e4e4e4;
+            
+            &.fade-out {
+                animation-name: fadeOut;
+                animation-duration: 1s;
+                animation-delay: .75s;
+                animation-fill-mode: forwards;
+            }
+        
+            .loader-logo {
+                position: relative;
+                top: 25px;
+                left: 25px;
+                width: 0;
+                height: 0;
+                border-right: 50px solid #c3c3c3;
+                border-top: 50px solid white;
+            }
+        }
+    }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale3d(0.4, 0.4, 0.4); }
+  50% { transform: scale3d(1, 1, 1); }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; z-index: -1;}
+}

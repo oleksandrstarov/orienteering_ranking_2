@@ -11,6 +11,7 @@ import { CompetitionsComponent } from './competitions/competitions.component';
 import { CompetitionComponent } from './competition/competition.component';
 import { AboutComponent } from './about/about.component';
 import { MenuComponent } from './menu/menu.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MenuComponent } from './menu/menu.component';
     CompetitionsComponent,
     CompetitionComponent,
     AboutComponent,
-    MenuComponent
+    MenuComponent,
+    LoaderComponent
   ],
   imports: [
     NgbModule.forRoot(),

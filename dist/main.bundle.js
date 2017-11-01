@@ -140,7 +140,7 @@ AppRoutingModule = __decorate([
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-menu></app-menu>\n<main id=\"main\">\n    <router-outlet ></router-outlet>\n</main>\n\n\n"
+module.exports = "<app-loader *ngIf=\"!isLoaded\"></app-loader>\n<div [hidden]=\"!isLoaded\">\n    <app-menu></app-menu>\n    <main id=\"main\">\n        <router-outlet ></router-outlet>\n    </main>\n</div>\n\n\n\n"
 
 /***/ }),
 
@@ -178,7 +178,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'app';
+        this.isLoaded = false;
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () { return _this.isLoaded = true; }, 2000);
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
@@ -210,12 +215,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__competition_competition_component__ = __webpack_require__("../../../../../src/app/competition/competition.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__about_about_component__ = __webpack_require__("../../../../../src/app/about/about.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__menu_menu_component__ = __webpack_require__("../../../../../src/app/menu/menu.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__loader_loader_component__ = __webpack_require__("../../../../../src/app/loader/loader.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -243,7 +250,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8__competitions_competitions_component__["a" /* CompetitionsComponent */],
             __WEBPACK_IMPORTED_MODULE_9__competition_competition_component__["a" /* CompetitionComponent */],
             __WEBPACK_IMPORTED_MODULE_10__about_about_component__["a" /* AboutComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__menu_menu_component__["a" /* MenuComponent */]
+            __WEBPACK_IMPORTED_MODULE_11__menu_menu_component__["a" /* MenuComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__loader_loader_component__["a" /* LoaderComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_3__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
@@ -384,7 +392,7 @@ CompetitionsComponent = __decorate([
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  home works!\n</p>\n"
+module.exports = "<div class=\"container\">\n    \n</div>"
 
 /***/ }),
 
@@ -439,6 +447,67 @@ HomeComponent = __decorate([
 ], HomeComponent);
 
 //# sourceMappingURL=home.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/loader/loader.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container loader-container\">\n    <div class=\"loader bounce-in\">\n        <div class=\"loader-background fade-out\">\n            <div class=\"loader-logo\">\n                \n            </div>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/loader/loader.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".loader-container {\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  z-index: 1000;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center; }\n  .loader-container .loader.bounce-in {\n    -webkit-animation-name: bounceIn;\n            animation-name: bounceIn;\n    -webkit-animation-duration: 1s;\n            animation-duration: 1s;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n    -webkit-animation-timing-function: ease-out;\n            animation-timing-function: ease-out; }\n  .loader-container .loader-background {\n    width: 106px;\n    height: 106px;\n    overflow: hidden;\n    border-radius: 100%;\n    padding: 2px;\n    background-color: #e4e4e4; }\n    .loader-container .loader-background.fade-out {\n      -webkit-animation-name: fadeOut;\n              animation-name: fadeOut;\n      -webkit-animation-duration: 1s;\n              animation-duration: 1s;\n      -webkit-animation-delay: .75s;\n              animation-delay: .75s;\n      -webkit-animation-fill-mode: forwards;\n              animation-fill-mode: forwards; }\n    .loader-container .loader-background .loader-logo {\n      position: relative;\n      top: 25px;\n      left: 25px;\n      width: 0;\n      height: 0;\n      border-right: 50px solid #c3c3c3;\n      border-top: 50px solid white; }\n\n@-webkit-keyframes bounceIn {\n  0% {\n    -webkit-transform: scale3d(0.4, 0.4, 0.4);\n            transform: scale3d(0.4, 0.4, 0.4); }\n  50% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n@keyframes bounceIn {\n  0% {\n    -webkit-transform: scale3d(0.4, 0.4, 0.4);\n            transform: scale3d(0.4, 0.4, 0.4); }\n  50% {\n    -webkit-transform: scale3d(1, 1, 1);\n            transform: scale3d(1, 1, 1); } }\n\n@-webkit-keyframes fadeOut {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0;\n    z-index: -1; } }\n\n@keyframes fadeOut {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0;\n    z-index: -1; } }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/loader/loader.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoaderComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LoaderComponent = (function () {
+    function LoaderComponent() {
+    }
+    LoaderComponent.prototype.ngOnInit = function () {
+    };
+    return LoaderComponent;
+}());
+LoaderComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-loader',
+        template: __webpack_require__("../../../../../src/app/loader/loader.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/loader/loader.component.scss")]
+    }),
+    __metadata("design:paramtypes", [])
+], LoaderComponent);
+
+//# sourceMappingURL=loader.component.js.map
 
 /***/ }),
 
