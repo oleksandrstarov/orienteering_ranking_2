@@ -1,28 +1,23 @@
 <nav class="navbar navbar-light navbar-expand bg-light">
-  <a class="navbar-brand" [routerLink]="'/home'"><img src="./favicon.ico" width="25" height="25"/></a>
   <ul class="navbar-nav mx-auto justify-content-center">
     <li class="nav-item">
       <a class="nav-link" [routerLink]="'/home'" routerLinkActive="active">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>
-        <span class="description">Главная</span>
+        <span class="icon menu-icon ori-icon-control-point"><span class="description">Главная</span></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="'/runners'" routerLinkActive="active">
-        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
-        <span class="description">Рейтинг</span>
+        <span class="icon menu-icon ori-icon-users"><span class="description">Рейтинг</span></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="'/competitions'" routerLinkActive="active">
-        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
-        <span class="description">Соревнования</span>
+        <span class="icon menu-icon ori-icon-map"><span class="description">Соревнования</span></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="'/about'" routerLinkActive="active">
-        <i class="fa fa-life-ring fa-lg" aria-hidden="true"></i>
-        <span class="description">О приложении</span>
+         <span class="icon menu-icon ori-icon-safari"><span class="description">О приложении</span></span>
       </a>
     </li>
   </ul>

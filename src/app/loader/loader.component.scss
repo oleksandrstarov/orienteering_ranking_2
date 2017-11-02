@@ -1,4 +1,4 @@
-$loading-screen-bg: #F9F9F9;
+@import '../../variables';
 
 .loader-container {
     position: fixed;
@@ -24,7 +24,8 @@ $loading-screen-bg: #F9F9F9;
             overflow: hidden;
             border-radius: 100%;
             padding: 2px;
-            background-color: #e4e4e4;
+            background-color: $light-gray;
+            box-shadow: 0 0 15px $light-gray;
             
             &.fade-out {
                 animation-name: fadeOut;
