@@ -526,7 +526,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@media (max-width: 840px) {\n  .description {\n    display: none; } }\n\n@media (max-width: 450px) {\n  .navbar-nav .nav-item {\n    margin-left: 1em;\n    margin-right: 1em; } }\n\n@media (min-width: 451px) {\n  .navbar-nav .nav-item {\n    margin-left: 2em;\n    margin-right: 2em; } }\n\n.navbar {\n  width: 100%;\n  position: fixed; }\n  .navbar .nav-link.active {\n    background-color: #737373;\n    border-radius: 4px;\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n    color: white; }\n  .navbar .description {\n    margin-right: 7px; }\n\n.icon:before {\n  font-size: 1.8em;\n  vertical-align: -36%;\n  line-height: 0.75em;\n  margin: 0 7px; }\n\n.ori-icon-control-point:before {\n  font-size: 2.3em;\n  vertical-align: -50%; }\n", ""]);
+exports.push([module.i, "@media (max-width: 840px) {\n  .description {\n    display: none; } }\n\n@media (max-width: 450px) {\n  .navbar-nav .nav-item {\n    margin-left: 1em;\n    margin-right: 1em; } }\n\n@media (min-width: 451px) {\n  .navbar-nav .nav-item {\n    margin-left: 2em;\n    margin-right: 2em; } }\n\n.navbar {\n  width: 100%;\n  position: fixed;\n  padding: 0.5rem 0; }\n  .navbar .nav-link.active {\n    background-color: rgba(0, 0, 0, 0.5);\n    border-radius: 4px;\n    color: white; }\n  .navbar .description {\n    margin-left: 7px; }\n\n.icon:before {\n  font-size: 1.8em;\n  vertical-align: -36%;\n  line-height: 0.75em; }\n\n.ori-icon-control-point:before {\n  font-size: 2.3em;\n  vertical-align: -50%; }\n", ""]);
 
 // exports
 
