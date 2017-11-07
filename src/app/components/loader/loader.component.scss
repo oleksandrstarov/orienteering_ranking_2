@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../../variables';
 
 .loader-container {
     position: fixed;
@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     .loader {
         &.bounce-in{
                 animation-name: bounceIn;
@@ -26,14 +26,14 @@
             padding: 2px;
             background-color: $light-gray;
             box-shadow: 0 0 15px $light-gray;
-            
+
             &.fade-out {
                 animation-name: fadeOut;
                 animation-duration: 1s;
                 animation-delay: .75s;
                 animation-fill-mode: forwards;
             }
-        
+
             .loader-logo {
                 position: relative;
                 top: 25px;

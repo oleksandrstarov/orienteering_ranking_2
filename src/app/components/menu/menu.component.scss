@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../../variables';
 
 @media (max-width: 840px) {
     .description {
@@ -28,13 +28,13 @@
     width: 100%;
     position: fixed;
     padding: 0.5rem 0;
-    
+
     .nav-link.active {
         background-color: $active-menu-item-color;
         border-radius: 4px;
         color: white;
     }
-    
+
     .description {
         margin-left: 7px;
     }
