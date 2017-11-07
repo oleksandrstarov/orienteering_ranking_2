@@ -10,6 +10,7 @@ export class RunnerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('runner');
   }
 
 }

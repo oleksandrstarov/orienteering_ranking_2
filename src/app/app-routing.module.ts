@@ -11,12 +11,12 @@ import { AboutComponent } from './about/about.component';
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'runners', component: RunnersComponent, 
+  {path: 'runners', component: RunnersComponent,
     children: [
         {path: ':id', component: RunnerComponent}
       ]
   },
-  {path: 'competitions', component: CompetitionsComponent, 
+  {path: 'competitions', component: CompetitionsComponent,
     children: [
         {path: ':id', component: CompetitionComponent}
       ]
