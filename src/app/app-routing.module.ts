@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { RunnersComponent } from './runners/runners.component';
-import { CompetitionsComponent } from './competitions/competitions.component';
-import { RunnerComponent } from './runner/runner.component';
-import { CompetitionComponent } from './competition/competition.component';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './components/home/home.component';
+import { RunnersComponent } from './components/runners/runners.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { RunnerComponent } from './components/runner/runner.component';
+import { CompetitionComponent } from './components/competition/competition.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},

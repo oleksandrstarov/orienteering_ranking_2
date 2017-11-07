@@ -4,14 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { RunnersComponent } from './runners/runners.component';
-import { RunnerComponent } from './runner/runner.component';
-import { CompetitionsComponent } from './competitions/competitions.component';
-import { CompetitionComponent } from './competition/competition.component';
-import { AboutComponent } from './about/about.component';
-import { MenuComponent } from './menu/menu.component';
-import { LoaderComponent } from './loader/loader.component';
+import { HomeComponent } from './components/home/home.component';
+import { RunnersComponent } from './components/runners/runners.component';
+import { RunnerComponent } from './components/runner/runner.component';
+import { CompetitionsComponent } from './components/competitions/competitions.component';
+import { CompetitionComponent } from './components/competition/competition.component';
+import { AboutComponent } from './components/about/about.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
