@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
+  groups = 'Загрузка...';
+  showInfo = false;
+
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleInfo() {
+    this.showInfo = !this.showInfo;
+  }
 }

@@ -12,6 +12,7 @@ import { CompetitionComponent } from './components/competition/competition.compo
 import { AboutComponent } from './components/about/about.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

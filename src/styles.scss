@@ -5,3 +5,13 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~font-awesome/scss/font-awesome';
 
+#main {
+  position: absolute;
+  overflow-y: auto;
+  height: calc(100vh -  #{$menu-height});
+  width: 100%;
+  top: $menu-height;
+  display: flex;
+  justify-content: center;
+}
+
