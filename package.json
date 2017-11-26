@@ -6,6 +6,7 @@
   "license": "ISC",
   "scripts": {
     "ng": "ng",
+    "dev": "mysql-ctl start && node backend/application.js",
     "start": "node backend/application.js",
     "build": "ng build",
     "test": "ng test",
