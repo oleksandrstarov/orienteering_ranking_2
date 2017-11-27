@@ -196,7 +196,7 @@ function importResultsForWeek(date, callback){
     .then(function(){
         if(isNextWeekValid){
             process.stdout.write("\r" +`Working on ${date.addDays(7).toMysqlFormat()}`);
-            importResultsForWeek(nextUpdateDate/*date.addDays(7)*/, callback);
+            importResultsForWeek(date.addDays(7), callback);
         }else{
            callback();
         }
