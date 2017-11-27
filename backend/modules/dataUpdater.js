@@ -3,6 +3,7 @@
 var competitionsCollector = require('./dataCollector.js'),
     pointsCalculator = require('./pointsCalculator.js'),
     SFRparser= require('./htmlParserSFR.js'),
+    MEOSparser= require('./htmlParserMEOS.js'),
     WOparser= require('./htmlParserWinOrient.js'),
     db = require('./dbUtils.js');
 
@@ -251,12 +252,12 @@ function processCompetitionsResults(competitions){
 function processCompetitionResult(competition, callback){
     getResults(competition, function(error, competitionData){
         if(error){
-            console.log(error);
             db.processCompetition(competitionData, function(){
                 callback();
                 return;
             });
         }else{
+            //check this
             db.updateRunnersPoints(competitionData.DATE, function(error){
                 pointsCalculator.processCompetitionResults(competitionData, function(competitionData){
                     db.processCompetition(competitionData, function(){
@@ -278,7 +279,10 @@ function getResults(competition, callback){
         });
     }else if(competition.TYPE === 'WINORIENT'){
         WOparser.processCompetition(competition, function(error, data){
-            
+            callback(error, data);
+        });
+    }else if(competition.TYPE === 'MEOS'){
+        MEOSparser.processCompetition(competition, function(error, data){
             callback(error, data);
         });
     }else{

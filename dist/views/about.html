@@ -27,7 +27,6 @@ TM - среднее время трех лучших спортсменов (п�
 		  <div class="columns">
         <div ng-repeat="entry in ctrl.points">{{entry.name}} : {{entry.points | currency:""}}</div>
       </div>
-		
 		<h4>Ограничения</h4>
     <p>
     Каждые очки действительны в течении года, в рейтинг идут 6 лучших (минимальных) значений за последний год,
@@ -44,6 +43,10 @@ TM - среднее время трех лучших спортсменов (п�
 <div class="container">
   <h2 ng-click="toggleInfo()">Release progress <span ng-if="!showInfo" class="angle fa fa-angle-down"></span><span ng-if="showInfo" class="angle fa fa-angle-up"></span></h2>
   <span ng-if="showInfo">
+  <h4>v.: 0.8.0 / 2017-11-27</h4>
+  <p>
+    -MeOS results files support
+  </p>
   <h4>v.: 0.7.2 / 2017-10-11</h4>
   <p>
     -fixed duplicates merge for runners in admin module
@@ -108,7 +111,6 @@ TM - среднее время трех лучших спортсменов (п�
   <p>
     -updated logic - competition results in priority against subjective, highlighted results with subjective values, added statistic screen, added static db for static values
   </p>
-  
    <h4>v.: 0.3.3 / 2016-11-11</h4>
   <p>
     -fixed bugs with async recalculation, added search in rank, minor UI updates for competition screen, added places column for ranking

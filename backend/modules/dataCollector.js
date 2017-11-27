@@ -110,12 +110,11 @@ function filterNewResults(allResults, existingResults){
 function processCompetition(competitionData, callback){
     //console.log(competitionData);
     var url = competitionData.url;
-    request({ encoding: null, method: "GET", url: url}, function (error, response, body) {
+    request({ encoding: null, method: "GET", url: url}, function (error, response, bodyData) {
         if (!error) {
             //console.log(url);
             
-            body = iconv.decode(new Buffer(body), "win1251");
-            
+            var body = iconv.decode(new Buffer(bodyData), "win1251");
             var result = {};
             result.id = competitionData.id;
             result.url = url;
@@ -125,7 +124,7 @@ function processCompetition(competitionData, callback){
             //(ID, DATE, URL, NAME, TYPE, STATUS, VALID, WEB_ID)
             
             var type = getFileType($);
-            //console.log(type);
+            console.log(type);
             result.type = type;
             result.notes = '';
             if(type === 'SFR'){
@@ -158,10 +157,17 @@ function processCompetition(competitionData, callback){
                     result.isValid = false;
                     callback(competitionData.id + ' non-valid', result);
                 }
-               
-               
                 
-            }else{
+            }else if(type === "MEOS"){
+                body = iconv.decode(new Buffer(bodyData), "utf8");
+                $ = cheerio.load(body);
+                result.isValid = true;
+                
+                result.title = $('td.freeheader').text().normalizeTitle();
+                result.date = toDate($('td.freeheader').parent().next().children('td').text()).withoutTime().toMysqlFormat();
+                callback(null, result);
+               
+            } else {
                 //possibly should be checked at webpage to get date?
                 if(result.id !== null){
                     getInfoFromWebPage(result, function(error, data){
@@ -215,8 +221,13 @@ function getFileType($){
     if(isValidSFR($('span.name').text())){
         return 'SFR';
     }
+    
     if(isValidWinOrient($('head title').text())){
         return 'WINORIENT';
+    }
+    
+    if(isValidMeos($('body p a i').text())){
+        return 'MEOS';
     }
     return 'UNKNOWN';
     
@@ -231,6 +242,13 @@ function isValidSFR(string){
 
 function isValidWinOrient(string){
     if(string.indexOf('WinOrient') != -1){
+        return true;
+    }
+    return false;
+}
+
+function isValidMeos(string){
+    if(string.toLowerCase().indexOf('meos') != -1){
         return true;
     }
     return false;
