@@ -38,14 +38,17 @@ function twoDigits(d) {
 }
 
 String.prototype.normalizeTitle = function(){
-   return this.replace(/\n/g, ' ')
+   return this
+   .replace(/\n/g, ' ')
    .replace(/\r/g, ' ')
    .replace(/ {2,}/g, ' ')
    .replace('Протокол результатов (промежуточные времена).', '')
    .replace('"', '')
    .replace("'", '')
    .replace('Протокол результатов.', '')
-   .replace('ПРОТОКОЛ РЕЗУЛЬТАТОВ', '').trim();
+   .replace('ПРОТОКОЛ РЕЗУЛЬТАТОВ', '')
+   .replace('Результаты – ', '')
+   .trim();
    //.replace(/,?[, -]\d{2,}/, '');
 };
 

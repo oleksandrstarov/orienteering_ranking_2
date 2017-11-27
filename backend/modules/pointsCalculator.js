@@ -22,7 +22,6 @@ var db = require('./dbUtils.js'),
 
 
 module.exports.processCompetitionResults = function(resultsObject, callback){
-    ////console.log(resultsObject);
     checkGroups(resultsObject);
     if(resultsObject.group.length === 0){
         resultsObject.STATUS = 'INVALID';
@@ -37,9 +36,8 @@ module.exports.processCompetitionResults = function(resultsObject, callback){
     
     function getBestThreePointsCallback(error, bestPoints){
         if(error){
-            //console.error(error);
+            console.error(error);
         }
-        ////console.log(j);
         resultsObject.group[j].avgPoints = getAvgData(bestPoints);
         
         if(++j < resultsObject.group.length){
@@ -64,7 +62,6 @@ module.exports.processCompetitionResults = function(resultsObject, callback){
 
 function processGroup(group){
     group = setResultAndAvgTopTime(group);
-    //console.log(group.name);
     for(var i=0; i<group.data.length; i++){
         var result = group.data[i].resultSeconds;
         if(result === -1){
@@ -116,6 +113,7 @@ function getAvgData(threeTopData){
 //from db
 function getBestThreePoints(group, callback){
     if(!group.isValid){
+        
         callback('INVALID GROUP - NO POINTS', [group.shift,group.shift,group.shift]);
         return;
     }
@@ -162,21 +160,26 @@ function setResultAndAvgTopTime(group){
 }
 
 function convertResultToSeconds(resultString){
-    var re = new RegExp(/(\d{1,2}:\d{2}:\d{2})/);
+    var re = new RegExp(/((\d{1,2}:)?\d{1,2}:\d{2})/);
     var result = -1;
     if(re.test(resultString)){
         var data = resultString.split(':');
-        result = parseInt(data[2]) + parseInt(data[1]) * 60 + parseInt(data[0]) * 60 *60;
+        if (data.length === 3) {
+            result = parseInt(data[2]) + parseInt(data[1]) * 60 + parseInt(data[0]) * 60 *60;
+        } 
+        
+        if (data.length === 2) {
+            result = parseInt(data[1]) + parseInt(data[0]) * 60;
+        }
+        
     }
     return result;
 }
 
 function checkGroups(resultsObject){
-    //console.log(resultsObject.group);
     for(var i=0; i<resultsObject.group.length; i++){
         resultsObject.group[i].isValid = true;
         
-        //console.log(resultsObject.group[i]);
         if(resultsObject.group[i].data.length < 3){
             //resultsObject.group[i].isValid = false;
             resultsObject.group.splice(i,1);

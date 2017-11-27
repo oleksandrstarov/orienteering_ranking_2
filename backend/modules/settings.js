@@ -29,7 +29,7 @@ var groupSettings = [
     
     {name: 'M21E', variants:['М21Е', 'M21E', 'Ч21Е'], sex: 'M', shift: 10},
     
-    {name: 'M21A', variants:['M21A', 'М21А', 'M21,', 'M21 ', 'Ч21 '], sex: 'M', shift: 20},
+    {name: 'M21A', variants:['M21A', 'М21А', 'M21,', 'M21 ', 'Ч21 ', 'Ч21A'], sex: 'M', shift: 20},
     
     {name: 'M20', variants:['М20', 'M20', 'Ч20'], sex: 'M', shift: 14},
     
@@ -56,7 +56,7 @@ var groupSettings = [
     //WWW
     {name: 'Ж21Е', variants:['Ж21Е', 'W21Е'], sex: 'W', shift: 10},
     
-    {name: 'Ж21A', variants:['Ж21A', 'W21А', 'Ж21,', 'Ж21 '], sex: 'W', shift: 20},
+    {name: 'Ж21A', variants:['Ж21A', 'W21А', 'Ж21,', 'Ж21 ', 'Ж21A'], sex: 'W', shift: 20},
     
     {name: 'Ж20', variants:['Ж20', 'W20'], sex: 'W', shift: 14},
     

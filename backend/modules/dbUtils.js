@@ -36,7 +36,6 @@ module.exports.getBestThreePoints = function(personsArray, callback){
 };
 
 module.exports.processCompetition = function(competition, callback){
-   //console.log('before db process');
     db.processCompetition(competition, function(error){
         //console.log('competition.STATUS', competition.STATUS);
         if(competition.STATUS === 'INVALID'){

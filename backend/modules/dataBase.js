@@ -77,7 +77,7 @@ module.exports.processCompetition = function(competition, callback){
       callback();
     }
     else{
-      //console.log('COMPETITION FAILED ' + query);
+      console.log('COMPETITION FAILED ' + query);
       //console.log(err);
       callback(err);
     }
@@ -623,7 +623,6 @@ module.exports.addResults = function(competition, callback){
   for(var i=0; i<competition.group.length; i++){
     var group = competition.group[i];
     for(var j=0; j<group.data.length; j++){
-      ////console.log(group.data[j].id);
       query += '(' 
       + competition.ID + ', ' 
       + group.data[j].id + ', ' 
