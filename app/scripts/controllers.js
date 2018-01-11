@@ -164,7 +164,7 @@ angular.module('app')
       }
       else return '';
     };
-    //"Место {{runner.PLACE_DIFF}}n\Очки {{runner.POINTS_DIFF}}"
+    
     self.getPopup = function(runner){
       
       if(runner.PLACE_DIFF=== null){
@@ -254,7 +254,6 @@ angular.module('app')
     };
       
     function drawChart(data, name){
-     //Chart.defaults.global.defaultFontSize = 12;
      
       var labels = data.map(function(entry){
        
@@ -269,8 +268,6 @@ angular.module('app')
       var places = data.map(function(entry){
         return entry.PLACE;
       });
-      
-      //http://jtblin.github.io/angular-chart.js/
       $scope.labels = labels;
       $scope.series = ['очки', 'место'];
       $scope.data = [points, places];
@@ -301,7 +298,6 @@ angular.module('app')
     }
     
     function onSuccess(response, self, scope){
-
       self.info = setTopResults(response);
       scope.isDataLoaded = true;
     }
@@ -362,7 +358,6 @@ angular.module('app')
    var customFullscreen = false;
 
    this.showPrompt = function(event) {
-    // Appending dialog to document.body to cover sidenav in docs app
     
     $mdDialog.show({
         clickOutsideToClose:true,
@@ -384,10 +379,8 @@ angular.module('app')
     $scope.message = '';
     $scope.newCompetition = '';
    
-    
     $scope.addCompetition =  function(){
         $scope.message = 'Adding...';
-       
         if(!$scope.newCompetition){
             $scope.message = 'Empty link!';
             return;
@@ -409,8 +402,6 @@ angular.module('app')
             if(!response.error){
                 
                 self.info = mapValue(JSON.parse(response.data));
-                
-                //item.selected prop
             }
             $scope.message = response.error || 'Competitions updated';
         });
@@ -423,8 +414,6 @@ angular.module('app')
             if(!response.error){
                 
                 self.info = mapValue(JSON.parse(response.data));
-                
-                //item.selected prop
             }
             $scope.message = response.error || 'Competitions updated';
         });
@@ -438,7 +427,6 @@ angular.module('app')
             $scope.message = response.data || 'Data updated';
         });
     };
-    
     
     self.info=[];
     service.getCompetitions().query(
@@ -495,7 +483,6 @@ angular.module('app')
       
       $scope.mergedRunners.push({main:self.selectedRunner, duplicates:$scope.selectedRunners});
       
-      
       self.selectedRunner = {};
       $scope.show = false;
       
@@ -530,9 +517,6 @@ angular.module('app')
       
     };
     
-    
-    
-    
     $scope.update =  function(){
         $scope.message = 'Updating...';
         service.updateRunner().update({data:self.selectedRunner}, function(response){
@@ -557,8 +541,6 @@ angular.module('app')
    this.selectedPrimary = function(runner){
        $scope.show = true;
    };
-    
-    
 
     service.getRunners().get(
         function(response){
@@ -603,6 +585,7 @@ angular.module('app')
           });
     };
 }])
+
 .controller('CompareRunnersController', ['$mdDialog' , function ($mdDialog){
   var self = this;
   self.close = function() {

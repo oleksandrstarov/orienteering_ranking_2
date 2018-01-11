@@ -1,19 +1,16 @@
-//http://orienteering.kh.ua/Result/
-
 'use strict';
 
 var request = require('request'),
     cheerio = require('cheerio'),
     iconv  = require('iconv-lite'),
     Buffer = require('buffer').Buffer,
-    //SFRparser= require('./htmlParserSFR.js'),
     url = 'http://orienteering.kh.ua/Result/Index/tag/1/';
 
 module.exports.manualImport = function(customURL, callback){
     var data = [];
         data.push(parseUrl(customURL));
         importCompetitions(data, callback);
-}
+};
 
 
 module.exports.getNewCompetitions = function(competitionsInDB, callback){
@@ -56,7 +53,7 @@ function grabResults(callback){
         if (!error) {
             
             var $body = cheerio.load(body);
-            //var $ = cheerio.load($body('div').html());
+            
             var filteredResult = '';
             // id 118 == 2015 year///
             $body('table').find('div[id].results-list').each(function(index, element){
@@ -66,8 +63,7 @@ function grabResults(callback){
             });
             
             var $ = cheerio.load('<div>'+filteredResult+'</div>');
-            //console.log($());
-            //'div.item>div'
+
             $('div').find('a').each(function(index, element){
                 var link = $(element).attr('href');
                 //console.log($(element).html());
@@ -261,13 +257,11 @@ function toDate(dateStr) {
         return null;
     }
     if(delimeter == '-'){
-        //2016-10-14
          return new Date(parts[0].length === 2? '20'+parts[0]: parts[0], parts[1]-1, parts[2]);
     }
     if(delimeter == '.'){
          return new Date(parts[2].length === 2? '20'+parts[2]: parts[2], parts[1]-1, parts[0]);
     }
-   
 }
 
 

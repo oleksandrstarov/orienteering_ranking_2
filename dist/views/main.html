@@ -2,7 +2,6 @@
   <loader-template ng-hide="isDataLoaded"></loader-template>
   <div class="row" ng-show="isDataLoaded && isError">{{message}}</div>
   <div class="row" ng-show="isDataLoaded && !isError">
-    
    <div class="col-xs-12 col-sm-5 info">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -39,11 +38,9 @@
                     <dd ng-repeat="runner in homeCtrl.data.progress.novices"><a ui-sref="app.runner({id: runner.ID})">{{runner.FULLNAME}}</a></dd>
                </dl>
             </div>
-        
         </div>
     </div>
     <div class="col-xs-12 col-sm-5 col-sm-offset-2 info">
-       
       <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Топ-3</h3>
@@ -66,7 +63,6 @@
                 <td>{{ runner.DURATION}}</td>
               </tr>
               <tr class="blank-row"><td colspan="4"></td></tr>
-             
               <tr ng-repeat="runner in homeCtrl.data.leaders | filter:{'SEX':'W'}">
                 <td>{{runner.PLACE}}</td>   
                 <td><a ui-sref="app.runner({id: runner.ID})">{{runner.FULLNAME}}</a></td>
@@ -76,7 +72,6 @@
             </tbody>
           </table>
         </div>
-      
       </div>
     </div>
   </div>

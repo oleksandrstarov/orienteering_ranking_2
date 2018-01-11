@@ -30,8 +30,6 @@ module.exports.processCompetitionResults = function(resultsObject, callback){
         return;
     }
     var j = 0;
-    ////console.log(resultsObject.group[j]);
-    //resultsObject.group[i].avgPoints = 10;
     getBestThreePoints(resultsObject.group[j], getBestThreePointsCallback);
     
     function getBestThreePointsCallback(error, bestPoints){
@@ -50,7 +48,6 @@ module.exports.processCompetitionResults = function(resultsObject, callback){
                 }else{
                     resultsObject.group.splice(i,1);
                     i--;
-                    //resultsObject.group[i] =processInvalidGroup(resultsObject.group[i]);
                 }
             }
             callback(resultsObject);
@@ -70,10 +67,6 @@ function processGroup(group){
             group.data[i].points = null;
         }
         group.data[i].points = countPoints(result, group.avgTime, group.avgPoints);
-        /*//console.log(group.data[i].lastName + " " +
-                    group.data[i].firstName + " " +
-                    group.data[i].result + " " +
-                    group.data[i].points + " ");*/
     }
     return group;
 }
@@ -89,7 +82,7 @@ function countPoints(time, avgTime, avgPoints, constant){
     
     //Points (P) = (Time - (TM - PM /  KK)) õ KK
 		//KK  =  (75 + PM) / TM)
-		//limit is 300 90
+		//limit is 90
 		
 	var correlationValue = (constant + avgPoints)/avgTime;
 	var points = (time - (avgTime - avgPoints/correlationValue))*correlationValue;
@@ -120,7 +113,6 @@ function getBestThreePoints(group, callback){
     
     var personsArray = [];
     for(var j=0; j<group.data.length; j++ ){
-        //resultsObject.group[i].data[j].currentPoints = 10;
         personsArray.push(group.data[j].fullName);
     }
     
@@ -209,10 +201,6 @@ function processInvalidGroup(group){
             
         }
         group.data[i].points = settings.maxPoints;
-        /*//console.log(group.data[i].lastName + " " +
-                    group.data[i].firstName + " " +
-                    group.data[i].result + " " +
-                    group.data[i].points + " ");*/
     }
     return group;
 }

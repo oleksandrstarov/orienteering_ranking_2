@@ -236,7 +236,7 @@ thead th, thead td {
 
 
 tbody tr.blank-row{
-    height: 6px !important; /* Overwrite any previous rules */
+    height: 6px !important; 
     background-color: #888;
 }
 

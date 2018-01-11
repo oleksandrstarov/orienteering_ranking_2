@@ -3,25 +3,8 @@
 var sql = require('mysql'),
     settings = require('./settings.js').getSQLSettings(),
     globalSettings = require('./settings.js').getSettings();
-    //defaultSettings = require('./settings.js').getSettings();
+    
 
-
-
-//var connection = sql.createConnection(settings);
-
-////console.log(settings);
-/*connection.connect();
-
-connection.query('SELECT * from TEST', function(err, rows, fields) {
-  if (!err)
-    //console.log(rows[0].data + ' ' + rows[0].value);
-  else
-    //console.log('Error while performing Query.');
-});
-
-connection.end();
-//////////////////////////////////////////////////
-*/
 var connection;
 console.log('database file');
 
@@ -35,14 +18,14 @@ function handleDisconnect() {
     if(err) {                                     // or restarting (takes a while sometimes).
       console.log('error when connecting to db:', err);
       setTimeout(handleDisconnect, 2000);
-      return;                             // We introduce a delay before attempting to reconnect,
+      return;                             // a delay before attempting to reconnect,
     }
     switchToDB(connection, function(){
       var now = new Date();
       console.log('Reconnected to ORIENTEERING at ' + now.getDate() + " time: " +now.getHours() +":" +now.getMinutes());
-    });                                      // to avoid a hot loop, and to allow our node script to
-  });                                     // process asynchronous requests in the meantime.
-                                          // If you're also serving http, display a 503 error.
+    });                                     
+  });                                     
+                                          
   connection.on('error', function(err) {
     console.log('db error', err);
     if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
@@ -54,8 +37,6 @@ function handleDisconnect() {
 }
 
 handleDisconnect();
-
-//todo drop to date
 
 //COMPETITIONS
 module.exports.processCompetition = function(competition, callback){
@@ -838,31 +819,13 @@ module.exports.getComparableData = function(runnerOne, runnerTwo){
 
 //DB
 module.exports.prepareDB = function(callback){
-  
-  //connection.connect();
-  //console.log('prepare DB');
-  /*connection.query('SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "ORIENTEERING";', function(err, rows, fields) {
-    if (!err){
-      if(rows.length === 0){*/
-        createDB(connection, function(){
-          switchToDB(connection, function(){
-            
-            createTables(connection, function(){
-              
-              callback();
-            });
-          });
-        });
-      /*}else{
-        switchToDB(connection, function(){
+    createDB(connection, function(){
+      switchToDB(connection, function(){
+        createTables(connection, function(){
           callback();
         });
-      }
-    }else{
-      //console.error(err);
-    }
-  });*/
-    
+      });
+    });
 };
 
 module.exports.setPointsStatistic = function(date){
@@ -882,8 +845,6 @@ module.exports.setPointsStatistic = function(date){
 };
 
 module.exports.getPointsStatistic = function(runnerID){
-  
-  //TODO -- save statistics
   return new Promise(function(resolve, reject){
     var query = `
     SELECT ENTRY_DATE, POINTS, PLACE FROM STATISTICS WHERE RUNNER_ID = ${runnerID};

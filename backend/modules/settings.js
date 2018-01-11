@@ -2,7 +2,6 @@
 
 
 var settings = {
-    //defaultPoints: 10,
     defaultTime: 60,
     maxPoints: 90,
     startsAmount:6,

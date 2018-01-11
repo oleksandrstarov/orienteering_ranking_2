@@ -28,8 +28,6 @@ module.exports.getBestThreePoints = function(personsArray, callback){
             persons += ', ';
         }
     }
-    //callback(null, [10, 10, 10]);
-    //pooints -- array
     db.getBestThreePoints(persons, function(error, points){
         callback(error, points);
     })
@@ -48,9 +46,6 @@ module.exports.processCompetition = function(competition, callback){
              return;
         });
     });
-    //save competition to db
-    //update runners
-    
 };
 
 module.exports.updateRunnersPoints = function(date, callback){
@@ -234,9 +229,6 @@ module.exports.fillCache = function(callback){
         callback(error);
     });
 };
-
-/*var self =this;
-setTimeout(function(){self.fillCache(function(){})}, 1000);*/
 
 module.exports.getDataFromCache = function(prop){
    return cache.getData(prop);

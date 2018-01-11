@@ -50,7 +50,6 @@ function prepareHTMLtree($) {
      $('tr').each(function(index, element){
         if($(element).children('td').hasClass('header')) {
             currentClass = $(element).children('td:first-child').children('b').text();
-            
         }
         
         $(element).addClass(currentClass);

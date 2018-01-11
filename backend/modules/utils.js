@@ -49,7 +49,6 @@ String.prototype.normalizeTitle = function(){
    .replace('ПРОТОКОЛ РЕЗУЛЬТАТОВ', '')
    .replace('Результаты – ', '')
    .trim();
-   //.replace(/,?[, -]\d{2,}/, '');
 };
 
 String.prototype.getHashCode = function(){

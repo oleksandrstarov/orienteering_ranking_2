@@ -9,8 +9,6 @@ module.exports.setData = function(prop, value){
     setRunnersStats();
 };
 
-
-
 module.exports.getData = function(prop){
     if(!prop){
         return null;

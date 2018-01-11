@@ -116,10 +116,4 @@ angular.module('app', ['ui.router', 'ngResource', 'ngMaterial', 'chart.js'])
       ;
       
       $urlRouterProvider.otherwise('/');
-      
-    
-   
-  })
- 
- ;
- 
+  });

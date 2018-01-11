@@ -21,8 +21,6 @@ var requiredHour = 22;
 var timeToStart = requiredHour + timeshiftFromKharkiv;
 console.log(timeToStart);
 
-
-
 var rule = new cron.RecurrenceRule();
 rule.dayOfWeek = [new cron.Range(0, 6)];
 rule.hour = timeToStart;
@@ -35,8 +33,6 @@ cron.scheduleJob(rule, function(){
     });
 });
 
-//manual start
-//server.startServer();
 
 db.initDB(function(){
     console.log('init');

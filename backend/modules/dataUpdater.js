@@ -10,7 +10,7 @@ var competitionsCollector = require('./dataCollector.js'),
 var isDataUpdating;
 var nextUpdateDate;
 var lastUpdateDate;
-//updateData();
+
 var self = this;
 
 module.exports.updateData = function (callback){
@@ -27,32 +27,32 @@ module.exports.updateData = function (callback){
 function processUpdate(callback){
     isDataUpdating = true;
     var startImport = new Date();
-     updateCompetitions()
-        .then(function(){
-            console.log('import');
-            return importResults();
-        })
-        .then(function(){
-            
-            isDataUpdating = false;
-            console.log('DONE');
-            console.log(`Import took ${(new Date() - startImport)/1000}  sec.`);
-            db.fillCache(function(){
-                if(callback){
-                    callback();
-                }
-            });
-        })
-        .catch(function(error){
-            console.log(`Fails after ${(new Date() - startImport)/1000}  sec.`);
-            isDataUpdating = false;
-            console.log('error on update competitions', error);
-            db.fillCache(function(){
-                if(callback){
-                    callback(error);
-                }
-            });
+    updateCompetitions()
+    .then(function(){
+        console.log('import');
+        return importResults();
+    })
+    .then(function(){
+        
+        isDataUpdating = false;
+        console.log('DONE');
+        console.log(`Import took ${(new Date() - startImport)/1000}  sec.`);
+        db.fillCache(function(){
+            if(callback){
+                callback();
+            }
         });
+    })
+    .catch(function(error){
+        console.log(`Fails after ${(new Date() - startImport)/1000}  sec.`);
+        isDataUpdating = false;
+        console.log('error on update competitions', error);
+        db.fillCache(function(){
+            if(callback){
+                callback(error);
+            }
+        });
+    });
 }
 
 
@@ -77,8 +77,6 @@ module.exports.dropData = function (callback){
            callback(error);
        }
        self.updateData(callback);
-       //processUpdate(callback);
-       //rollBackDB(earliestReadyCompetition, callback);
    });
 };
 
@@ -86,7 +84,6 @@ module.exports.dropData = function (callback){
 function rollBackDB(date){
     db.rollBackToDate(date, function(error){
        self.updateData();
-       //processUpdate();
    });
 }
 
@@ -110,7 +107,6 @@ module.exports.mergeDuplicates = function (runners, callback){
         
         index++;
         if(index < runners.length){
-           // idArray.push(runners[index].main.ID);
             
             runners[index].duplicates.forEach(function(runner){
                 idArray.push(runner.ID);
@@ -148,7 +144,6 @@ function updateCompetitions(){
     return new Promise(function(resolve, reject){
         var processedCompetitions = [];
          db.getImportedCompetitionsIDs(function(data){
-            ////console.log(data);
             processedCompetitions = data;
             competitionsCollector.getNewCompetitions(processedCompetitions, function(error, list){
                 if(error){
@@ -196,7 +191,7 @@ function importResultsForWeek(date, callback){
     .then(function(){
         if(isNextWeekValid){
             process.stdout.write("\r" +`Working on ${date.addDays(7).toMysqlFormat()}`);
-            importResultsForWeek(date.addDays(7), callback);
+            importResultsForWeek(nextUpdateDate/*date.addDays(7)*/, callback);
         }else{
            callback();
         }
