@@ -4,7 +4,8 @@ var request = require('request'),
     cheerio = require('cheerio'),
     iconv  = require('iconv-lite'),
     Buffer = require('buffer').Buffer,
-    url = 'http://orienteering.kh.ua/Result/Index/tag/1/';
+    url = 'http://orienteering.kh.ua/Result/Index/tag/1/',
+    moment = require('moment');
 
 module.exports.manualImport = function(customURL, callback){
     var data = [];
@@ -120,13 +121,12 @@ function processCompetition(competitionData, callback){
             //(ID, DATE, URL, NAME, TYPE, STATUS, VALID, WEB_ID)
             
             var type = getFileType($);
-            console.log(type);
             result.type = type;
             result.notes = '';
             if(type === 'SFR'){
                 result.isValid = true;
-                result.title = $('h1').text().normalizeTitle();
-                result.date = toDate($('h1').text().match(/(\d{2}.){2}(\d{4}|\d{2})/)[0]).withoutTime().toMysqlFormat();
+                result.title = $('h1').clone().children().remove().end().text().normalizeTitle();
+                result.date = toDate($('h1').text().match(/((\d{2}.){2}(\d{4}|\d{2})|(\d{2}-\D+-\d{2}))/)[0]).withoutTime().toMysqlFormat();
                 callback(null, result);
                 
             }else if(type === 'WINORIENT'){
@@ -244,23 +244,26 @@ function isValidWinOrient(string){
 }
 
 function isValidMeos(string){
-    if(string.toLowerCase().indexOf('meos') != -1){
+    if(string.toLowerCase().indexOf('meos') !== -1){
         return true;
     }
     return false;
 }
 
 function toDate(dateStr) {
-    var delimeter = dateStr.indexOf('.') != -1? '.': '-';
+    if(dateStr.match(/(\d{2}-\D+-\d{2})/)) {
+      return moment(dateStr).toDate();
+    }
+    var delimeter = dateStr.indexOf('.') !== -1? '.': '-';
     var parts = dateStr.split(delimeter);
     if(!parts.length){
         return null;
     }
-    if(delimeter == '-'){
-         return new Date(parts[0].length === 2? '20'+parts[0]: parts[0], parts[1]-1, parts[2]);
+    if(delimeter === '-'){
+      return new Date(parts[0].length === 2? '20'+parts[0]: parts[0], parts[1]-1, parts[2]);
     }
-    if(delimeter == '.'){
-         return new Date(parts[2].length === 2? '20'+parts[2]: parts[2], parts[1]-1, parts[0]);
+    if(delimeter === '.'){
+      return new Date(parts[2].length === 2? '20'+parts[2]: parts[2], parts[1]-1, parts[0]);
     }
 }
 

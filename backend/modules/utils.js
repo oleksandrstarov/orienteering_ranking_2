@@ -2,6 +2,7 @@
 
 
 Date.prototype.toMysqlFormat = function() {
+    console.log(this);
     return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " 00:00:00";
 };
 
@@ -48,7 +49,8 @@ String.prototype.normalizeTitle = function(){
    .replace('Протокол результатов.', '')
    .replace('ПРОТОКОЛ РЕЗУЛЬТАТОВ', '')
    .replace('Результаты – ', '')
-   .trim();
+   .trim()
+   .substring(0, 300);
 };
 
 String.prototype.getHashCode = function(){
