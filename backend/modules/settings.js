@@ -12,8 +12,8 @@ var settings = {
 
 var sqlSettings = {
     host     :  process.env.IP,
-    user     : 'oleksandrstarov',
-    password : '',
+    user     : 'user',
+    password : 'root',
     database : 'mysql'
 };
 

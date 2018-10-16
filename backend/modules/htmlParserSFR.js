@@ -116,8 +116,6 @@ function processResultLine(data, pattern){
     return resultLine;
 }
 
-
-
 function processResults(group, $){
     var groupResult = [];
     var pattern = [];
