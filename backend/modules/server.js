@@ -43,6 +43,8 @@ var auth = function(req, res, next) {
 var recalculating = dataUpdater.isUpdating;
 
 app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   if(recalculating()){
     res.sendStatus(434);
     return;   
