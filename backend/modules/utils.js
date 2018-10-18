@@ -2,7 +2,6 @@
 
 
 Date.prototype.toMysqlFormat = function() {
-    console.log(this);
     return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " 00:00:00";
 };
 

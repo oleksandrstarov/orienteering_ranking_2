@@ -1,3 +1,4 @@
+
 var compression = require('compression'),
     express = require('express'),
     morgan = require('morgan'),
@@ -27,7 +28,9 @@ app.use(session({
     saveUninitialized: true
 }));
 morgan('combined', {
-  skip: function (req, res) { return res.statusCode < 400 }
+  skip: function (req, res) {
+    return res.statusCode < 400;
+  }
 });
 app.use(morgan('combined'));
 app.use(express.static(__dirname + "./../../dist"));

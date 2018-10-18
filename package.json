@@ -13,7 +13,7 @@
     "gulp-useref": "^3.1.0",
     "jshint-stylish": "^1.0.2"
   },
-  "description": "Orienteering rancing system for results from SFR and WinOrient systems",
+  "description": "Orienteering ranking system for results from SFR and WinOrient systems",
   "version": "1.0.0",
   "main": "backend/application.js",
   "directories": {
