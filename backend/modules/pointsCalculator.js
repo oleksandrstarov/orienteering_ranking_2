@@ -1,7 +1,7 @@
 'use strict';
 
 var db = require('./dbUtils.js'),
-    settings = require('./settings.js').getSettings();
+  settings = require('./settings.js').getSettings();
 
 /*{ title: 'Чемпионат Харьковской области. Васищево-север..     Средняя,  21.02.2016.     Протокол результатов.',
   date: Sun Feb 21 2016 00:00:00 GMT+0000 (UTC),
@@ -20,188 +20,186 @@ var db = require('./dbUtils.js'),
   fullName: 'Кизиев Сергей' }*/
 
 
+module.exports.processCompetitionResults = function (resultsObject, callback) {
+  checkGroups(resultsObject);
+  if (resultsObject.group.length === 0) {
+    resultsObject.STATUS = 'INVALID';
+    resultsObject.NOTES = 'Нет полных групп для рассчета';
+    callback(resultsObject);
+    return;
+  }
+  var j = 0;
+  getBestThreePoints(resultsObject.group[j], getBestThreePointsCallback);
 
-module.exports.processCompetitionResults = function(resultsObject, callback){
-    checkGroups(resultsObject);
-    if(resultsObject.group.length === 0){
-        resultsObject.STATUS = 'INVALID';
-        resultsObject.NOTES = 'Нет полных групп для рассчета';
-        callback(resultsObject);
-        return;
+  function getBestThreePointsCallback(error, bestPoints) {
+    if (error) {
+      console.error(error);
     }
-    var j = 0;
-    getBestThreePoints(resultsObject.group[j], getBestThreePointsCallback);
-    
-    function getBestThreePointsCallback(error, bestPoints){
-        if(error){
-            console.error(error);
+    resultsObject.group[j].avgPoints = getAvgData(bestPoints);
+
+    if (++j < resultsObject.group.length) {
+      getBestThreePoints(resultsObject.group[j], getBestThreePointsCallback);
+    } else {
+
+      for (var i = 0; i < resultsObject.group.length; i++) {
+        if (resultsObject.group[i].isValid) {
+          resultsObject.group[i] = processGroup(resultsObject.group[i]);
+        } else {
+          resultsObject.group.splice(i, 1);
+          i--;
         }
-        resultsObject.group[j].avgPoints = getAvgData(bestPoints);
-        
-        if(++j < resultsObject.group.length){
-            getBestThreePoints(resultsObject.group[j], getBestThreePointsCallback);
-        }else{
-            
-            for(var i=0; i<resultsObject.group.length; i++){
-                if(resultsObject.group[i].isValid){
-                    resultsObject.group[i] = processGroup(resultsObject.group[i]);
-                }else{
-                    resultsObject.group.splice(i,1);
-                    i--;
-                }
-            }
-            callback(resultsObject);
-        }
+      }
+      callback(resultsObject);
     }
+  }
 };
 
 
-
-function processGroup(group){
-    group = setResultAndAvgTopTime(group);
-    for(var i=0; i<group.data.length; i++){
-        var result = group.data[i].resultSeconds;
-        if(result === -1){
-            group.data[i].result = '00:00:00';
-            group.data[i].place = -1;
-            group.data[i].points = null;
-        }
-        group.data[i].points = countPoints(result, group.avgTime, group.avgPoints);
+function processGroup(group) {
+  group = setResultAndAvgTopTime(group);
+  for (var i = 0; i < group.data.length; i++) {
+    var result = group.data[i].resultSeconds;
+    if (result === -1) {
+      group.data[i].result = '00:00:00';
+      group.data[i].place = -1;
+      group.data[i].points = null;
     }
-    return group;
+    group.data[i].points = countPoints(result, group.avgTime, group.avgPoints);
+  }
+  return group;
 }
 
 
-function countPoints(time, avgTime, avgPoints, constant){
-    if(constant === undefined){
-        constant = settings.defaultTime;
-    }
-    if(time === -1){
-        return settings.maxPoints;
-    }
-    
-    //Points (P) = (Time - (TM - PM /  KK)) õ KK
-		//KK  =  (75 + PM) / TM)
-		//limit is 90
-		
-	var correlationValue = (constant + avgPoints)/avgTime;
-	var points = (time - (avgTime - avgPoints/correlationValue))*correlationValue;
-	
-	return points <= settings.maxPoints? round(points) : settings.maxPoints;
+function countPoints(time, avgTime, avgPoints, constant) {
+  if (constant === undefined) {
+    constant = settings.defaultTime;
+  }
+  if (time === -1) {
+    return settings.maxPoints;
+  }
+
+  //Points (P) = (Time - (TM - PM /  KK)) õ KK
+  //KK  =  (75 + PM) / TM)
+  //limit is 90
+
+  var correlationValue = (constant + avgPoints) / avgTime;
+  var points = (time - (avgTime - avgPoints / correlationValue)) * correlationValue;
+
+  return points <= settings.maxPoints ? round(points) : settings.maxPoints;
 }
 
-function round(points){
-    return Math.round(points * 100) / 100;
+function round(points) {
+  return Math.round(points * 100) / 100;
 }
 
 
-function getAvgData(threeTopData){
-    var avgValue =0;
-    for(var i=0; i<3; i++){
-        avgValue+=threeTopData[i];
-    }
-    return avgValue/3;
+function getAvgData(threeTopData) {
+  var avgValue = 0;
+  for (var i = 0; i < 3; i++) {
+    avgValue += threeTopData[i];
+  }
+  return avgValue / 3;
 }
 
 //from db
-function getBestThreePoints(group, callback){
-    if(!group.isValid){
-        
-        callback('INVALID GROUP - NO POINTS', [group.shift,group.shift,group.shift]);
-        return;
-    }
-    
-    var personsArray = [];
-    for(var j=0; j<group.data.length; j++ ){
-        personsArray.push(group.data[j].fullName);
-    }
-    
-    db.getBestThreePoints(personsArray, function(error, bestPoints){
-        if(error){
-            callback(error, [group.shift,group.shift,group.shift]);
-        }else{
-            for(var i = 0; i < 3; i++){
-                if(!bestPoints[i]){
-                    bestPoints[i] = group.shift;
-                }
-             }
-            
-            callback(null, bestPoints);
+function getBestThreePoints(group, callback) {
+  if (!group.isValid) {
+
+    callback('INVALID GROUP - NO POINTS', [group.shift, group.shift, group.shift]);
+    return;
+  }
+
+  var personsArray = [];
+  for (var j = 0; j < group.data.length; j++) {
+    personsArray.push(group.data[j].fullName);
+  }
+
+  db.getBestThreePoints(personsArray, function (error, bestPoints) {
+    if (error) {
+      callback(error, [group.shift, group.shift, group.shift]);
+    } else {
+      for (var i = 0; i < 3; i++) {
+        if (!bestPoints[i]) {
+          bestPoints[i] = group.shift;
         }
-        
-    })
+      }
+
+      callback(null, bestPoints);
+    }
+
+  })
 }
 
 
-function setResultAndAvgTopTime(group){
-    var topTime = [];
-    if(group.isValid){
-        for(var j=0; j<group.data.length; j++ ){
-            group.data[j].resultSeconds = convertResultToSeconds(group.data[j].result);
-            if(j<3){
-                topTime.push(group.data[j].resultSeconds);
-            }
-        } 
+function setResultAndAvgTopTime(group) {
+  var topTime = [];
+  if (group.isValid) {
+    for (var j = 0; j < group.data.length; j++) {
+      group.data[j].resultSeconds = convertResultToSeconds(group.data[j].result);
+      if (j < 3) {
+        topTime.push(group.data[j].resultSeconds);
+      }
     }
-    
-    group.avgTime = getAvgData(topTime);
-    if(group.avgTime > topTime[0] *1.1){
-       group.avgTime = topTime[0] *1.1; 
-    }
-    return group;
+  }
+
+  group.avgTime = getAvgData(topTime);
+  if (group.avgTime > topTime[0] * 1.1) {
+    group.avgTime = topTime[0] * 1.1;
+  }
+  return group;
 }
 
-function convertResultToSeconds(resultString){
-    var re = new RegExp(/((\d{1,2}:)?\d{1,2}:\d{2})/);
-    var result = -1;
-    if(re.test(resultString)){
-        var data = resultString.split(':');
-        if (data.length === 3) {
-            result = parseInt(data[2]) + parseInt(data[1]) * 60 + parseInt(data[0]) * 60 *60;
-        } 
-        
-        if (data.length === 2) {
-            result = parseInt(data[1]) + parseInt(data[0]) * 60;
-        }
-        
+function convertResultToSeconds(resultString) {
+  var re = new RegExp(/((\d{1,2}:)?\d{1,2}:\d{2})/);
+  var result = -1;
+  if (re.test(resultString)) {
+    var data = resultString.split(':');
+    if (data.length === 3) {
+      result = parseInt(data[2]) + parseInt(data[1]) * 60 + parseInt(data[0]) * 60 * 60;
     }
-    return result;
+
+    if (data.length === 2) {
+      result = parseInt(data[1]) + parseInt(data[0]) * 60;
+    }
+
+  }
+  return result;
 }
 
-function checkGroups(resultsObject){
-    for(var i=0; i<resultsObject.group.length; i++){
-        resultsObject.group[i].isValid = true;
-        
-        if(resultsObject.group[i].data.length < 3){
-            //resultsObject.group[i].isValid = false;
-            resultsObject.group.splice(i,1);
-            i--;
-            continue;
-        }
-        
-        for(var j=0; j<resultsObject.group[i].data.length; j++){
-            if(convertResultToSeconds(resultsObject.group[i].data[j].result) === -1 && j < 3){
-                //resultsObject.group[i].isValid = false;
-                resultsObject.group.splice(i,1);
-                i--;
-                break;
-            }
-        }
+function checkGroups(resultsObject) {
+  for (var i = 0; i < resultsObject.group.length; i++) {
+    resultsObject.group[i].isValid = true;
+
+    if (resultsObject.group[i].data.length < 3) {
+      //resultsObject.group[i].isValid = false;
+      resultsObject.group.splice(i, 1);
+      i--;
+      continue;
     }
+
+    for (var j = 0; j < resultsObject.group[i].data.length; j++) {
+      if (convertResultToSeconds(resultsObject.group[i].data[j].result) === -1 && j < 3) {
+        //resultsObject.group[i].isValid = false;
+        resultsObject.group.splice(i, 1);
+        i--;
+        break;
+      }
+    }
+  }
 }
 
-function processInvalidGroup(group){
-    group = setResultAndAvgTopTime(group);
-    for(var i=0; i<group.data.length; i++){
-        var result = convertResultToSeconds(group.data[i].result);
-        group.data[i].resultSeconds = result;
-        if(result === -1){
-            group.data[i].result = '00:00:00';
-            group.data[i].place = -1;
-            
-        }
-        group.data[i].points = settings.maxPoints;
+function processInvalidGroup(group) {
+  group = setResultAndAvgTopTime(group);
+  for (var i = 0; i < group.data.length; i++) {
+    var result = convertResultToSeconds(group.data[i].result);
+    group.data[i].resultSeconds = result;
+    if (result === -1) {
+      group.data[i].result = '00:00:00';
+      group.data[i].place = -1;
+
     }
-    return group;
+    group.data[i].points = settings.maxPoints;
+  }
+  return group;
 }
 

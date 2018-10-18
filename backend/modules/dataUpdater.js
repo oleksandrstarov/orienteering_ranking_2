@@ -1,11 +1,11 @@
 'use strict';
 
 var competitionsCollector = require('./dataCollector.js'),
-    pointsCalculator = require('./pointsCalculator.js'),
-    SFRparser= require('./htmlParserSFR.js'),
-    MEOSparser= require('./htmlParserMEOS.js'),
-    WOparser= require('./htmlParserWinOrient.js'),
-    db = require('./dbUtils.js');
+  pointsCalculator = require('./pointsCalculator.js'),
+  SFRparser = require('./htmlParserSFR.js'),
+  MEOSparser = require('./htmlParserMEOS.js'),
+  WOparser = require('./htmlParserWinOrient.js'),
+  db = require('./dbUtils.js');
 
 var isDataUpdating;
 var nextUpdateDate;
@@ -13,300 +13,296 @@ var lastUpdateDate;
 
 var self = this;
 
-module.exports.updateData = function (callback){
-    db.getLastUpdateDate(function(date){
-        lastUpdateDate = date.withoutTime();
-        nextUpdateDate =  getPrevSunday(new Date().UTC()).withoutTime();
-        console.log('last ', lastUpdateDate, ' next ', nextUpdateDate);
-        processUpdate(callback);
-    });
+module.exports.updateData = function (callback) {
+
+  db.getLastUpdateDate(function (date) {
+    lastUpdateDate = date.withoutTime();
+    nextUpdateDate = getPrevSunday(new Date().UTC()).withoutTime();
+    console.log('last ', lastUpdateDate, ' next ', nextUpdateDate);
+    processUpdate(callback);
+  });
 };
 
 
+function processUpdate(callback) {
+  isDataUpdating = true;
+  var startImport = new Date();
+  updateCompetitions()
+    .then(function () {
+      console.log('import');
+      return importResults();
+    })
+    .then(function () {
 
-function processUpdate(callback){
-    isDataUpdating = true;
-    var startImport = new Date();
-    updateCompetitions()
-    .then(function(){
-        console.log('import');
-        return importResults();
+      isDataUpdating = false;
+      console.log('DONE');
+      console.log(`Import took ${(new Date() - startImport) / 1000}  sec.`);
+      db.fillCache(function () {
+        if (callback) {
+          callback();
+        }
+      });
     })
-    .then(function(){
-        
-        isDataUpdating = false;
-        console.log('DONE');
-        console.log(`Import took ${(new Date() - startImport)/1000}  sec.`);
-        db.fillCache(function(){
-            if(callback){
-                callback();
-            }
-        });
-    })
-    .catch(function(error){
-        console.log(`Fails after ${(new Date() - startImport)/1000}  sec.`);
-        isDataUpdating = false;
-        console.log('error on update competitions', error);
-        db.fillCache(function(){
-            if(callback){
-                callback(error);
-            }
-        });
+    .catch(function (error) {
+      console.log(`Fails after ${(new Date() - startImport) / 1000}  sec.`);
+      isDataUpdating = false;
+      console.log('error on update competitions', error);
+      db.fillCache(function () {
+        if (callback) {
+          callback(error);
+        }
+      });
     });
 }
 
 
+module.exports.recalculateCompetitions = function (competitionsArray, callback) {
+  db.updateCompetitionsStatus(competitionsArray, function (error, earliestReadyCompetition) {
 
-
-module.exports.recalculateCompetitions = function (competitionsArray, callback){
-   db.updateCompetitionsStatus(competitionsArray, function(error, earliestReadyCompetition){
-       
-       if(error){
-           console.log('error');
-           callback(error);
-           return;
-       }
-       console.log('before roll back');
-       rollBackDB(earliestReadyCompetition);
-   });
+    if (error) {
+      console.log('error');
+      callback(error);
+      return;
+    }
+    console.log('before roll back');
+    rollBackDB(earliestReadyCompetition);
+  });
 };
 
-module.exports.dropData = function (callback){
-   db.dropData( function(error){
-       if(error){
-           callback(error);
-       }
-       self.updateData(callback);
-   });
+module.exports.dropData = function (callback) {
+  db.dropData(function (error) {
+    if (error) {
+      callback(error);
+    }
+    self.updateData(callback);
+  });
 };
 
 
-function rollBackDB(date){
-    db.rollBackToDate(date, function(error){
-       self.updateData();
-   });
+function rollBackDB(date) {
+  db.rollBackToDate(date, function (error) {
+    self.updateData();
+  });
 }
 
-module.exports.mergeDuplicates = function (runners, callback){
-    var index = 0;
-    var idArray = [];
-    
-    idArray.push(runners[index].main.ID);
-            
-    runners[index].duplicates.forEach(function(runner){
+module.exports.mergeDuplicates = function (runners, callback) {
+  var index = 0;
+  var idArray = [];
+
+  idArray.push(runners[index].main.ID);
+
+  runners[index].duplicates.forEach(function (runner) {
+    idArray.push(runner.ID);
+  });
+
+  db.setDuplicates(runners[index].main, runners[index].duplicates, setDuplicatesCallback);
+
+  function setDuplicatesCallback(error) {
+    if (error) {
+      callback('Error setting duplicates: ' + error);
+      return;
+    }
+
+    index++;
+    if (index < runners.length) {
+
+      runners[index].duplicates.forEach(function (runner) {
         idArray.push(runner.ID);
-    });
-    
-    db.setDuplicates(runners[index].main, runners[index].duplicates, setDuplicatesCallback);
-    
-    function setDuplicatesCallback(error){
-        if(error){
-            callback('Error setting duplicates: ' + error);
-            return;
-        }
-        
-        index++;
-        if(index < runners.length){
-            
-            runners[index].duplicates.forEach(function(runner){
-                idArray.push(runner.ID);
-            });
-            
-            db.setDuplicates(runners[index].main, runners[index].duplicates, setDuplicatesCallback);
-        }else{
-            db.getEarliestResultDate(idArray, function(error, earliestResultDate){
-                rollBackDB(earliestResultDate, callback);
-           });
-        }
+      });
+
+      db.setDuplicates(runners[index].main, runners[index].duplicates, setDuplicatesCallback);
+    } else {
+      db.getEarliestResultDate(idArray, function (error, earliestResultDate) {
+        rollBackDB(earliestResultDate, callback);
+      });
     }
+  }
 };
 
-module.exports.manualImport = function (data, callback){
-    var isValidURL = /http:\/\/(.+)\.(.+)\/(.+)\.(htm|html)/.test(data);
-    if(isValidURL){
-        competitionsCollector.manualImport(data, function(error, list){
-            if(error){
-               console.log(error);
-            }
-            db.saveNewCompetitions(list.reverse(), function(error){
-                if(error){
-                    console.log(error);
-                }
-                callback();
-            });
-        });
-    }else{
-        callback('Invalid URL provided. Please check');
-    }
+module.exports.manualImport = function (data, callback) {
+  var isValidURL = /http:\/\/(.+)\.(.+)\/(.+)\.(htm|html)/.test(data);
+  if (isValidURL) {
+    competitionsCollector.manualImport(data, function (error, list) {
+      if (error) {
+        console.log(error);
+      }
+      db.saveNewCompetitions(list.reverse(), function (error) {
+        if (error) {
+          console.log(error);
+        }
+        callback();
+      });
+    });
+  } else {
+    callback('Invalid URL provided. Please check');
+  }
 };
 
-function updateCompetitions(){
-    return new Promise(function(resolve, reject){
-        var processedCompetitions = [];
-         db.getImportedCompetitionsIDs(function(data){
-            processedCompetitions = data;
-            competitionsCollector.getNewCompetitions(processedCompetitions, function(error, list){
-                if(error){
-                   console.log(error);
-                   resolve();
-                }else{
-                    if(list.length > 0){
-                        db.saveNewCompetitions(list.reverse(), function(error){
-                            if(error){
-                                console.log(error);
-                                reject(error);
-                            }
-                            resolve();
-                        });
-                    }else{
-                        resolve();
-                    }
-                }
+function updateCompetitions() {
+  return new Promise(function (resolve, reject) {
+    var processedCompetitions = [];
+    db.getImportedCompetitionsIDs(function (data) {
+      processedCompetitions = data;
+      competitionsCollector.getNewCompetitions(processedCompetitions, function (error, list) {
+        if (error) {
+          console.log(error);
+          resolve();
+        } else {
+          if (list.length > 0) {
+            db.saveNewCompetitions(list.reverse(), function (error) {
+              if (error) {
+                console.log(error);
+                reject(error);
+              }
+              resolve();
             });
-        });
+          } else {
+            resolve();
+          }
+        }
+      });
     });
+  });
 }
 
-function importResults(){
-    return new Promise(function(resolve, reject){
-        var targetDate = lastUpdateDate === nextUpdateDate ? lastUpdateDate : lastUpdateDate.addDays(7);
-        
-        if(targetDate <= nextUpdateDate){
-            importResultsForWeek(targetDate, function(error){
-                if(error){
-                    console.log(error);
-                    reject(error);
-                }
-                resolve();
-            });
-        }else{
-            reject('not a sunday today');
+function importResults() {
+  return new Promise(function (resolve, reject) {
+    var targetDate = lastUpdateDate === nextUpdateDate ? lastUpdateDate : lastUpdateDate.addDays(7);
+    if (targetDate <= nextUpdateDate) {
+      importResultsForWeek(targetDate, function (error) {
+        if (error) {
+          console.log(error);
+          reject(error);
         }
-    });
+        resolve();
+      });
+    } else {
+      reject('not a sunday today');
+    }
+  });
 }
 
-function importResultsForWeek(date, callback){
-    var isNextWeekValid = date.addDays(7) <= nextUpdateDate;
-    weeklyImport(date)
-    .then(function(){
-        if(isNextWeekValid){
-            process.stdout.write("\r" +`Working on ${date.addDays(7).toMysqlFormat()}`);
-            importResultsForWeek(nextUpdateDate/*date.addDays(7)*/, callback);
-        }else{
-           callback();
-        }
+function importResultsForWeek(date, callback) {
+  var isNextWeekValid = date.addDays(7) <= nextUpdateDate;
+  weeklyImport(date)
+    .then(function () {
+      if (isNextWeekValid) {
+        process.stdout.write("\r" + `Working on ${date.addDays(7).toMysqlFormat()}`);
+        importResultsForWeek(date.addDays(7), callback);
+      } else {
+        callback();
+      }
     })
-    .catch(function(error){
-        console.log('weeklyImport', error);
-        callback(error);
+    .catch(function (error) {
+      console.log('weeklyImport', error);
+      callback(error);
     });
 }
 
-function weeklyImport(date){
-    return new Promise(function(resolve, reject){
-        db.getCompetitionsToImport(date)
-        .then(function(competitions){
-            return processCompetitionsResults(competitions);
-        })
-        .then(function(){
-            return savePointsStatisticsOnSunday(date);
-        })
-        .then(function(){
-            resolve();
-        })
-        .catch(function(error){
-            console.log(error);
-            reject('dataUpdater.js ' + error);
-        });
-    });
+function weeklyImport(date) {
+  return new Promise(function (resolve, reject) {
+    db.getCompetitionsToImport(date)
+      .then(function (competitions) {
+        return processCompetitionsResults(competitions);
+      })
+      .then(function () {
+        return savePointsStatisticsOnSunday(date);
+      })
+      .then(function () {
+        resolve();
+      })
+      .catch(function (error) {
+        console.log(error);
+        reject('dataUpdater.js ' + error);
+      });
+  });
 }
 
-function processCompetitionsResults(competitions){
-    return new Promise(function(resolve, reject){
-        if(competitions == null || competitions.length == 0){
-            resolve();
-        }
-        var competition = competitions.shift();
-        processCompetitionResult(competition, processCompetitionCallback);
-        
-        
-        function processCompetitionCallback(error){
-            if(error){
-                reject('rejected with error '+ error);
-            }
-            if(competitions.length > 0){
-                competition = competitions.shift();
-                processCompetitionResult(competition, processCompetitionCallback);
-            }else{
-                resolve();
-            }
-        }
-    });
-}
-
-function processCompetitionResult(competition, callback){
-    getResults(competition, function(error, competitionData){
-        if(error){
-            db.processCompetition(competitionData, function(){
-                callback();
-                return;
-            });
-        }else{
-            //check this
-            db.updateRunnersPoints(competitionData.DATE, function(error){
-                pointsCalculator.processCompetitionResults(competitionData, function(competitionData){
-                    db.processCompetition(competitionData, function(){
-                        callback();
-                        return;
-                    });
-                });
-            });    
-        }
-    });
-}
-
-
-
-function getResults(competition, callback){
-    if(competition.TYPE === 'SFR'){
-        SFRparser.processCompetition(competition, function(error, data){
-            callback(error, data);
-        });
-    }else if(competition.TYPE === 'WINORIENT'){
-        WOparser.processCompetition(competition, function(error, data){
-            callback(error, data);
-        });
-    }else if(competition.TYPE === 'MEOS'){
-        MEOSparser.processCompetition(competition, function(error, data){
-            callback(error, data);
-        });
-    }else{
-        competition.STATUS = 'INVALID';
-        callback('UNKNOWN TYPE', competition);
+function processCompetitionsResults(competitions) {
+  return new Promise(function (resolve, reject) {
+    if (competitions == null || competitions.length == 0) {
+      resolve();
     }
+    var competition = competitions.shift();
+    processCompetitionResult(competition, processCompetitionCallback);
+
+
+    function processCompetitionCallback(error) {
+      if (error) {
+        reject('rejected with error ' + error);
+      }
+      if (competitions.length > 0) {
+        competition = competitions.shift();
+        processCompetitionResult(competition, processCompetitionCallback);
+      } else {
+        resolve();
+      }
+    }
+  });
 }
 
-function savePointsStatisticsOnSunday(date){
-    return new Promise(function(resolve, reject){
-        db.updateRunnersPoints(date, function(error){
-           db.setPointsStatistic(date)
-               .then(function(){
-                  resolve();
-               })
-               .catch(function(error){
-                  console.log('savePointsStatisticsOnSunday', error);
-                  reject(error);
-                });
-       }); 
+function processCompetitionResult(competition, callback) {
+  getResults(competition, function (error, competitionData) {
+    if (error) {
+      db.processCompetition(competitionData, function () {
+        callback();
+        return;
+      });
+    } else {
+      //check this
+      db.updateRunnersPoints(competitionData.DATE, function (error) {
+        pointsCalculator.processCompetitionResults(competitionData, function (competitionData) {
+          db.processCompetition(competitionData, function () {
+            callback();
+            return;
+          });
+        });
+      });
+    }
+  });
+}
+
+
+function getResults(competition, callback) {
+  if (competition.TYPE === 'SFR') {
+    SFRparser.processCompetition(competition, function (error, data) {
+      callback(error, data);
     });
+  } else if (competition.TYPE === 'WINORIENT') {
+    WOparser.processCompetition(competition, function (error, data) {
+      callback(error, data);
+    });
+  } else if (competition.TYPE === 'MEOS') {
+    MEOSparser.processCompetition(competition, function (error, data) {
+      callback(error, data);
+    });
+  } else {
+    competition.STATUS = 'INVALID';
+    callback('UNKNOWN TYPE', competition);
+  }
+}
+
+function savePointsStatisticsOnSunday(date) {
+  return new Promise(function (resolve, reject) {
+    db.updateRunnersPoints(date, function (error) {
+      db.setPointsStatistic(date)
+        .then(function () {
+          resolve();
+        })
+        .catch(function (error) {
+          console.log('savePointsStatisticsOnSunday', error);
+          reject(error);
+        });
+    });
+  });
 };
 
-function getPrevSunday(date){
-    var day = date.getDay();
-    date = date.addDays(-day);
-    return date;
+function getPrevSunday(date) {
+  var day = date.getDay();
+  date = date.addDays(-day);
+  return date;
 }
 
-module.exports.isUpdating = function(){
-    return isDataUpdating === true;
+module.exports.isUpdating = function () {
+  return isDataUpdating === true;
 };
