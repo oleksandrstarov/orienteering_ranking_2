@@ -23,5 +23,5 @@ navigate to http://localhost:8080 to see the application
  4. Run [npm install]
  5. Run [ng serve --open]
 
-If everything was set correctly - the comand [ng serve --open] should begin automatically,
+If everything was set correctly - the command [ng serve --open] should begin automatically,
 navigate to http://localhost:4200/ to see the application
