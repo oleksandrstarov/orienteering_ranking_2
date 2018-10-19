@@ -8,6 +8,9 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './shared/components/header/header.component';
 import {FooterComponent} from './shared/components/footer/footer.component';
 
+//material design elements modules
+import {MatTabsModule} from '@angular/material/tabs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +20,8 @@ import {FooterComponent} from './shared/components/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
