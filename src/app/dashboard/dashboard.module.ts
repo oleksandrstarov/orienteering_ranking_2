@@ -4,7 +4,6 @@ import {DashboardRoutingModule} from "./dashboard-router.module";
 
 import {DashboardComponent} from "./dashboard.component";
 
-
 @NgModule({
   imports: [
     CommonModule,

@@ -1,9 +1,3 @@
-<nav>
-  <a routerLink="/dashboard">Главная</a>
-  <a routerLink="/rating">Рейтинг</a>
-  <a routerLink="/competition">Соревнования</a>
-  <a routerLink="/about-rating">О рейтинге</a>
-</nav>
 <nav mat-tab-nav-bar>
   <a mat-tab-link
      *ngFor="let link of navLinks"
@@ -13,5 +7,3 @@
     {{link.label}}
   </a>
 </nav>
-
-

@@ -4,7 +4,6 @@ import {AboutRatingRoutingModule} from './about-rating-router.module';
 
 import {AboutRatingComponent} from "./about-rating.component";
 
-
 @NgModule({
   imports: [
     CommonModule,

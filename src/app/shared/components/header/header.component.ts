@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  navLinks = [{path: '/rating', label: 'Главная'},{path: '/competition', label: 'qwe'},{path: '/rating', label: 'qwe'}];
-  constructor() { }
+  navLinks = [
+    {path: '/dashboard', label: 'Главная'},
+    {path: '/rating', label: 'Рейтинг'},
+    {path: '/competition', label: 'Соревнования'},
+    {path: '/about-rating', label: 'О рейтинге'}
+  ];
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
