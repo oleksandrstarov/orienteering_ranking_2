@@ -29,5 +29,4 @@ export class RatingComponent implements OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
   }
-
 }
