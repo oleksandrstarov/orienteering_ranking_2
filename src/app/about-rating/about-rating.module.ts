@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AboutRatingRoutingModule} from './about-rating-router.module';
 
-import { AboutRatingRoutingModule } from './about-rating-router.module';
-import { AboutRatingComponent } from './about-rating.component';
+import {AboutRatingComponent} from "./about-rating.component";
 
 @NgModule({
   imports: [

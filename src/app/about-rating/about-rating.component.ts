@@ -9,7 +9,7 @@ export class AboutRatingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }
