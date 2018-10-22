@@ -9,7 +9,7 @@ export class CompetitionComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
