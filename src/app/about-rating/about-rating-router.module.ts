@@ -1,11 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {  AboutRatingComponent} from './about-rating.component'
-
+import { AboutRatingComponent } from './about-rating.component';
 
 const routes: Routes = [
-  { path: '', component: AboutRatingComponent}
+  { path: '', component: AboutRatingComponent }
 ];
 
 @NgModule({

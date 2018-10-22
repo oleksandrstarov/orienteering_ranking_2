@@ -1,15 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RatingRoutingModule} from "./rating-router.module";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   MatCheckboxModule,
   MatExpansionModule,
-  MatFormFieldModule, MatInputModule,
+  MatFormFieldModule,
+  MatInputModule,
   MatSortModule,
   MatTableModule
-} from "@angular/material";
+} from '@angular/material';
 
-import {RatingComponent} from "./rating.component";
+import { RatingRoutingModule } from './rating-router.module';
+import { RatingComponent } from './rating.component';
 
 @NgModule({
   imports: [

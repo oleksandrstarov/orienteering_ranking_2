@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 export interface PeriodicElement {
   number: number;
@@ -9,9 +9,9 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {number: 1, name: 'Тарануха Антон', club: 'ХНУПС', points: 9.12},
-  {number: 2, name: 'Коновалов Олексій', club: 'УПС', points: 7.12},
-  {number: 3, name: 'Сергей Степаненко', club: 'ХПИ', points: 11.12}
+  { number: 1, name: 'Тарануха Антон', club: 'ХНУПС', points: 9.12 },
+  { number: 2, name: 'Коновалов Олексій', club: 'УПС', points: 7.12 },
+  { number: 3, name: 'Сергей Степаненко', club: 'ХПИ', points: 11.12 }
 ];
 
 @Component({
@@ -26,7 +26,7 @@ export class RatingComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.dataSource.sort = this.sort;
   }
 }
