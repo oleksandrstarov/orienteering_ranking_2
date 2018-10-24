@@ -1,0 +1,17 @@
+@import './variables';
+
+@media only screen and (max-width: 960px) {
+  .container.change {
+    + .navbar {
+      display: block;
+    }
+  }
+
+  .mat-tab-links {
+    flex-direction: column;
+  }
+
+  .mat-tab-nav-bar.mat-primary {
+    min-height: $header-height;
+  }
+}
