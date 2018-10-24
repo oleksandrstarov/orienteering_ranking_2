@@ -1,6 +1,6 @@
 Project is under migration to Angular 6
 
-<h4>Project setup</h4>
+#### Project setup
 
 1. Fetch code from https://gitlab.com/oleksandrstarov/orienteering_ranking.git 
 2. Download MySQL https://dev.mysql.com/downloads/file/?id=479861 and install
@@ -11,11 +11,18 @@ Project is under migration to Angular 6
 If everything was set correctly - the import should begin automatically,
 navigate to http://localhost:8080 to see the application
 
-<h4>Branch naming</h4>
+#### Deployment
+The deployment process is done by OpenShift.
+The target branch for source code for OpenShift is [master]
+Make sure to buld app before push (run [npm run build] to update version of app and create /dist folder).  
+
+
+#### Branch naming
 
  1. Branch name must contain [feature/or-]+[number of task]
+ 2. Bugfix branch name should contain [bugfix/or-]+[number of task]
 
-<h4>Project setup with Angular6 + life reload</h4>
+#### Project setup with Angular6 + life reload
 
  1. Fetch code from https://gitlab.com/oleksandrstarov/orienteering_ranking.git 
  2. Download MySQL https://dev.mysql.com/downloads/file/?id=479861 and install
@@ -44,3 +51,7 @@ Settings > Languages and Frameworks > Stylesheets > Stylelint
 ```
 And enable stylelint.  
 Please do not forget to check that you use 2 spaces indentation by default.
+
+#### .ts .scss linting
+
+There are git-hook set up to check linting of .ts and .scss files before commit. If linting fails - no commit will be done.
