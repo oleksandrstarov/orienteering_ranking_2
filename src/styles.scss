@@ -1,5 +1,17 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'assets/styles/mat-ang-custom-style';
+@import 'assets/styles/variables';
 
 body {
-  font-size: 14px;
+  font-size: 10px;
+  margin: $header-height 0 0;
+}
+
+h1 {
+  margin: 3em 1.5em 1.5em;
+  font-size: 2.5em;
+}
+
+.wrapper-base-margin.margin {
+  margin: $wrapper-base-margin;
 }

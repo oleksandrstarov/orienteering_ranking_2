@@ -1,3 +1,11 @@
-.header{
-  margin-bottom: 20px;
+@import '../assets/styles/variables';
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: $white-color;
+  z-index: 2;
+  min-height: $header-height;
 }

@@ -6,8 +6,11 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule,
+  MatGridListModule,
+  MatDividerModule, MatListModule, MatIconModule, MatCardModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { RatingRoutingModule } from './rating-router.module';
 import { RatingComponent } from './rating.component';
@@ -21,7 +24,13 @@ import { RatingComponent } from './rating.component';
     MatExpansionModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatListModule,
+    MatIconModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   declarations: [
     RatingComponent
