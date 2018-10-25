@@ -10,7 +10,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node backend/application.js",
-    "build": "node version-update.js && ng build",
+    "build": "node version-update.js && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "precommit": "lint-staged",
