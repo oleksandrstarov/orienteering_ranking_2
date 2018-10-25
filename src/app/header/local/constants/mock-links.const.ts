@@ -1,5 +1,5 @@
-import { NavigationLinkModel } from '../../../../models/link.model';
-import { NavLinksEnum } from '../../../../enums/nav-links.enum';
+import { NavigationLinkModel } from '../../../shared/models/link.model';
+import { NavLinksEnum } from '../../../shared/enums/nav-links.enum';
 
 export const NAV_LINKS: NavigationLinkModel[] = [
   new NavigationLinkModel({ path: NavLinksEnum.Dashboard, label: 'Главная' }),

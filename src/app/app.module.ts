@@ -4,18 +4,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule, MatMenuModule } from '@angular/material';
+import { MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
 
+import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-router.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +23,10 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
+    HeaderModule,
+    FooterModule
   ],
   exports: [],
   providers: [],
