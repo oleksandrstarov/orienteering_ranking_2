@@ -1,0 +1,7 @@
+@media only screen and (max-width: 960px) {
+  .container.change {
+    + .navbar {
+      display: block;
+    }
+  }
+}
