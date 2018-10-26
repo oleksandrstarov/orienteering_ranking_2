@@ -15,3 +15,13 @@ h1 {
 .wrapper-base-margin.margin {
   margin: $wrapper-base-margin;
 }
+
+.mat-icon.fa {
+  font-family: FontAwesome;
+}
+
+td.mat-cell.mat-column-status {
+  &:first-of-type {
+    padding: 12px;
+  }
+}
