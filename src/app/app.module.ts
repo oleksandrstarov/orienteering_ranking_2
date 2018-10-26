@@ -26,7 +26,8 @@ import { FooterModule } from './footer/footer.module';
     MatIconModule,
     MatListModule,
     HeaderModule,
-    FooterModule
+    FooterModule,
+    MatIconModule
   ],
   exports: [],
   providers: [],
