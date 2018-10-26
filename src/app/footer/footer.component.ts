@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { APP_DATE, APP_VERSION } from '../../../../environments/version';
+import { APP_DATE, APP_VERSION } from '../../environments/version';
 
 @Component({
   selector: 'app-footer',

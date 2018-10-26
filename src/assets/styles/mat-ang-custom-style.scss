@@ -1,5 +1,15 @@
 @import './variables';
 
+.mat-icon.fa {
+  font-family: FontAwesome;
+}
+
+td.mat-cell.mat-column-status {
+  &:first-of-type {
+    padding: 1.2em;
+  }
+}
+
 @media only screen and (max-width: 960px) {
   .container.change {
     + .navbar {
@@ -13,5 +23,13 @@
 
   .mat-tab-nav-bar.mat-primary {
     min-height: $header-height;
+  }
+
+  .date-column {
+    td {
+      white-space: pre;
+      padding: 0 .5em;
+      text-align: left;
+    }
   }
 }
