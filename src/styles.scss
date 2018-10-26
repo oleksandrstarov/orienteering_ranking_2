@@ -2,9 +2,14 @@
 @import 'assets/styles/mat-ang-custom-style';
 @import 'assets/styles/variables';
 
+html {
+  height: 100%;
+}
+
 body {
   font-size: 10px;
   margin: $header-height 0 0;
+  height: calc(100% - 5em);
 }
 
 h1 {
@@ -12,8 +17,17 @@ h1 {
   font-size: 3em;
 }
 
+app-root {
+  display: block;
+  height: 100%;
+}
+
 .wrapper-base-margin.margin {
   margin: $wrapper-base-margin;
+}
+
+.white-icon {
+  color: $white-color;
 }
 
 .mat-icon.fa {
