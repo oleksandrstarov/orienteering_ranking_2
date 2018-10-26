@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 import { CompetitionService } from '../core/api/competition/competition.service';
-import { Competition } from '../shared/models/competition';
+import { Competition } from '../shared/models/competition.model';
 import { CompetitionStatus } from '../shared/enums/competition-status.enum';
 
 @Component({
