@@ -14,7 +14,7 @@ td.mat-cell.mat-column-status {
   }
 }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: $screen-width-md) {
   .container.change {
     + .navbar {
       display: block;

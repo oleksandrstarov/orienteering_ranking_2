@@ -5,13 +5,14 @@
   <div class="bar3"></div>
 </div>
 <nav mat-tab-nav-bar class="navbar">
-
   <a mat-tab-link
      *ngFor="let link of navLinks"
      [routerLink]="link.path"
      routerLinkActive #rla="routerLinkActive"
      [active]="rla.isActive">
-    <mat-icon>{{link.icon}} icon</mat-icon>
-    <span>{{link.label}}</span>
+    <div class="link-wrapper">
+      <mat-icon>{{link.icon}} icon</mat-icon>
+      <span>{{link.label}}</span>
+    </div>
   </a>
 </nav>
