@@ -1,7 +1,26 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '../../assets/styles/variables';
 
-@media only screen and (max-width: 960px) {
+.mat-tab-link {
+  .link-wrapper {
+    line-height: 1.8em;
+    display: flex;
+    justify-content: start;
+  }
+
+  &.mat-tab-label-active {
+    color: $primary-color;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (max-width: $screen-width-md) {
+  .mat-tab-link {
+    .link-wrapper {
+      min-width: 10em;
+    }
+  }
+
   .container {
     display: inline-block;
     cursor: pointer;
