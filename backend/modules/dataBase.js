@@ -797,6 +797,36 @@ module.exports.getStatistic = function(){
   });
 };
 
+module.exports.getStats = function(){
+  //params total, active, superactive, competitions, activecomps, mostfreq, starts,  mostfreq year, starts year, latest comp, latest update
+  return new Promise(function(resolve, reject){
+    var stats = {};
+    var query =  `(select count(*) as data from runners where active = 1) 
+          union all 
+          (select count(*) from runners where id in (select distinct runner from results where date > date_sub((select max(entry_date) from statistics), interval 1 year) and competition != 0) and active =1)  
+          union all
+          (select count(*) from runners where id in (select distinct runner from results where date > date_sub((select max(entry_date) from statistics), interval 1 year) and competition != 0 group by runner having count(runner)>=${globalSettings.startsAmount}) and active =1  )
+          union all 
+          (select count(id) from competitions)
+          union all 
+          (select count(id) from competitions where date > date_sub((select max(entry_date) from statistics), interval 1 year))
+          union all 
+          (select date_format(max(date),"%d-%m-%y") from competitions) 
+          union all 
+          (select date_format(max(entry_date),"%d-%m-%y") from statistics)`;
+
+    connection.query(query, (err, rows) => {
+      if (!err){
+        const [totalRunners, activeRunners, moreThenSixStarts, totalStarts, yearStarts, lastStart, scoringDate] = rows.map(({ data }) => data);
+        resolve({totalRunners, activeRunners, moreThenSixStarts, totalStarts, yearStarts, lastStart, scoringDate});
+      }else{
+        //console.log(0, err);
+        reject(err);
+      }
+    });
+  });
+};
+
 module.exports.getComparableData = function(runnerOne, runnerTwo){
   return new Promise(function(resolve, reject){
     var query = `SELECT 
