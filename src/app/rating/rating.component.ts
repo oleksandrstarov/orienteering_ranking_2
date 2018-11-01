@@ -20,7 +20,6 @@ export class RatingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.service.getRunners()
       .subscribe(({ runnersMan, runnersWoman }) => {
         this.dataSourceMen = new MatTableDataSource(runnersMan);
