@@ -14,7 +14,7 @@
         <input matInput (keyup)="applyFilterMan($event.target.value)" placeholder="Поиск по имени или клубу">
       </mat-form-field>
     </form>
-    <table mat-table [dataSource]="dataSourceMen" matSort class="mat-elevation-z8 full-width-table">
+    <table mat-table [dataSource]="dataSourceMen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
         <td mat-cell *matCellDef="let element"> {{element.currentPlace}}</td>
@@ -50,7 +50,7 @@
         <input matInput (keyup)="applyFilterWoman($event.target.value)" placeholder="Поиск по имени или клубу">
       </mat-form-field>
     </form>
-    <table mat-table [dataSource]="dataSourceWomen" matSort class="mat-elevation-z8 full-width-table">
+    <table mat-table [dataSource]="dataSourceWomen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
         <td mat-cell *matCellDef="let element"> {{element.currentPlace}}</td>

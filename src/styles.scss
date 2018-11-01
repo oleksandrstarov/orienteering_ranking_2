@@ -39,3 +39,19 @@ td.mat-cell.mat-column-status {
     padding: 12px;
   }
 }
+
+.error-icon {
+  color: $error-color;
+}
+
+.success-icon {
+  color: $success-color;
+}
+
+.pending-icon {
+  color: $primary-color;
+}
+
+.full-width-table {
+  width: 100%;
+}
