@@ -1,3 +1,169 @@
-<p>
-  dashboard works!
-</p>
+<mat-card class="example-card wrapper-base-margin margin">
+  <mat-card-header>
+    <mat-card-title>Лидеры</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <h3>Мужчины</h3>
+        <table mat-table [dataSource]="topMan" class="mat-elevation-z1 full-width-table">
+          <ng-container matColumnDef="place">
+            <th mat-header-cell *matHeaderCellDef> No.</th>
+            <td mat-cell *matCellDef="let element"> {{element.place}}</td>
+          </ng-container>
+          <ng-container matColumnDef="fullname">
+            <th mat-header-cell *matHeaderCellDef> Имя</th>
+            <td mat-cell *matCellDef="let element"> {{element.fullName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef> Очки</th>
+            <td mat-cell *matCellDef="let element"> {{element.points}}</td>
+          </ng-container>
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef> Недель на позиции</th>
+            <td mat-cell *matCellDef="let element"> {{element.duration}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="leadersColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: leadersColumns;"></tr>
+        </table>
+      </div>
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <h3>Женщины</h3>
+        <table mat-table [dataSource]="topWoman" class="mat-elevation-z1 full-width-table">
+          <ng-container matColumnDef="place">
+            <th mat-header-cell *matHeaderCellDef> No.</th>
+            <td mat-cell *matCellDef="let element"> {{element.place}}</td>
+          </ng-container>
+          <ng-container matColumnDef="fullname">
+            <th mat-header-cell *matHeaderCellDef> Имя</th>
+            <td mat-cell *matCellDef="let element"> {{element.fullName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef> Очки</th>
+            <td mat-cell *matCellDef="let element"> {{element.points}}</td>
+          </ng-container>
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef> Недель на позиции</th>
+            <td mat-cell *matCellDef="let element"> {{element.duration}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="leadersColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: leadersColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="example-card wrapper-base-margin margin">
+  <mat-card-header>
+    <mat-card-title>Статистика</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Всего спортсменов:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.totalRunners}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Активных:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.activeRunners}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Активных > 6 стартов:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.moreThenSixStarts}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Всего стартов:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.totalStarts}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Стартов за год:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.yearStarts}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Последний старт:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.lastStart}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Пересчет очков:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.scoringDate}}</p>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Больше всех стартов:</strong></p>
+          </div>
+          <div fxFlex="1 0 0" *ngIf="attendersAllTime">
+            <p *ngFor="let attender of attendersAllTime">{{attender.fullName}} - {{attender.amount}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>За последний год:</strong></p>
+          </div>
+          <div fxFlex="1 0 0" *ngIf="attendersYearly">
+            <p *ngFor="let attender of attendersYearly">{{attender.fullName}} - {{attender.amount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="example-card wrapper-base-margin margin">
+  <mat-card-header>
+    <mat-card-title>Изменения в таблице участников</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <h3>Новички:</h3>
+        <p *ngFor="let novice of novices">
+          <mat-icon class="pending-icon" fxFlex="10%">control_point icon</mat-icon>
+          <span class="runner-text-aline">{{novice.fullName}}</span></p>
+      </div>
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <h3>Подъем в рейтинге:</h3>
+        <p *ngFor="let runner of runnersUp">
+          <mat-icon class="success-icon" fxFlex="10%">arrow_upward icon</mat-icon>
+          <span class="runner-text-aline">{{runner.fullName}} c {{runner.place}} на {{runner.currentPlace}} ({{runner.placeDiff}})</span>
+        </p>
+      </div>
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <h3>Потеря в рейтинге:</h3>
+        <p *ngFor="let runner of runnersDown">
+          <mat-icon class="error-icon" fxFlex="10%">arrow_downward icon</mat-icon>
+          <span class="runner-text-aline">{{runner.fullName}} c {{runner.place}} на {{runner.currentPlace}} ({{runner.placeDiff}})</span>
+        </p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
