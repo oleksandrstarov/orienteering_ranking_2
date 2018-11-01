@@ -30,14 +30,14 @@ export class CompetitionListComponent implements OnInit {
   }
 
   private createCompetitionItems(competitionItems: any[]): Competition[] {
-    return competitionItems.map(item => {
-      return new Competition({
+    return competitionItems.map(item =>
+      new Competition({
         status: item.STATUS,
         date: new Date(item.DATE),
         name: item.NAME,
         notes: item.NOTES,
         runners: item.RUNNERS
-      });
-    });
+      })
+  );
   }
 }

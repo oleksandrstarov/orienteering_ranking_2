@@ -32,3 +32,9 @@ header {
   flex: 0 0 auto;
   background: $primary-color;
 }
+
+@media only screen and (max-width: $screen-width-md) {
+  .container-wrapper {
+    width: auto;
+  }
+}
