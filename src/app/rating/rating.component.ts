@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 import { RatingService } from '../core/api/rating/rating.service';
+import { RunnerRatingModel } from '../shared/models/runner-rating.model';
+import { DISPLAYED_COLUMNS } from '../shared/const/displayed-columns.const';
 
 @Component({
   selector: 'app-rating',
@@ -11,16 +13,16 @@ import { RatingService } from '../core/api/rating/rating.service';
 export class RatingComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['number', 'name', 'club', 'points'];
-  dataSourceMen: any;
-  dataSourceWomen: any;
+  readonly displayedColumns: string[] = DISPLAYED_COLUMNS.rating;
+  dataSourceMen: MatTableDataSource<RunnerRatingModel>;
+  dataSourceWomen: MatTableDataSource<RunnerRatingModel>;
 
   constructor (private service: RatingService) {
 
   }
 
   ngOnInit(): void {
-    this.service.getRunners()
+    this.service.getAllRunners()
       .subscribe(({ runnersMan, runnersWoman }) => {
         this.dataSourceMen = new MatTableDataSource(runnersMan);
         this.dataSourceWomen = new MatTableDataSource(runnersWoman);

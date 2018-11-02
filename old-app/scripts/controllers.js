@@ -139,7 +139,7 @@ angular.module('app')
     };
     
    
-    runnerService.getRunners().get(
+    runnerService.getAllRunners().get(
       function(response){
         $scope.isDataLoaded = true;
        
@@ -211,7 +211,7 @@ angular.module('app')
     });
     
     $scope.getRunners = function(){
-      return runnerService.getRunners().get().$promise.then(function(response){
+      return runnerService.getAllRunners().get().$promise.then(function(response){
         console.log(response);
         var isMan = self.info.details[0].SEX == "M";
         self.runners = isMan?response.man:response.woman;
@@ -542,7 +542,7 @@ angular.module('app')
        $scope.show = true;
    };
 
-    service.getRunners().get(
+    service.getAllRunners().get(
         function(response){
             console.log(response);
             $scope.info = response.man;
