@@ -13,14 +13,14 @@ import { GenderEnum } from '../../../shared/enums/gender.enum';
   providedIn: 'root'
 })
 export class DashboardService {
-  private readonly configUrl = `${environment.baseURL}/stats`;
-  private readonly infoUrl = `${environment.baseURL}/stats/dashboard-info`;
+  private readonly baseUrl = `${environment.baseURL}/stats`;
+  private readonly infoUrl = `${this.baseUrl}/dashboard-info`;
 
   constructor(private http: HttpClient) {
   }
 
   getStats(): Observable<any> {
-    return this.http.get(this.configUrl)
+    return this.http.get(this.baseUrl)
       .pipe(map((res: any) => ({
         topMan: this.getLeaders(res.stats.leaders, GenderEnum.MAN),
         topWoman: this.getLeaders(res.stats.leaders, GenderEnum.WOMAN),

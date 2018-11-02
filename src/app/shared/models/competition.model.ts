@@ -2,6 +2,7 @@ import { CompetitionStatus } from '../enums/competition-status.enum';
 
 export class Competition {
   date: Date;
+  id: number;
   name: string;
   notes: string;
   runners: number;

@@ -33,6 +33,7 @@ export class CompetitionListComponent implements OnInit {
     return competitionItems.map(item =>
       new Competition({
         status: item.STATUS,
+        id: item.ID,
         date: new Date(item.DATE),
         name: item.NAME,
         notes: item.NOTES,

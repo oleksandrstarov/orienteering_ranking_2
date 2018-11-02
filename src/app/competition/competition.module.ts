@@ -5,6 +5,7 @@ import { MatIconModule, MatSortModule, MatTableModule } from '@angular/material'
 import { CompetitionRoutingModule } from './competition-router.module';
 
 import { CompetitionListComponent } from './competition-list.component';
+import { CompetitionViewComponent } from './components/competition-view/competition-view.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { CompetitionListComponent } from './competition-list.component';
     MatSortModule
   ],
   declarations: [
-    CompetitionListComponent
+    CompetitionListComponent,
+    CompetitionViewComponent
   ],
   exports: []
 })
