@@ -5,6 +5,7 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 import { CompetitionService } from '../core/api/competition/competition.service';
 import { Competition } from '../shared/models/competition.model';
 import { CompetitionStatus } from '../shared/enums/competition-status.enum';
+import { DISPLAYED_COLUMNS } from '../shared/const/displayed-columns.const';
 
 @Component({
   selector: 'app-competition-list',
@@ -14,7 +15,7 @@ import { CompetitionStatus } from '../shared/enums/competition-status.enum';
 export class CompetitionListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   competitionStatus = CompetitionStatus;
-  displayedColumns: string[] = ['status', 'date', 'name', 'notes', 'runners'];
+  displayedColumns: string[] = DISPLAYED_COLUMNS.competition;
   dataSource: any;
 
   constructor(private service: CompetitionService) {

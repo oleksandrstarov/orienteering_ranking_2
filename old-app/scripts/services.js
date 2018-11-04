@@ -12,7 +12,7 @@ angular.module('app')
     };
 }])
 .service('runnerService',['$resource', function($resource){
-    this.getRunners = function() {
+    this.getAllRunners = function() {
         return $resource('/runners');
     };
     
@@ -52,7 +52,7 @@ angular.module('app')
   }])
   
 .service('adminRunnersService', ['$resource', function($resource){
-    this.getRunners = function() {
+    this.getAllRunners = function() {
         return $resource('admin/runners');
     };
     this.mergeDuplicates = function(){

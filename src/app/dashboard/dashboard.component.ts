@@ -5,6 +5,7 @@ import { LeaderModel } from '../shared/models/leader.model';
 import { AttendersModel } from '../shared/models/attenders.model';
 import { NoviceModel } from '../shared/models/novice.model';
 import { DashboardInfoModel } from '../shared/models/dashboard-info.model';
+import { DISPLAYED_COLUMNS } from '../shared/const/displayed-columns.const';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ import { DashboardInfoModel } from '../shared/models/dashboard-info.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  leadersColumns: string[] = ['place', 'fullname', 'points', 'duration'];
+  displayedColumns: string[] = DISPLAYED_COLUMNS.dashboard;
   topMan: LeaderModel[];
   topWoman: LeaderModel[];
   attendersAllTime: AttendersModel[];

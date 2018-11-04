@@ -17,19 +17,33 @@
     <table mat-table [dataSource]="dataSourceMen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
-        <td mat-cell *matCellDef="let element"> {{element.number}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.currentPlace}}</td>
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя</th>
-        <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.fullName}}</td>
       </ng-container>
       <ng-container matColumnDef="club">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Клуб</th>
-        <td mat-cell *matCellDef="let element"> {{element.club}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.team}}</td>
       </ng-container>
       <ng-container matColumnDef="points">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Очки</th>
-        <td mat-cell *matCellDef="let element"> {{element.points}}</td>
+        <td mat-cell *matCellDef="let element" class="column-relative">
+          <span>{{element.currentRank}}</span>
+          <ng-container [ngSwitch]="element.state">
+            <mat-icon class="pending-icon position-icon" *ngSwitchCase="'new'" [matTooltip]="element.info">control_point
+              icon
+            </mat-icon>
+            <mat-icon class="success-icon position-icon" *ngSwitchCase="'up'" [matTooltip]="element.info">arrow_upward icon
+            </mat-icon>
+            <mat-icon class="error-icon position-icon" *ngSwitchCase="'down'" [matTooltip]="element.info">arrow_downward
+              icon
+            </mat-icon>
+            <mat-icon class="stable-icon position-icon" *ngSwitchDefault [matTooltip]="element.info">arrow_forward icon
+            </mat-icon>
+          </ng-container>
+        </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -53,19 +67,33 @@
     <table mat-table [dataSource]="dataSourceWomen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
-        <td mat-cell *matCellDef="let element"> {{element.number}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.currentPlace}}</td>
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя</th>
-        <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.fullName}}</td>
       </ng-container>
       <ng-container matColumnDef="club">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Клуб</th>
-        <td mat-cell *matCellDef="let element"> {{element.club}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.team}}</td>
       </ng-container>
       <ng-container matColumnDef="points">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Очки</th>
-        <td mat-cell *matCellDef="let element"> {{element.points}}</td>
+        <td mat-cell *matCellDef="let element" class="column-relative">
+          <span>{{element.currentRank}}</span>
+          <ng-container [ngSwitch]="element.state">
+            <mat-icon class="pending-icon position-icon" *ngSwitchCase="'new'" [matTooltip]="element.info">control_point
+              icon
+            </mat-icon>
+            <mat-icon class="success-icon position-icon" *ngSwitchCase="'up'" [matTooltip]="element.info">arrow_upward icon
+            </mat-icon>
+            <mat-icon class="error-icon position-icon" *ngSwitchCase="'down'" [matTooltip]="element.info">arrow_downward
+              icon
+            </mat-icon>
+            <mat-icon class="stable-icon position-icon" *ngSwitchDefault [matTooltip]="element.info">arrow_forward icon
+            </mat-icon>
+          </ng-container>
+        </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -8,7 +8,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatGridListModule,
-  MatDividerModule, MatListModule, MatIconModule, MatCardModule
+  MatDividerModule, MatListModule, MatIconModule, MatCardModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -30,7 +30,8 @@ import { RatingComponent } from './rating.component';
     MatListModule,
     MatIconModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTooltipModule
   ],
   declarations: [
     RatingComponent
