@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 
 import { CompetitionViewService } from '../../../core/api/competition-view/competition-view.service';
+import { CompetitionInfoModel } from '../../../shared/models/competition-info.model';
+import { DISPLAYED_COLUMNS } from '../../../shared/const/displayed-columns.const';
 
 @Component({
   selector: 'app-competition-view',
@@ -10,20 +13,43 @@ import { CompetitionViewService } from '../../../core/api/competition-view/compe
 })
 export class CompetitionViewComponent implements OnInit {
   id: number;
+  competitionInfo = new CompetitionInfoModel();
+  runnersMan: any[];
+  runnersWoman: any[];
+  displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
 
   constructor(
     private route: ActivatedRoute,
     private service: CompetitionViewService
   ) {
+    this.runnersMan = [];
+    this.runnersWoman = [];
   }
 
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
-    // this.service.getStats(this.id).subscribe(
-    //   res => {
-    //
-    //   }
-    // );
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'), 10);
+
+    this.service.getStats(this.id).subscribe(
+      ({ man, woman }) => {
+        this.runnersMan = Object.values(man).map((el: any[]) => {
+          return new MatTableDataSource(el);
+        });
+        this.runnersWoman = Object.values(woman).map((el: any[]) => {
+          return new MatTableDataSource(el);
+        });
+      }
+    );
+
+    this.service.getCompetitionInfo(this.id)
+      .subscribe(({ name, date, url, members }) => {
+        this.competitionInfo = {
+          ...this.competitionInfo,
+          name,
+          date,
+          url,
+          members
+        };
+      });
   }
 
 }
