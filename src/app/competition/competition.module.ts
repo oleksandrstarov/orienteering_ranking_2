@@ -4,7 +4,6 @@ import { MatCardModule, MatIconModule, MatSortModule, MatTableModule } from '@an
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CompetitionRoutingModule } from './competition-router.module';
-
 import { CompetitionListComponent } from './competition-list.component';
 import { CompetitionViewComponent } from './components/competition-view/competition-view.component';
 

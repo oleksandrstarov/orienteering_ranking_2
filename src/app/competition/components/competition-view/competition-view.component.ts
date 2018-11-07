@@ -14,16 +14,12 @@ import { DISPLAYED_COLUMNS } from '../../../shared/const/displayed-columns.const
 export class CompetitionViewComponent implements OnInit {
   id: number;
   competitionInfo = new CompetitionInfoModel();
-  runnersMan: any[];
-  runnersWoman: any[];
+  runnersMan = [];
+  runnersWoman = [];
   displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
 
-  constructor(
-    private route: ActivatedRoute,
-    private service: CompetitionViewService
-  ) {
-    this.runnersMan = [];
-    this.runnersWoman = [];
+  constructor( private route: ActivatedRoute, private service: CompetitionViewService ) {
+
   }
 
   ngOnInit(): void {
@@ -31,12 +27,8 @@ export class CompetitionViewComponent implements OnInit {
 
     this.service.getStats(this.id).subscribe(
       ({ man, woman }) => {
-        this.runnersMan = Object.values(man).map((el: any[]) => {
-          return new MatTableDataSource(el);
-        });
-        this.runnersWoman = Object.values(woman).map((el: any[]) => {
-          return new MatTableDataSource(el);
-        });
+        this.runnersMan = Object.values(man).map((el: any[]) => new MatTableDataSource(el));
+        this.runnersWoman = Object.values(woman).map((el: any[]) => new MatTableDataSource(el));
       }
     );
 

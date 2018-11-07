@@ -4,11 +4,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
+import { CompetitionViewRunnersModel } from '../../../shared/models/competition-view-runners.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompetitionViewService {
+  private readonly womanGroupIdentifier = 'Ж';
   private readonly baseUrl = `${environment.baseURL}/competitions`;
 
   constructor(private http: HttpClient) {
@@ -32,25 +34,26 @@ export class CompetitionViewService {
   }
 
   private createRunners(data: any[]): any {
+    const competitors = { man: {}, woman: {} };
+
     return data.reduce((memo, elem) => {
       const groupGender = elem.COMP_GROUP[0];
-      const target = groupGender === 'Ж' ? memo.woman : memo.man;
+      const target = groupGender === this.womanGroupIdentifier ? memo.woman : memo.man;
 
       if (!target[elem.COMP_GROUP]) {
         target[elem.COMP_GROUP] = [];
       }
-      target[elem.COMP_GROUP].push({
-        group: elem.COMP_GROUP,
-        date: elem.DATE,
-        timeBehind: elem.TIME_BEHIND,
-        name: elem.NAME,
-        points: elem.POINTS,
-        time: elem.TIME
-      });
+      target[elem.COMP_GROUP].push(
+        new CompetitionViewRunnersModel({
+          group: elem.COMP_GROUP,
+          date: elem.DATE,
+          timeBehind: elem.TIME_BEHIND || '___',
+          name: elem.NAME,
+          points: elem.POINTS,
+          time: elem.TIME
+        })
+      );
       return memo;
-    }, {
-      man: {},
-      woman: {}
-    });
+    }, competitors);
   }
 }

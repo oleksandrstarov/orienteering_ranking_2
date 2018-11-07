@@ -10,6 +10,7 @@ export class Competition {
   private competitionStatus: CompetitionStatus;
 
   constructor (data: any) {
+
     Object.assign(this, data);
   }
   set status(status: CompetitionStatus) {

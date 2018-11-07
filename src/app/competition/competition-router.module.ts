@@ -6,10 +6,7 @@ import { CompetitionViewComponent } from './components/competition-view/competit
 
 const routes: Routes = [
   { path: '', component: CompetitionListComponent },
-  {
-    path: ':id',
-    component: CompetitionViewComponent
-  }
+  { path: ':id', component: CompetitionViewComponent }
 ];
 
 @NgModule({
