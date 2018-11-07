@@ -15,7 +15,9 @@ export class CompetitionViewComponent implements OnInit {
   id: number;
   competitionInfo = new CompetitionInfoModel();
   runnersMan = [];
+  runnersGroupMan = [];
   runnersWoman = [];
+  runnersGroupWoman = [];
   displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
 
   constructor( private route: ActivatedRoute, private service: CompetitionViewService ) {
@@ -28,7 +30,9 @@ export class CompetitionViewComponent implements OnInit {
     this.service.getStats(this.id).subscribe(
       ({ man, woman }) => {
         this.runnersMan = Object.values(man).map((el: any[]) => new MatTableDataSource(el));
+        this.runnersGroupMan = Object.keys(man);
         this.runnersWoman = Object.values(woman).map((el: any[]) => new MatTableDataSource(el));
+        this.runnersGroupWoman = Object.keys(woman);
       }
     );
 
