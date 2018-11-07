@@ -15,13 +15,9 @@ export class RunnerViewComponent implements OnInit {
   id: number;
   runnerDetails = new RunnerDetailsModel();
   runnerResults: any;
-  displayedColumns = DISPLAYED_COLUMNS.runnerResults;
+  readonly displayedColumns = DISPLAYED_COLUMNS.runnerResults;
 
-  constructor(
-    private route: ActivatedRoute,
-    private service: RunnerDetailsService
-  ) {
-  }
+  constructor( private route: ActivatedRoute, private service: RunnerDetailsService ) {}
 
   ngOnInit(): void {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'), 10);
@@ -40,5 +36,4 @@ export class RunnerViewComponent implements OnInit {
         this.runnerResults = new MatTableDataSource(runnerResults);
       });
   }
-
 }

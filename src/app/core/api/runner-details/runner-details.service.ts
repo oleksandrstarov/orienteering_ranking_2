@@ -12,9 +12,7 @@ import { RunnerResultsModel } from '../../../shared/models/runner-results.model'
 export class RunnerDetailsService {
   private readonly baseUrl = `${environment.baseURL}/runners`;
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
   }
 
   getRunnerDetails(id: number): Observable<any> {
@@ -29,23 +27,22 @@ export class RunnerDetailsService {
           allStarts: res.results.filter(el => !!el.COMPETITION).length,
           team: res.details[0].TEAM,
           runnerResults: this.getRunnerResults(res.results)
-        })));
+        }))
+      );
   }
 
   private getRunnerResults(data: any[]): RunnerResultsModel[] {
     return data.map(el => (
-      new RunnerResultsModel(
-        {
-          date: new Date(el.DATE),
-          name: el.NAME,
-          competition: el.COMPETITION,
-          group: el.GROUP,
-          time: el.TIME,
-          place: el.PLACE,
-          points: el.POINTS,
-          actualResult: el.ACT_RESULT
-        }
-      )));
+      new RunnerResultsModel({
+        date: new Date(el.DATE),
+        name: el.NAME,
+        competition: el.COMPETITION,
+        group: el.GROUP,
+        time: el.TIME,
+        place: el.PLACE,
+        points: el.POINTS,
+        actualResult: el.ACT_RESULT
+      })
+    ));
   }
-
 }
