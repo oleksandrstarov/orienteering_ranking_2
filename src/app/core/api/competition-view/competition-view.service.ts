@@ -47,7 +47,7 @@ export class CompetitionViewService {
         new CompetitionViewRunnersModel({
           group: elem.COMP_GROUP,
           date: elem.DATE,
-          timeBehind: elem.TIME_BEHIND || '___',
+          timeBehind: elem.TIME_BEHIND || '+0:00',
           name: elem.NAME,
           points: elem.POINTS,
           time: elem.TIME
