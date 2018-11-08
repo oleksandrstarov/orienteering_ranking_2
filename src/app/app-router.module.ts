@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
-    path: 'rating',
+    path: 'runners',
     loadChildren: './rating/rating.module#RatingModule'
   },
   {

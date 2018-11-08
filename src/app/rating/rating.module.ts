@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { RatingRoutingModule } from './rating-router.module';
 import { RatingComponent } from './rating.component';
+import { RunnerViewComponent } from './components/runner-view/runner-view.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { RatingComponent } from './rating.component';
     MatTooltipModule
   ],
   declarations: [
-    RatingComponent
+    RatingComponent,
+    RunnerViewComponent
   ],
   exports: []
 })

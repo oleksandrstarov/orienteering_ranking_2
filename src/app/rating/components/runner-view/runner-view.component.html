@@ -1,0 +1,94 @@
+<mat-card class="example-card wrapper-base-margin margin" *ngIf="runnerDetails">
+  <mat-card-header>
+    <mat-card-title>{{runnerDetails.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Текущий рейтинг:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{runnerDetails.rank}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Клуб:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{runnerDetails.team}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Год рождения:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{runnerDetails.birth}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Всего стартов:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{runnerDetails.allStarts}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Текущая позиция:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{runnerDetails.place}}</p>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<div class="wrapper-base-margin margin">
+  <table mat-table [dataSource]="runnerResults" class="mat-elevation-z1 full-width-table">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Дата</th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd-MM-yyy'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Соревнования</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.name}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="group">
+      <th mat-header-cell *matHeaderCellDef> Группа</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.group}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Результат</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.time}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="place">
+      <th mat-header-cell *matHeaderCellDef> Место</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.place}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="points">
+      <th mat-header-cell *matHeaderCellDef> Очки</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.points}}
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.past]="row.actualResult === 'P'"></tr>
+  </table>
+</div>
