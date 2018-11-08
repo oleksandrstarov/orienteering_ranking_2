@@ -13,17 +13,18 @@ import { DISPLAYED_COLUMNS } from '../../../shared/const/displayed-columns.const
 })
 export class RunnerViewComponent implements OnInit {
   id: number;
-  runnerDetails = new RunnerDetailsModel();
+  runnerDetails: any;
   runnerResults: any;
   readonly displayedColumns = DISPLAYED_COLUMNS.runnerResults;
 
-  constructor( private route: ActivatedRoute, private service: RunnerDetailsService ) {}
+  constructor(private route: ActivatedRoute, private service: RunnerDetailsService) {
+  }
 
   ngOnInit(): void {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.service.getRunnerDetails(this.id)
       .subscribe(({ birth, rank, name, id, place, allStarts, team, runnerResults }) => {
-        this.runnerDetails = {
+        this.runnerDetails = new RunnerDetailsModel({
           ...this.runnerDetails,
           birth,
           rank,
@@ -32,7 +33,7 @@ export class RunnerViewComponent implements OnInit {
           place,
           allStarts,
           team
-        };
+        });
         this.runnerResults = new MatTableDataSource(runnerResults);
       });
   }

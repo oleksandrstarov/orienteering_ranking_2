@@ -5,14 +5,8 @@ import { RatingComponent } from './rating.component';
 import { RunnerViewComponent } from './components/runner-view/runner-view.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: RatingComponent
-  },
-  {
-    path: ':id',
-    component: RunnerViewComponent
-  }
+  { path: '', component: RatingComponent },
+  { path: ':id', component: RunnerViewComponent }
 ];
 
 @NgModule({

@@ -6,4 +6,8 @@ export class RunnerDetailsModel {
   place: number;
   allStarts: number;
   team: string;
+
+  constructor (data: any) {
+    Object.assign(this, data);
+  }
 }
