@@ -2,6 +2,7 @@ import { CompetitionStatus } from '../enums/competition-status.enum';
 
 export class Competition {
   date: Date;
+  id: number;
   name: string;
   notes: string;
   runners: number;
@@ -9,6 +10,7 @@ export class Competition {
   private competitionStatus: CompetitionStatus;
 
   constructor (data: any) {
+
     Object.assign(this, data);
   }
   set status(status: CompetitionStatus) {

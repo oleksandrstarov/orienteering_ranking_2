@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatCardModule, MatIconModule, MatSortModule, MatTableModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CompetitionRoutingModule } from './competition-router.module';
-
 import { CompetitionListComponent } from './competition-list.component';
+import { CompetitionViewComponent } from './components/competition-view/competition-view.component';
 
 @NgModule({
   imports: [
@@ -12,10 +13,13 @@ import { CompetitionListComponent } from './competition-list.component';
     CompetitionRoutingModule,
     MatTableModule,
     MatIconModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   declarations: [
-    CompetitionListComponent
+    CompetitionListComponent,
+    CompetitionViewComponent
   ],
   exports: []
 })
