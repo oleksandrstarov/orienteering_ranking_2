@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { forkJoin } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { CompetitionViewService } from '../../../core/api/competition-view/competition-view.service';
 import { CompetitionInfoModel } from '../../../shared/models/competition-info.model';
@@ -18,6 +20,7 @@ export class CompetitionViewComponent implements OnInit {
   runnersGroupMan = [];
   runnersWoman = [];
   runnersGroupWoman = [];
+  isLoaded = false;
   displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
 
   constructor( private route: ActivatedRoute, private service: CompetitionViewService ) {
@@ -27,25 +30,33 @@ export class CompetitionViewComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
-    this.service.getStats(this.id).subscribe(
-      ({ man, woman }) => {
-        this.runnersMan = Object.values(man).map((el: any[]) => new MatTableDataSource(el));
-        this.runnersGroupMan = Object.keys(man);
-        this.runnersWoman = Object.values(woman).map((el: any[]) => new MatTableDataSource(el));
-        this.runnersGroupWoman = Object.keys(woman);
-      }
-    );
-
-    this.service.getCompetitionInfo(this.id)
-      .subscribe(({ name, date, url, members }) => {
-        this.competitionInfo = {
-          ...this.competitionInfo,
-          name,
-          date,
-          url,
-          members
-        };
+    forkJoin(
+      this.service.getStats(this.id),
+      this.service.getCompetitionInfo(this.id)
+    )
+      .pipe(delay(300))
+      .subscribe(([stats, competitionInfo]) => {
+        this.parseStats(stats);
+        this.parseCompetitionInfo(competitionInfo);
+        this.isLoaded = true;
       });
+  }
+
+  private parseStats({ man, woman }: any): void {
+    this.runnersMan = Object.values(man).map((el: any[]) => new MatTableDataSource(el));
+    this.runnersGroupMan = Object.keys(man);
+    this.runnersWoman = Object.values(woman).map((el: any[]) => new MatTableDataSource(el));
+    this.runnersGroupWoman = Object.keys(woman);
+  }
+
+  private parseCompetitionInfo({ name, date, url, members }: any): void {
+    this.competitionInfo = {
+      ...this.competitionInfo,
+      name,
+      date,
+      url,
+      members
+    };
   }
 
 }

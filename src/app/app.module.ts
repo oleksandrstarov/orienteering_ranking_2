@@ -10,12 +10,11 @@ import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-router.module';
 import { AppComponent } from './app.component';
 import { FooterModule } from './footer/footer.module';
-import { SplashScreenComponent } from './shared/components/splash-screen/splash-screen.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SplashScreenComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +28,7 @@ import { SplashScreenComponent } from './shared/components/splash-screen/splash-
     MatListModule,
     HeaderModule,
     FooterModule,
-    MatIconModule
+    SharedModule
   ],
   exports: [],
   providers: [],

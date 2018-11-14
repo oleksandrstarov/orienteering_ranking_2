@@ -1,3 +1,4 @@
+<app-preloader *ngIf="!isLoaded"></app-preloader>
 <table mat-table matSort matSortActive="date" matSortDisableClear matSortDirection="desc" [dataSource]="dataSource"
        class="mat-elevation-z1">
   <ng-container matColumnDef="status">

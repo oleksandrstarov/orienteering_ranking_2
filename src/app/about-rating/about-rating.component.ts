@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay } from 'rxjs/operators';
 
 import { AboutService } from '../core/api/about/about.service';
 import { MATERIAL_VARIABLES } from '../shared/const/material-variables.const';
@@ -10,12 +11,18 @@ import { MATERIAL_VARIABLES } from '../shared/const/material-variables.const';
 })
 export class AboutRatingComponent implements OnInit {
   data: any;
+  isLoaded = false;
   readonly matVars = MATERIAL_VARIABLES;
+
   constructor(private service: AboutService) {
   }
 
   ngOnInit(): void {
     this.service.getGroups()
-      .subscribe(res => this.data = res);
+      .pipe(delay(300))
+      .subscribe(res => {
+        this.data = res;
+        this.isLoaded = true;
+      });
   }
 }

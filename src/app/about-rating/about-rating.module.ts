@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AboutRatingRoutingModule } from './about-rating-router.module';
 import { AboutRatingComponent } from './about-rating.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { AboutRatingComponent } from './about-rating.component';
     MatListModule,
     HttpClientModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    SharedModule
   ],
   declarations: [
     AboutRatingComponent

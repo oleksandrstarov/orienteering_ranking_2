@@ -15,6 +15,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RatingRoutingModule } from './rating-router.module';
 import { RatingComponent } from './rating.component';
 import { RunnerViewComponent } from './components/runner-view/runner-view.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { RunnerViewComponent } from './components/runner-view/runner-view.compon
     MatIconModule,
     MatCardModule,
     FlexLayoutModule,
-    MatTooltipModule
+    MatTooltipModule,
+    SharedModule
   ],
   declarations: [
     RatingComponent,

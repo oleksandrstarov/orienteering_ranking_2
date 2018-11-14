@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { DashboardService } from '../core/api/dashboard/dashboard.service';
 import { LeaderModel } from '../shared/models/leader.model';
@@ -22,6 +24,7 @@ export class DashboardComponent implements OnInit {
   runnersUp: NoviceModel[];
   runnersDown: NoviceModel[];
   dashboardInfo = new DashboardInfoModel();
+  isLoaded = false;
   private readonly allTime = 'A';
   private readonly yearly = 'Y';
 
@@ -29,29 +32,38 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getStats()
-      .subscribe(({ topMan, topWoman, attenders, novices, runnersUp, runnersDown }) => {
-        this.topMan = topMan;
-        this.topWoman = topWoman;
-        this.attendersAllTime = attenders.filter(el => el.period === this.allTime);
-        this.attendersYearly = attenders.filter(el => el.period === this.yearly);
-        this.novices = novices;
-        this.runnersUp = runnersUp;
-        this.runnersDown = runnersDown;
+    forkJoin(
+      this.service.getInfo(),
+      this.service.getStats()
+    )
+      .pipe(delay(300))
+      .subscribe(([info, stats]) => {
+        this.parseInfo(info);
+        this.parseStats(stats);
+        this.isLoaded = true;
       });
+  }
 
-    this.service.getInfo()
-      .subscribe(({ activeRunners, lastStart, moreThenSixStarts, scoringDate, totalRunners, totalStarts, yearStarts }) => {
-        this.dashboardInfo = {
-          ...this.dashboardInfo,
-          activeRunners,
-          lastStart,
-          moreThenSixStarts,
-          scoringDate,
-          totalRunners,
-          totalStarts,
-          yearStarts
-        };
-      });
+  private parseInfo({ activeRunners, lastStart, moreThenSixStarts, scoringDate, totalRunners, totalStarts, yearStarts }: any): void {
+    this.dashboardInfo = {
+      ...this.dashboardInfo,
+      activeRunners,
+      lastStart,
+      moreThenSixStarts,
+      scoringDate,
+      totalRunners,
+      totalStarts,
+      yearStarts
+    };
+  }
+
+  private parseStats({ topMan, topWoman, attenders, novices, runnersUp, runnersDown }: any): void {
+    this.topMan = topMan;
+    this.topWoman = topWoman;
+    this.attendersAllTime = attenders.filter(el => el.period === this.allTime);
+    this.attendersYearly = attenders.filter(el => el.period === this.yearly);
+    this.novices = novices;
+    this.runnersUp = runnersUp;
+    this.runnersDown = runnersDown;
   }
 }

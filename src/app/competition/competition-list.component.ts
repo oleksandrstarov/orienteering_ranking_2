@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 import { CompetitionService } from '../core/api/competition/competition.service';
@@ -17,16 +17,18 @@ export class CompetitionListComponent implements OnInit {
   competitionStatus = CompetitionStatus;
   displayedColumns: string[] = DISPLAYED_COLUMNS.competition;
   dataSource: any;
+  isLoaded = false;
 
   constructor(private service: CompetitionService) {
   }
 
   ngOnInit(): void {
     this.service.getCompetitions()
-      .pipe(map(res => this.createCompetitionItems(res)))
+      .pipe(delay(300), map(res => this.createCompetitionItems(res)))
       .subscribe(competitionItems => {
         this.dataSource = new MatTableDataSource(competitionItems);
         this.dataSource.sort = this.sort;
+        this.isLoaded = true;
       });
   }
 
