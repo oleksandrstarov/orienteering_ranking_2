@@ -6,6 +6,7 @@ import * as moment from 'moment';
 
 import { environment } from '../../../../environments/environment';
 import { RunnerResultsModel } from '../../../shared/models/runner-results.model';
+import { LOCALIZATION_SETTINGS } from '../../../shared/const/localization-settings.const';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,7 @@ export class RunnerDetailsService {
 
   private getRunnerStats(data: any[]): any {
     return data.reduce((memo, { ENTRY_DATE: date, PLACE: place, POINTS: point }) => {
-      memo.date.push(moment(new Date(date)).lang('ru').format('YYYY-MM-D'));
+      memo.date.push(moment(new Date(date)).locale(LOCALIZATION_SETTINGS.language).format(LOCALIZATION_SETTINGS.dateFormat));
       memo.points.push(point);
       memo.places.push(place);
       return memo;
