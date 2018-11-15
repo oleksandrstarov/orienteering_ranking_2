@@ -3,7 +3,7 @@
 
 .mat-tab-link {
   .link-wrapper {
-    line-height: 1.8em;
+    line-height: $line-height;
     display: flex;
     justify-content: start;
   }
@@ -17,7 +17,7 @@
 @media only screen and (max-width: $screen-width-sm) {
   .mat-tab-link {
     .link-wrapper {
-      min-width: 10em;
+      min-width: 10rem;
     }
   }
 

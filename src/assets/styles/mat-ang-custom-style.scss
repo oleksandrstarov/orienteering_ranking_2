@@ -2,13 +2,13 @@
 
 h2 {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-size: 2.3em;
+  font-size: 2.3rem;
   margin: $header-margin;
 }
 
 h3 {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-size: 2em;
+  font-size: 1.2rem;
   margin: $header-margin;
 }
 
@@ -22,7 +22,7 @@ h3 {
 
 td.mat-cell.mat-column-status {
   &:first-of-type {
-    padding: 1.2em;
+    padding: 1.2rem;
   }
 }
 
@@ -44,7 +44,7 @@ td.mat-cell.mat-column-status {
   .date-column {
     td {
       white-space: pre;
-      padding: 0 .5em;
+      padding: 0 .5rem;
       text-align: left;
     }
   }

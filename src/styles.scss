@@ -4,17 +4,17 @@
 
 html {
   height: 100%;
+  font-size: 10px;
 }
 
 body {
-  font-size: 10px;
   margin: $header-height 0 0;
-  height: calc(100% - 5em);
+  height: calc(100% - 5rem);
 }
 
 h1 {
-  margin: 1em 0 .5em .5em;
-  font-size: 3em;
+  margin: 1rem 0 .5rem .5rem;
+  font-size: 3rem;
 }
 
 app-root {

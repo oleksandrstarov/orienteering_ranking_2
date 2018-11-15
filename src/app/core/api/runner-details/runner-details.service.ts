@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 import { environment } from '../../../../environments/environment';
 import { RunnerResultsModel } from '../../../shared/models/runner-results.model';
+import { LOCALIZATION_SETTINGS } from '../../../shared/const/localization-settings.const';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ export class RunnerDetailsService {
           place: res.details[0].PLACE,
           allStarts: res.results.filter(el => !!el.COMPETITION).length,
           team: res.details[0].TEAM,
-          runnerResults: this.getRunnerResults(res.results)
+          runnerResults: this.getRunnerResults(res.results),
+          runnerStats: this.getRunnerStats(res.stats)
         }))
       );
   }
@@ -44,5 +47,18 @@ export class RunnerDetailsService {
         actualResult: el.ACT_RESULT
       })
     ));
+  }
+
+  private getRunnerStats(data: any[]): any {
+    return data.reduce((memo, { ENTRY_DATE: date, PLACE: place, POINTS: point }) => {
+      memo.date.push(moment(new Date(date)).locale(LOCALIZATION_SETTINGS.language).format(LOCALIZATION_SETTINGS.dateFormat));
+      memo.points.push(point);
+      memo.places.push(place);
+      return memo;
+    }, {
+      date: [],
+      points: [],
+      places: []
+    });
   }
 }
