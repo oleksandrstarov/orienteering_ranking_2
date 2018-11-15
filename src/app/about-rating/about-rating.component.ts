@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { AboutService } from '../core/api/about/about.service';
 import { MATERIAL_VARIABLES } from '../shared/const/material-variables.const';
@@ -19,10 +19,11 @@ export class AboutRatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getGroups()
-      .pipe(delay(300))
+      .pipe(
+        finalize(() => this.isLoaded = true)
+      )
       .subscribe(res => {
         this.data = res;
-        this.isLoaded = true;
       });
   }
 }

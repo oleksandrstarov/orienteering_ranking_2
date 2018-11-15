@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { DashboardService } from '../core/api/dashboard/dashboard.service';
 import { LeaderModel } from '../shared/models/leader.model';
@@ -36,11 +36,12 @@ export class DashboardComponent implements OnInit {
       this.service.getInfo(),
       this.service.getStats()
     )
-      .pipe(delay(300))
+      .pipe(
+        finalize(() => this.isLoaded = true)
+      )
       .subscribe(([info, stats]) => {
         this.parseInfo(info);
         this.parseStats(stats);
-        this.isLoaded = true;
       });
   }
 

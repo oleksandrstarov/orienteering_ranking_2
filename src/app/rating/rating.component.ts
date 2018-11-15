@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
-import { delay } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { RatingService } from '../core/api/rating/rating.service';
 import { RunnerRatingModel } from '../shared/models/runner-rating.model';
@@ -25,7 +25,9 @@ export class RatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAllRunners()
-      .pipe(delay(300))
+      .pipe(
+        finalize(() => this.isLoaded = true)
+      )
       .subscribe(({ runnersMan, runnersWoman }) => {
         this.dataSourceMen = new MatTableDataSource(runnersMan);
         this.dataSourceWomen = new MatTableDataSource(runnersWoman);

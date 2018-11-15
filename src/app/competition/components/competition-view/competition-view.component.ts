@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { forkJoin } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { CompetitionViewService } from '../../../core/api/competition-view/competition-view.service';
 import { CompetitionInfoModel } from '../../../shared/models/competition-info.model';
@@ -34,11 +34,12 @@ export class CompetitionViewComponent implements OnInit {
       this.service.getStats(this.id),
       this.service.getCompetitionInfo(this.id)
     )
-      .pipe(delay(300))
+      .pipe(
+        finalize(() => this.isLoaded = true)
+      )
       .subscribe(([stats, competitionInfo]) => {
         this.parseStats(stats);
         this.parseCompetitionInfo(competitionInfo);
-        this.isLoaded = true;
       });
   }
 
