@@ -93,3 +93,15 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns" [class.past]="row.actualResult === 'P'"></tr>
   </table>
 </div>
+
+<div style="width: 100%">
+  <canvas
+    baseChart
+    [chartType]="'line'"
+    [datasets]="chartData"
+    [labels]="chartLabels"
+    [options]="chartOptions"
+    [colors]="chartColors"
+    [legend]="true">
+  </canvas>
+</div>

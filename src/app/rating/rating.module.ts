@@ -11,6 +11,7 @@ import {
   MatDividerModule, MatListModule, MatIconModule, MatCardModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChartsModule } from 'ng2-charts';
 
 import { RatingRoutingModule } from './rating-router.module';
 import { RatingComponent } from './rating.component';
@@ -34,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
     MatCardModule,
     FlexLayoutModule,
     MatTooltipModule,
+    ChartsModule,
     SharedModule
   ],
   declarations: [
