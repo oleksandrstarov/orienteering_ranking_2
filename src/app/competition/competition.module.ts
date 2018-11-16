@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CompetitionRoutingModule } from './competition-router.module';
 import { CompetitionListComponent } from './competition-list.component';
 import { CompetitionViewComponent } from './components/competition-view/competition-view.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { CompetitionViewComponent } from './components/competition-view/competit
     MatIconModule,
     MatSortModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SharedModule
   ],
   declarations: [
     CompetitionListComponent,

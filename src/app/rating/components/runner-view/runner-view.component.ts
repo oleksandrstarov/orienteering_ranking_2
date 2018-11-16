@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { finalize } from 'rxjs/operators';
 
 import { RunnerDetailsService } from '../../../core/api/runner-details/runner-details.service';
 import { RunnerDetailsModel } from '../../../shared/models/runner-details.model';
@@ -17,6 +18,7 @@ export class RunnerViewComponent implements OnInit {
   id: number;
   runnerDetails: any;
   runnerResults: any;
+  isLoaded = false;
   chartColors: any[] = CHART_COLOR_SETTINGS;
   chartOptions = CHART_OPTIONS;
   chartData = [
@@ -32,6 +34,9 @@ export class RunnerViewComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.service.getRunnerDetails(this.id)
+      .pipe(
+        finalize(() => this.isLoaded = true)
+      )
       .subscribe(({ birth, rank, name, id, place, allStarts, team, runnerResults, runnerStats }) => {
         this.runnerDetails = new RunnerDetailsModel({
           ...this.runnerDetails,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -10,6 +10,8 @@ import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-router.module';
 import { AppComponent } from './app.component';
 import { FooterModule } from './footer/footer.module';
+import { SharedModule } from './shared/shared.module';
+import { DelayInterceptor } from './core/interceptors/delay-interceptor';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { FooterModule } from './footer/footer.module';
     MatListModule,
     HeaderModule,
     FooterModule,
-    MatIconModule
+    SharedModule
   ],
   exports: [],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: DelayInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

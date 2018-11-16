@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardRoutingModule } from './dashboard-router.module';
 
 import { DashboardComponent } from './dashboard.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { DashboardComponent } from './dashboard.component';
     MatCardModule,
     MatTableModule,
     FlexLayoutModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ],
   declarations: [
     DashboardComponent
