@@ -16,7 +16,9 @@ export class RatingComponent implements OnInit {
 
   readonly displayedColumns: string[] = DISPLAYED_COLUMNS.rating;
   dataSourceMen: MatTableDataSource<RunnerRatingModel>;
+  dataSourceMenData: MatTableDataSource<RunnerRatingModel>;
   dataSourceWomen: MatTableDataSource<RunnerRatingModel>;
+  dataSourceWomenData: MatTableDataSource<RunnerRatingModel>;
   isLoaded = false;
 
   constructor (private service: RatingService) {
@@ -29,8 +31,8 @@ export class RatingComponent implements OnInit {
         finalize(() => this.isLoaded = true)
       )
       .subscribe(({ runnersMan, runnersWoman }) => {
-        this.dataSourceMen = new MatTableDataSource(runnersMan);
-        this.dataSourceWomen = new MatTableDataSource(runnersWoman);
+        this.dataSourceMen = this.dataSourceMenData = new MatTableDataSource(runnersMan);
+        this.dataSourceWomen = this.dataSourceWomenData = new MatTableDataSource(runnersWoman);
         this.dataSourceMen.sort = this.dataSourceWomen.sort = this.sort;
         this.isLoaded = true;
       });
@@ -41,5 +43,20 @@ export class RatingComponent implements OnInit {
   }
   applyFilterWoman(filterValue: string): void {
     this.dataSourceWomen.filter = filterValue.trim().toLowerCase();
+  }
+  showSubjectiveMan(e: any): void {
+    if (e.checked) {
+      this.dataSourceMen = new MatTableDataSource(this.dataSourceMenData.filteredData.filter( el => el.subjective === 'N' ));
+    } else {
+      this.dataSourceMen = new MatTableDataSource(this.dataSourceMenData.filteredData.filter( el => el.subjective === 'Y' ));
+    }
+  }
+
+  showSubjectiveWoman(e: any): void {
+    if (e.checked) {
+      this.dataSourceWomen = new MatTableDataSource(this.dataSourceWomenData.filteredData.filter( el => el.subjective === 'N' ));
+    } else {
+      this.dataSourceWomen = new MatTableDataSource(this.dataSourceWomenData.filteredData.filter( el => el.subjective === 'Y' ));
+    }
   }
 }

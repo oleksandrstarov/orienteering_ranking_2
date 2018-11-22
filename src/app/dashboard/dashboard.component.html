@@ -101,22 +101,6 @@
             <p>{{dashboardInfo.yearStarts}}</p>
           </div>
         </div>
-        <div fxLayout="row wrap">
-          <div fxFlex="1 0 0">
-            <p><strong>Последний старт:</strong></p>
-          </div>
-          <div fxFlex="1 0 0">
-            <p>{{dashboardInfo.lastStart}}</p>
-          </div>
-        </div>
-        <div fxLayout="row wrap">
-          <div fxFlex="1 0 0">
-            <p><strong>Пересчет очков:</strong></p>
-          </div>
-          <div fxFlex="1 0 0">
-            <p>{{dashboardInfo.scoringDate}}</p>
-          </div>
-        </div>
       </div>
       <div fxFlex="1 0 0" class="wrapper-base-margin margin">
         <div fxLayout="row wrap">
@@ -135,6 +119,22 @@
             <p *ngFor="let attender of attendersYearly">{{attender.fullName}} - {{attender.amount}}</p>
           </div>
         </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Последний старт:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.lastStart}}</p>
+          </div>
+        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="1 0 0">
+            <p><strong>Пересчет очков:</strong></p>
+          </div>
+          <div fxFlex="1 0 0">
+            <p>{{dashboardInfo.scoringDate}}</p>
+          </div>
+        </div>
       </div>
     </div>
   </mat-card-content>
@@ -145,25 +145,37 @@
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row wrap">
-      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+      <div *ngIf="novices" fxFlex="1 0 0" class="wrapper-base-margin margin">
         <h3>Новички:</h3>
-        <p *ngFor="let novice of novices">
-          <mat-icon class="pending-icon" fxFlex="10%">control_point icon</mat-icon>
-          <span class="runner-text-aline">{{novice.fullName}}</span></p>
+        <ng-container *ngFor="let novice of novices; let i = index">
+          <p *ngIf="i < 5">
+            <mat-icon class="pending-icon" fxFlex="10%">control_point icon</mat-icon>
+            <span class="runner-text-aline">{{novice.fullName}}</span>
+          </p>
+        </ng-container>
+        <p *ngIf="novices.length > 0">Еще {{novices.length - 5}} человек.</p>
       </div>
-      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+      <div *ngIf="runnersUp" fxFlex="1 0 0" class="wrapper-base-margin margin">
         <h3>Подъем в рейтинге:</h3>
-        <p *ngFor="let runner of runnersUp">
-          <mat-icon class="success-icon" fxFlex="10%">arrow_upward icon</mat-icon>
-          <span class="runner-text-aline">{{runner.fullName}} c {{runner.place}} на {{runner.currentPlace}} ({{runner.placeDiff}})</span>
-        </p>
+        <ng-container *ngFor="let runner of runnersUp; let i = index">
+          <p *ngIf="i < 5">
+            <mat-icon class="success-icon" fxFlex="10%">arrow_upward icon</mat-icon>
+            <span class="runner-text-aline">{{runner.fullName}} c {{runner.place}} на {{runner.currentPlace}}
+              ({{runner.placeDiff}})</span>
+          </p>
+        </ng-container>
+        <p *ngIf="runnersUp.length > 0">Еще {{runnersUp.length - 5}} человек.</p>
       </div>
-      <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+      <div *ngIf="runnersDown" fxFlex="1 0 0" class="wrapper-base-margin margin">
         <h3>Потеря в рейтинге:</h3>
-        <p *ngFor="let runner of runnersDown">
-          <mat-icon class="error-icon" fxFlex="10%">arrow_downward icon</mat-icon>
-          <span class="runner-text-aline">{{runner.fullName}} c {{runner.place}} на {{runner.currentPlace}} ({{runner.placeDiff}})</span>
-        </p>
+        <ng-container *ngFor="let runner of runnersDown; let i = index">
+          <p *ngIf="i < 5">
+            <mat-icon class="error-icon" fxFlex="10%">arrow_downward icon</mat-icon>
+            <span class="runner-text-aline">{{runner.fullName}} c {{runner.place}} на {{runner.currentPlace}}
+              ({{runner.placeDiff}})</span>
+          </p>
+        </ng-container>
+        <p *ngIf="runnersDown.length > 0">Еще {{runnersDown.length - 5}} человек.</p>
       </div>
     </div>
   </mat-card-content>

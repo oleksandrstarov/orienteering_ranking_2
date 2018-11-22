@@ -1,16 +1,16 @@
 <app-preloader *ngIf="!isLoaded"></app-preloader>
-<div fxLayout="row wrap" fxLayoutAlign=”center”>
+<div fxLayout="row wrap" fxLayoutAlign="center start">
   <mat-expansion-panel class="wrapper-base-margin margin" fxFlex="1 0 auto" [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span>Мужчины</span>
       </mat-panel-title>
       <mat-panel-description>
-        <span>Корректировка: <b>-12.44</b></span>
+        <span *ngIf="dataSourceMenData">Корректировка: <b>-{{dataSourceMenData.filteredData[0].correction}}</b></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <form class="example-form">
-      <mat-checkbox color="primary">Скрыть субъективные</mat-checkbox>
+    <form class="example-form form-justify">
+      <mat-checkbox (change)="showSubjectiveMan($event)" color="primary">Скрыть субъективные</mat-checkbox>
       <mat-form-field>
         <input matInput (keyup)="applyFilterMan($event.target.value)" placeholder="Поиск по имени или клубу">
       </mat-form-field>
@@ -26,7 +26,7 @@
       </ng-container>
       <ng-container matColumnDef="club">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Клуб</th>
-        <td mat-cell *matCellDef="let element"> {{element.team}}</td>
+        <td mat-cell *matCellDef="let element"> <span class="three-point-text">{{element.team}}</span></td>
       </ng-container>
       <ng-container matColumnDef="points">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Очки</th>
@@ -56,11 +56,11 @@
         <span>Женщины</span>
       </mat-panel-title>
       <mat-panel-description>
-        <span>Корректировка: <b>-7.64</b></span>
+        <span *ngIf="dataSourceWomenData">Корректировка: <b>-{{dataSourceWomenData.filteredData[0].correction}}</b></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <form class="example-form">
-      <mat-checkbox color="primary">Скрыть субъективные</mat-checkbox>
+    <form class="example-form form-justify">
+      <mat-checkbox (change)="showSubjectiveWoman($event)" color="primary">Скрыть субъективные</mat-checkbox>
       <mat-form-field>
         <input matInput (keyup)="applyFilterWoman($event.target.value)" placeholder="Поиск по имени или клубу">
       </mat-form-field>
@@ -76,7 +76,7 @@
       </ng-container>
       <ng-container matColumnDef="club">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Клуб</th>
-        <td mat-cell *matCellDef="let element"> {{element.team}}</td>
+        <td mat-cell *matCellDef="let element"> <span class="three-point-text">{{element.team}}</span></td>
       </ng-container>
       <ng-container matColumnDef="points">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Очки</th>
@@ -101,5 +101,3 @@
     </table>
   </mat-expansion-panel>
 </div>
-
-

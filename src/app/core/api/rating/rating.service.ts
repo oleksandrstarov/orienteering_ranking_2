@@ -28,7 +28,7 @@ export class RatingService {
       .map(el => (
         new RunnerRatingModel({
           currentPlace: el.CUR_PLACE,
-          currentRank: el.CUR_RANK,
+          currentRank: (el.CUR_RANK - data[0].CUR_RANK).toFixed(2),
           fullName: el.FULLNAME,
           id: el.ID,
           place: el.PLACE,
@@ -36,7 +36,8 @@ export class RatingService {
           points: el.POINTS,
           pointsDiff: el.POINTS_DIFF,
           subjective: el.SUBJECTIVE,
-          team: el.TEAM
+          team: el.TEAM,
+          correction: data[0].CUR_RANK
         })
       ));
   }
