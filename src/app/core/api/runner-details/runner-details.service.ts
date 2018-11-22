@@ -38,7 +38,7 @@ export class RunnerDetailsService {
     return data.map(el => (
       new RunnerResultsModel({
         date: new Date(el.DATE),
-        name: el.NAME,
+        name: el.NAME || 'Субьективные',
         competition: el.COMPETITION,
         group: el.GROUP,
         time: el.TIME,

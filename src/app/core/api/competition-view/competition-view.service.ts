@@ -49,7 +49,7 @@ export class CompetitionViewService {
           date: elem.DATE,
           timeBehind: elem.TIME_BEHIND || '+0:00',
           name: elem.NAME,
-          points: elem.POINTS,
+          points: (elem.POINTS).toFixed(2),
           time: elem.TIME
         })
       );

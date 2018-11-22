@@ -13,6 +13,7 @@ export class RunnerRatingModel {
   team: string;
   state: string;
   info: string;
+  correction: number;
 
   constructor (data: any) {
     Object.assign(this, data);

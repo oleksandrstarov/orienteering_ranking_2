@@ -1,15 +1,19 @@
 @import './variables';
 
-h2 {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-size: 2.3rem;
-  margin: $header-margin;
+.mat-card-header {
+  .mat-card-title {
+    font-size: 20px;
+  }
 }
 
-h3 {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-size: 1.2rem;
-  margin: $header-margin;
+.mat-card-header {
+  .mat-card-header-text {
+    margin: 0;
+  }
+}
+
+.mat-expansion-panel-header {
+  font-size: 20px;
 }
 
 .mat-icon.fa {
@@ -23,6 +27,22 @@ h3 {
 td.mat-cell.mat-column-status {
   &:first-of-type {
     padding: 1.2rem;
+  }
+}
+
+table {
+  td.mat-cell,
+  td.mat-footer-cell,
+  th.mat-header-cell {
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+  }
+
+  td.mat-cell.mat-column-status {
+    &:first-of-type {
+      padding: 1rem 1.5rem;
+      box-sizing: border-box;
+    }
   }
 }
 

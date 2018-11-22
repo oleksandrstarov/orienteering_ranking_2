@@ -40,7 +40,7 @@ export class DashboardService {
       .filter(el => el.SEX === sex)
       .map(el => (
           new LeaderModel({
-            duration: el.DURATION,
+            duration: Math.floor(el.DURATION),
             fullName: el.FULLNAME,
             id: el.ID,
             place: el.PLACE,

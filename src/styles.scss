@@ -8,18 +8,40 @@ html {
 }
 
 body {
+  font-size: 10px;
   margin: $header-height 0 0;
+  overflow-y: scroll;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-align: justify;
   height: calc(100% - 5rem);
 }
 
+h1,
+h2,
+h3 {
+  margin: 1.5rem 0 1rem;
+  font-weight: 300;
+}
+
 h1 {
-  margin: 1rem 0 .5rem .5rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
 }
 
 app-root {
   display: block;
   height: 100%;
+}
+
+.mat-tooltip {
+  font-size: 1.3rem;
 }
 
 .wrapper-base-margin.margin {

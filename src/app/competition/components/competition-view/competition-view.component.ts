@@ -11,7 +11,7 @@ import { DISPLAYED_COLUMNS } from '../../../shared/const/displayed-columns.const
 @Component({
   selector: 'app-competition-view',
   templateUrl: './competition-view.component.html',
-  styleUrls: ['./competition-view.component.css']
+  styleUrls: ['./competition-view.component.scss']
 })
 export class CompetitionViewComponent implements OnInit {
   id: number;
@@ -22,9 +22,10 @@ export class CompetitionViewComponent implements OnInit {
   runnersGroupWoman = [];
   isLoaded = false;
   displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
+  ngxScrollToOffset: number;
 
-  constructor( private route: ActivatedRoute, private service: CompetitionViewService ) {
-
+  constructor(private route: ActivatedRoute, private service: CompetitionViewService) {
+    this.ngxScrollToOffset = -55;
   }
 
   ngOnInit(): void {

@@ -61,7 +61,7 @@
         6 стартов начиная с дня первого попадания спортсмена в ретинг с шагом в месяц в прошлое согласно таблице ниже
         (основаны на статистике отношений скоростей на дистанции по группам):
       </p>
-      <mat-grid-list cols="4" [rowHeight]="matVars.rowHeight" [gutterSize]="matVars.gutterSize">
+      <mat-grid-list cols="6" [rowHeight]="matVars.rowHeight" [gutterSize]="matVars.gutterSize">
         <mat-grid-tile *ngFor="let link of data">{{ link.name }} : {{ link.points }}</mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>
@@ -102,6 +102,26 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
   <dl>
+    <dt><strong>v.: 0.9.2 / 2018-11-23</strong></dt>
+    <dd>-Implement Preloader to all app pages</dd>
+    <dd>-Implement unit tests into application</dd>
+    <dd>-Perform design review and fix issues</dd>
+    <dd>-Implement chart to runner view page</dd>
+    <dd>-Implement Splash screen and Preloader to all pages</dd>
+    <dt><strong>v.: 0.9.1 / 2018-11-09</strong></dt>
+    <dd>-Migrate project to angular 7</dd>
+    <dd>-Implement competition view page</dd>
+    <dd>-Implement runner view page</dd>
+    <dd>-Iplement runners table page</dd>
+    <dd>-Implement dashboard</dd>
+    <dt><strong>v.: 0.9.0 / 2018-10-26</strong></dt>
+    <dd>-Implement footer</dd>
+    <dd>-Create environments</dd>
+    <dd>-Implement header with navigation</dd>
+    <dd>-Implement about page</dd>
+    <dd>-Implement competitions page</dd>
+    <dd>-Create modules with placeholders components for each routing endpoint (use lazyloading)</dd>
+    <dd>-Create routing for ng app</dd>
     <dt><strong>v.: 0.8.0 / 2017-11-27</strong></dt>
     <dd>-MeOS results files support</dd>
     <dt><strong>v.: 0.7.2 / 2017-10-11</strong></dt>
