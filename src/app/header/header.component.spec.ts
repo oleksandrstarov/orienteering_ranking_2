@@ -1,4 +1,6 @@
+import { MatListModule, MatIconModule, MatCardModule, MatTabsModule } from '@angular/material';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeaderComponent } from './header.component';
 
@@ -8,9 +10,16 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      declarations: [HeaderComponent],
+      imports: [
+        MatListModule,
+        MatIconModule,
+        MatCardModule,
+        MatTabsModule,
+        RouterTestingModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +31,11 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle', () => {
+    component.isMenuOpened = false;
+    component.toggle();
+    expect(component.isMenuOpened).toBe(true);
+  });
+
 });
