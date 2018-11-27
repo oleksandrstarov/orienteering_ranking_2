@@ -41,14 +41,14 @@
       <mat-chip-list>
         <mat-chip
           *ngFor="let group of runnersGroupMan"
-          [ngx-scroll-to-offset]="ngxScrollToOffset"
+          [ngx-scroll-to-offset]="tableHeadersOffset"
           [ngx-scroll-to]="group">
           {{group}}
         </mat-chip>
       </mat-chip-list>
       <div *ngFor="let group of runnersMan; let i = index">
         <h3 id="{{runnersGroupMan[i]}}">{{runnersGroupMan[i]}}</h3>
-        <table mat-table [dataSource]="group" class="wrapper-base-margin margin mat-elevation-z1 full-width-table">
+        <table mat-table [dataSource]="group" class="mat-elevation-z1 full-width-table">
           <ng-container matColumnDef="number">
             <th mat-header-cell *matHeaderCellDef> №</th>
             <td mat-cell *matCellDef="let competition; let i = index"> {{i + 1}}</td>
@@ -80,14 +80,14 @@
       <mat-chip-list>
         <mat-chip
           *ngFor="let group of runnersGroupWoman"
-          [ngx-scroll-to-offset]="ngxScrollToOffset"
+          [ngx-scroll-to-offset]="tableHeadersOffset"
           [ngx-scroll-to]="group">
           {{group}}
         </mat-chip>
       </mat-chip-list>
       <div *ngFor="let group of runnersWoman; let i = index">
         <h3 id="{{runnersGroupWoman[i]}}">{{runnersGroupWoman[i]}}</h3>
-        <table mat-table [dataSource]="group" class="wrapper-base-margin margin mat-elevation-z1 full-width-table">
+        <table mat-table [dataSource]="group" class="mat-elevation-z1 full-width-table">
           <ng-container matColumnDef="number">
             <th mat-header-cell *matHeaderCellDef> №</th>
             <td mat-cell *matCellDef="let competition; let i = index"> {{i + 1}}</td>
