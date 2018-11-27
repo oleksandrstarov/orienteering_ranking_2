@@ -1,3 +1,26 @@
-.full-width-table {
-  width: 100%;
+@import '../../assets/styles/variables';
+
+.column-relative {
+  position: relative;
+}
+
+.position-icon {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  cursor: help;
+}
+
+.three-point-text {
+  max-width: 9rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.example-form.form-justify {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

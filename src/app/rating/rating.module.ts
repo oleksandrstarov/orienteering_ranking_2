@@ -8,12 +8,15 @@ import {
   MatSortModule,
   MatTableModule,
   MatGridListModule,
-  MatDividerModule, MatListModule, MatIconModule, MatCardModule
+  MatDividerModule, MatListModule, MatIconModule, MatCardModule, MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChartsModule } from 'ng2-charts';
 
 import { RatingRoutingModule } from './rating-router.module';
 import { RatingComponent } from './rating.component';
+import { RunnerViewComponent } from './components/runner-view/runner-view.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -30,10 +33,14 @@ import { RatingComponent } from './rating.component';
     MatListModule,
     MatIconModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTooltipModule,
+    ChartsModule,
+    SharedModule
   ],
   declarations: [
-    RatingComponent
+    RatingComponent,
+    RunnerViewComponent
   ],
   exports: []
 })

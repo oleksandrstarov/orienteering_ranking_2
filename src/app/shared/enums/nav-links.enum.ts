@@ -1,6 +1,6 @@
 export enum NavLinksEnum {
   Dashboard = '/dashboard',
-  Rating = '/rating',
+  Rating = '/runners',
   Competition = '/competition',
   AboutRating = '/about-rating'
 }

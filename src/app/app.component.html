@@ -1,9 +1,19 @@
-<header>
-  <app-header></app-header>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<footer>
-  <app-footer></app-footer>
-</footer>
+<div class="container" [hidden]="!isLoaded">
+  <header id="header">
+    <app-header></app-header>
+  </header>
+  <main class="main-content container-wrapper">
+    <div fxLayout="column">
+      <mat-list-item>
+        <h1>
+          Рейтинг спортсменов Харьковской области
+        </h1>
+      </mat-list-item>
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+  <footer class="footer">
+    <app-footer class="container-wrapper"></app-footer>
+  </footer>
+</div>
+<app-splash-screen *ngIf="!isLoaded"></app-splash-screen>

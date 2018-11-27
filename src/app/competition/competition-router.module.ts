@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CompetitionComponent } from './competition.component';
+import { CompetitionListComponent } from './competition-list.component';
+import { CompetitionViewComponent } from './components/competition-view/competition-view.component';
 
 const routes: Routes = [
-  { path: '', component: CompetitionComponent }
+  { path: '', component: CompetitionListComponent },
+  { path: ':id', component: CompetitionViewComponent }
 ];
 
 @NgModule({

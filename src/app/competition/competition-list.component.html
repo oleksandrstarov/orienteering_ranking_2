@@ -1,0 +1,32 @@
+<app-preloader *ngIf="!isLoaded"></app-preloader>
+<table mat-table matSort matSortActive="date" matSortDisableClear matSortDirection="desc" [dataSource]="dataSource"
+       class="mat-elevation-z1">
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container [ngSwitch]="element.status">
+        <mat-icon class="success-icon" *ngSwitchCase="competitionStatus.IMPORTED">check icon</mat-icon>
+        <mat-icon class="error-icon" *ngSwitchCase="competitionStatus.INVALID">close icon</mat-icon>
+        <mat-icon class="pending-icon" *ngSwitchDefault>access_time icon</mat-icon>
+      </ng-container>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Дата</th>
+    <td class="date-column" mat-cell *matCellDef="let element"> {{element.date | date: 'dd-MM-yyy'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Название</th>
+    <td mat-cell *matCellDef="let element"><a [routerLink]="element.id">{{element.name}}</a></td>
+  </ng-container>
+  <ng-container matColumnDef="notes">
+    <th mat-header-cell *matHeaderCellDef> Примечание</th>
+    <td mat-cell *matCellDef="let element"> {{element.notes}}</td>
+  </ng-container>
+  <ng-container matColumnDef="runners">
+    <th mat-header-cell *matHeaderCellDef> Учасники</th>
+    <td mat-cell *matCellDef="let element"> {{element.runners}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

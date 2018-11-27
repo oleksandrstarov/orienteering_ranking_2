@@ -1,3 +1,208 @@
-<p>
-  about-rating works!
-</p>
+<app-preloader *ngIf="!isLoaded"></app-preloader>
+<div fxLayout="row wrap">
+  <mat-card fxFlex="1 0 0" class="wrapper-base-margin margin">
+    <mat-card-header>
+      <mat-card-title>Описание системы подсчета</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        На этом сайте представлен рейтинг спортсменов, которые принимали участие в соревнованиях проводимых ХФСО с
+        использованием результатов SFR или WinOrient
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="1 0 0" class="wrapper-base-margin margin">
+    <mat-card-header>
+      <mat-card-title>Группы принимающие участие в рейтинге</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        В текущей версии рейтинг считается для групп M21E, M21A, M20, M18, M16, M30, M35, M40, M45, M50, M55, M60, M65,
+        Ж21Е, Ж21A, Ж20, Ж18, Ж16, Ж30, Ж35, Ж40, Ж45, Ж50, Ж55, Ж60, Ж65. Если таких групп нет в протоколах - рейтинг
+        не
+        рассчитывается. В рассчет принимаются только группы с количеством финишировавших участников 3 или больше,
+        которые
+        имеют результат и место. Протоколы, выложеные на сайте, принимаются в рассчет "как есть", т.е. если участник не
+        имеет права бежать по группе, но получил результат и не отмечет как "ВК" - очки также будут насчитаны.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div fxLayout="column wrap">
+  <mat-card fxFlex="1 0 0" class="wrapper-base-margin margin">
+    <mat-card-header>
+      <mat-card-title>Формула с сайта федерации ориентирования Швеции</mat-card-title>
+      <mat-card-subtitle>(с некоторыми изменениями)</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    <pre>
+      <strong>Points (P) = (Time - (TM - PM /  KK)) * KK</strong>
+      <strong>KK  =  (60 + PM) / TM)</strong>
+      где:
+      <strong>P </strong>- очки за конкретный старт
+      <strong>Time</strong> - время участника в секундах
+      <strong>TM</strong> - среднее время трех лучших спортсменов (первые три места) - если среднее значение больше лучшего времени на 10%, то использыется лечшее время + 10% чтобы избежать нереальных очков у победителей в группах с низкой плотностью результатов
+      <strong>РМ</strong> - среднее значение очков трех стартовавших спортсменов с минимальным лучшими очками
+      <strong>КК</strong> - коэфициент корреляции
+      <strong>60</strong> - значение константы (примерное время для длинной дистанции)
+    </pre>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="1 0 0" class="wrapper-base-margin margin">
+    <mat-card-header>
+      <mat-card-title>Максимальный лимит очков, субьективные очки</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Максимальный лимит - 90 очков.
+      </p>
+      <p>
+        Субьективные очки -присваивается первоначально каждому спортсмену в виде очков за
+        6 стартов начиная с дня первого попадания спортсмена в ретинг с шагом в месяц в прошлое согласно таблице ниже
+        (основаны на статистике отношений скоростей на дистанции по группам):
+      </p>
+      <mat-grid-list cols="6" [rowHeight]="matVars.rowHeight" [gutterSize]="matVars.gutterSize">
+        <mat-grid-tile *ngFor="let link of data">{{ link.name }} : {{ link.points }}</mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div fxLayout="row wrap">
+  <mat-card fxFlex="1 0 0" class="wrapper-base-margin margin">
+    <mat-card-header>
+      <mat-card-title>Ограничения</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Каждые очки действительны в течении года, в рейтинг идут 6 лучших (минимальных) значений за последний год, если
+        стартов недостаточно - присваиваются максимальные очки (90), в момент импорта участник получает 7 стартов, 6
+        субьективных и один реальный за конкретный старт, обновление очков происходит каждое воскресенье в 23.00.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="1 0 0" class="wrapper-base-margin margin">
+    <mat-card-header>
+      <mat-card-title>Что означают очки?</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Значение очков показывает сколько минут спортсмен проиграет идеальному (по Харьковским меркам) победителю на
+        дистанции с временем победителя в 60 минут, для этого на странице "Рейтинг" очки выровнены к нулевым позициям
+        для лидеров, значение выравнивания указано вверху страницы, во всех остальных местах программы указано
+        абсолютное значение очков без выравнивания. Все группы сведены в единый лист, с разделением только по половому
+        признаку. Отдельного просмотра общего рейтинга по группам пока что нет.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-expansion-panel class="wrapper-base-margin margin">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Release progress
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <dl>
+    <dt><strong>v.: 0.9.2 / 2018-11-23</strong></dt>
+    <dd>-Implement Preloader to all app pages</dd>
+    <dd>-Implement unit tests into application</dd>
+    <dd>-Perform design review and fix issues</dd>
+    <dd>-Implement chart to runner view page</dd>
+    <dd>-Implement Splash screen and Preloader to all pages</dd>
+    <dt><strong>v.: 0.9.1 / 2018-11-09</strong></dt>
+    <dd>-Migrate project to angular 7</dd>
+    <dd>-Implement competition view page</dd>
+    <dd>-Implement runner view page</dd>
+    <dd>-Iplement runners table page</dd>
+    <dd>-Implement dashboard</dd>
+    <dt><strong>v.: 0.9.0 / 2018-10-26</strong></dt>
+    <dd>-Implement footer</dd>
+    <dd>-Create environments</dd>
+    <dd>-Implement header with navigation</dd>
+    <dd>-Implement about page</dd>
+    <dd>-Implement competitions page</dd>
+    <dd>-Create modules with placeholders components for each routing endpoint (use lazyloading)</dd>
+    <dd>-Create routing for ng app</dd>
+    <dt><strong>v.: 0.8.0 / 2017-11-27</strong></dt>
+    <dd>-MeOS results files support</dd>
+    <dt><strong>v.: 0.7.2 / 2017-10-11</strong></dt>
+    <dd>-fixed duplicates merge for runners in admin module</dd>
+    <dt><strong>v.: 0.7.1 / 2017-10-11</strong></dt>
+    <dd>-migrated to the new hosting</dd>
+    <dt><strong>v.: 0.7.0 / 2017-06-13</strong></dt>
+    <dd>-bugfix for auto recalculation, all screens are adjusted be to usable at mobile devices, added client cache to
+      speed up continious navigation.
+    </dd>
+    <dt><strong>v.: 0.6.1 / 2017-06-12</strong></dt>
+    <dd>-bugfix for auto recalculation, added mobile-frienly layouts for main screens</dd>
+    <dt><strong>v.: 0.6.0 / 2017-05-26</strong></dt>
+    <dd>-changed logic for recalculation, bug fix, added simple compare runner option from runner view</dd>
+    <dt><strong>v.: 0.5.4 / 2017-04-21</strong></dt>
+    <dd>-admin module updates, added Place to runner view, added 'weeks at position' to leaders at Home view.
+      Recalculation only on Sunday. data updates - every day (23.00)
+    </dd>
+    <dt><strong>v.: 0.5.3 / 2017-04-11</strong></dt>
+    <dd>-ignored groups without 3 finished runners with places assigned.</dd>
+    <dt><strong>v.: 0.5.2 / 2017-04-10</strong></dt>
+    <dd>-added statistic for weekly most progressed/regressed runner, new runners, most active runners shown as list.
+    </dd>
+    <dt><strong>v.: 0.5.1 / 2017-04-07</strong></dt>
+    <dd>-addded this week to previous week indication for runners with place/poinnts progress. Added server cache for
+      performance update.
+    </dd>
+    <dt><strong>v.: 0.5.0 / 2017-03-19</strong></dt>
+    <dd>-release version, added new subjective points based on speed relations between groups from 11 different
+      competitions during period from 2015 to 2017 years, updated admin module for runner data updates and duplicates
+      merging
+    </dd>
+    <dt><strong>v.: 0.4.2 / 2017-03-07</strong></dt>
+    <dd>-Added filter for subjective ranking in runners view, added correction points to keep list started from 0.00 for
+      best runner in each gender, added tracking on sex update for girls who initially ran in man classes
+    </dd>
+    <dt><strong>v.: 0.4.1 / 2017-03-05</strong></dt>
+    <dd>-keep the latest team name for runners, fill birth date for runners with first non-empty value</dd>
+    <dt><strong>v.: 0.4.0 / 2017-03-01</strong></dt>
+    <dd>-major update, added support for groups 16-65, changed default points logic (separate for each group). Updated
+      Competition results view (added accordion for multiple groups). Formula update - the avg time of 3 best runners is
+      limited to be not more than best time x 1.1 (i.e. best time plus 10%) - to avoid unreal hight points for small
+      groups
+    </dd>
+    <dt><strong>v.: 0.3.6 / 2017-02-12</strong></dt>
+    <dd>-added weekly statistics for each runner at runner details page</dd>
+    <dt><strong>v.: 0.3.5 / 2017-02-09</strong></dt>
+    <dd>-minor mobile layout changes, added admin module to the application, menu highlighting</dd>
+    <dt><strong>v.: 0.3.4 / 2016-11-22</strong></dt>
+    <dd>-updated logic - competition results in priority against subjective, highlighted results with subjective values,
+      added statistic screen, added static db for static values
+    </dd>
+    <dt><strong>v.: 0.3.3 / 2016-11-11</strong></dt>
+    <dd>-fixed bugs with async recalculation, added search in rank, minor UI updates for competition screen, added
+      places column for ranking
+    </dd>
+    <dt><strong>v.: 0.3.2 / 2016-11-08</strong></dt>
+    <dd>-formula changed, default time updated from 75 to 60, max points updated from 300 to 90</dd>
+    <dt><strong>v.: 0.3.1 / 2016-10-02</strong></dt>
+    <dd>-db error handlig implemented, minor UI changes (competitions status icons, logos, icons), admin tools work, on
+      demand removing active competition, update title, add by URL
+    </dd>
+    <dt><strong>v.: 0.3.0 / 2016-09-05</strong></dt>
+    <dd>-full Win Orient support, import logic rebuilded</dd>
+    <dt><strong>v.: 0.2.5 / 2016-08-10</strong></dt>
+    <dd>-chaged logic for import competitions(tho СОБ filter is in use now), WinOrient result files support added</dd>
+    <dt><strong>v.: 0.2.4 / 2016-08-08</strong></dt>
+    <dd>-added ability to manually import competitions via URL, switch on and off competiitons, merge duplicates</dd>
+    <dt><strong>v.: 0.2.3 / 2016-08-01</strong></dt>
+    <dd>-added URLs for competitions, minor updates</dd>
+    <dt><strong>v.: 0.2.2 / 2016-07-29</strong></dt>
+    <dd>-added pre-loads to all screens with info from server</dd>
+    <dt><strong>v.: 0.2.1 / 2016-07-26</strong></dt>
+    <dd>-added info screens for Runner and Competition views</dd>
+    <dt><strong>v.: 0.2.0 / 2016-07-20</strong></dt>
+    <dd>-added screens for Runner and Competition views</dd>
+    <dt><strong>v.: 0.1.5 / 2016-07-10</strong></dt>
+    <dd>-added screens for Runner ranking and Competitions list</dd>
+    <dt><strong>v.: 0.1.0 / 2016-07-08</strong></dt>
+    <dd>-backend with simple data presentation</dd>
+    <dt><strong>v.: 0.0.1 / 2016-05-26</strong></dt>
+    <dd>-initial commit, development start (env Cloud9 IDE, using AngularJS, Node and MySQL)</dd>
+  </dl>
+</mat-expansion-panel>

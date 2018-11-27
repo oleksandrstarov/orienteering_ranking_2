@@ -2,16 +2,82 @@
 @import 'assets/styles/mat-ang-custom-style';
 @import 'assets/styles/variables';
 
+html {
+  height: 100%;
+  font-size: 10px;
+}
+
 body {
   font-size: 10px;
   margin: $header-height 0 0;
+  overflow-y: scroll;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-align: justify;
+  height: calc(100% - 5rem);
+}
+
+h1,
+h2,
+h3 {
+  margin: 1.5rem 0 1rem;
+  font-weight: 300;
 }
 
 h1 {
-  margin: 3em 1.5em 1.5em;
-  font-size: 2.5em;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
+.mat-tooltip {
+  font-size: 1.3rem;
 }
 
 .wrapper-base-margin.margin {
   margin: $wrapper-base-margin;
+}
+
+.white-icon {
+  color: $white-color;
+}
+
+.mat-icon.fa {
+  font-family: FontAwesome;
+}
+
+td.mat-cell.mat-column-status {
+  &:first-of-type {
+    padding: 12px;
+  }
+}
+
+.error-icon {
+  color: $error-color;
+}
+
+.success-icon {
+  color: $success-color;
+}
+
+.pending-icon {
+  color: $primary-color;
+}
+
+.stable-icon {
+  color: $gray-color;
+}
+
+.full-width-table {
+  width: 100%;
 }

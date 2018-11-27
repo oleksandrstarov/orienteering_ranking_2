@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule, MatMenuModule } from '@angular/material';
+import { MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
 
+import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-router.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
+import { FooterModule } from './footer/footer.module';
+import { SharedModule } from './shared/shared.module';
+import { DelayInterceptor } from './core/interceptors/delay-interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -25,10 +25,16 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
+    HeaderModule,
+    FooterModule,
+    SharedModule
   ],
   exports: [],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: DelayInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

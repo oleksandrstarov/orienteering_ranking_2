@@ -1,0 +1,58 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '../../assets/styles/variables';
+
+.mat-tab-link {
+  .link-wrapper {
+    line-height: $line-height;
+    display: flex;
+    justify-content: start;
+  }
+
+  &.mat-tab-label-active {
+    color: $primary-color;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (max-width: $screen-width-sm) {
+  .mat-tab-link {
+    .link-wrapper {
+      min-width: 10rem;
+    }
+  }
+
+  .container {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    z-index: 3;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    width: 30px;
+    height: 2px;
+    background-color: $primary-color;
+    margin: 6px 0;
+    transition: .4s;
+  }
+
+  .change .bar1 {
+    transform: rotate(-45deg) translate(-6px, 6px);
+  }
+
+  .change .bar2 {
+    opacity: 0;
+  }
+
+  .change .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
