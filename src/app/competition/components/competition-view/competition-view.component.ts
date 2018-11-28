@@ -23,8 +23,8 @@ export class CompetitionViewComponent implements OnInit {
   isLoaded = false;
   displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
   tableHeadersOffset: number;
-  
-  constructor(private route: ActivatedRoute, 
+
+  constructor(private route: ActivatedRoute,
               private service: CompetitionViewService) {
     this.tableHeadersOffset = -10;
   }
