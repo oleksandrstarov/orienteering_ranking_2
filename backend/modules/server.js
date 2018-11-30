@@ -24,7 +24,10 @@ app.use(compression());
 app.use(session({
   secret: '2C41-4D24-WppQ38S',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1800000
+  }
 }));
 morgan('combined', {
   skip: function (req, res) {
@@ -192,9 +195,7 @@ app.put('/adminLogin', function (req, res) {
   if (req.body.user === 'admin01' && req.body.password.getHashCode() === 32956370) {
     req.session.user = "admin01";
     req.session.admin = true;
-    setTimeout(function () {
-      req.session.destroy();
-    }, 1800000); // 30 minutes
+
     res.end(JSON.stringify({adminPanel: 'app.adminCompetitions'}));
   }
   res.end(JSON.stringify({error: 'invalid password'}));
