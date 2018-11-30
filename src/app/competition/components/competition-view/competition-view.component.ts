@@ -22,10 +22,11 @@ export class CompetitionViewComponent implements OnInit {
   runnersGroupWoman = [];
   isLoaded = false;
   displayedColumns: string[] = DISPLAYED_COLUMNS.singleCompetition;
-  ngxScrollToOffset: number;
+  tableHeadersOffset: number;
 
-  constructor(private route: ActivatedRoute, private service: CompetitionViewService) {
-    this.ngxScrollToOffset = -55;
+  constructor(private route: ActivatedRoute,
+              private service: CompetitionViewService) {
+    this.tableHeadersOffset = -10;
   }
 
   ngOnInit(): void {

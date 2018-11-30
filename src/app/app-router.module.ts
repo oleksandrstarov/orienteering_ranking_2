@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: './about-rating/about-rating.module#AboutRatingModule'
   },
   {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule'
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
     pathMatch: 'full'

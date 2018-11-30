@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   isLoaded = false;
   private readonly allTime = 'A';
   private readonly yearly = 'Y';
+  private readonly displayedRunners = 5;
 
   constructor(private service: DashboardService) {
   }

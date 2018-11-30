@@ -10,11 +10,10 @@ import { CompetitionViewRunnersModel } from '../../../shared/models/competition-
   providedIn: 'root'
 })
 export class CompetitionViewService {
-  private readonly womanGroupIdentifier = 'Ж';
   private readonly baseUrl = `${environment.baseURL}/competitions`;
+  private readonly womanGroupIdentifier = 'Ж';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getStats(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`)

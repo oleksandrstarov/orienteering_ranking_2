@@ -8,8 +8,10 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class CompetitionService {
-  private readonly configUrl = `${environment.baseURL}/competitions`;
-  constructor(private http: HttpClient) { }
+  configUrl = `${environment.baseURL}/competitions`;
+
+  constructor(private http: HttpClient) {
+  }
 
   getCompetitions(): Observable<any> {
     return this.http.get(this.configUrl);
