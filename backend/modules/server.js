@@ -5,7 +5,8 @@ var compression = require('compression'),
   bodyParser = require('body-parser'),
   path = require('path'),
   db = require('./dbUtils.js'),
-  dataUpdater = require('./dataUpdater.js');
+  dataUpdater = require('./dataUpdater.js'),
+  moment = require('moment');
 
 
 this.serverSettings = {
@@ -50,6 +51,7 @@ var recalculating = dataUpdater.isUpdating;
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'content-type');
   if (recalculating()) {
     res.sendStatus(434);
     return;
@@ -192,13 +194,17 @@ app.get('/admin/competitions', auth, function (req, res) {
 });
 
 app.put('/adminLogin', function (req, res) {
+
   if (req.body.user === 'admin01' && req.body.password.getHashCode() === 32956370) {
+    const authUserData = {
+      expires: moment().add(30, 'minutes').valueOf()
+    };
     req.session.user = "admin01";
     req.session.admin = true;
 
-    res.end(JSON.stringify({adminPanel: 'app.adminCompetitions'}));
+    res.end(JSON.stringify(authUserData));
   }
-  res.end(JSON.stringify({error: 'invalid password'}));
+  res.status(401).end(JSON.stringify({error: 'invalid password'}));
 });
 
 app.get('*', function (req, res) {

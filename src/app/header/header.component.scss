@@ -2,10 +2,17 @@
 @import '../../assets/styles/variables';
 
 .mat-tab-link {
+  padding: 0 1rem;
+  min-width: 13rem;
+
   .link-wrapper {
     line-height: $line-height;
     display: flex;
     justify-content: start;
+
+    &.link-admin {
+      color: $error-color;
+    }
   }
 
   &.mat-tab-label-active {
@@ -14,10 +21,36 @@
   }
 }
 
+.log-out {
+  line-height: 2.2rem;
+  font-size: 1.4rem;
+  color: $error-color;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  padding: 0 2.4rem;
+  opacity: .6;
+  cursor: pointer;
+
+  .link-admin {
+    color: $error-color;
+    line-height: 2.2rem;
+    display: flex;
+    justify-content: start;
+    padding: 12px 0;
+  }
+}
+
 @media only screen and (max-width: $screen-width-sm) {
   .mat-tab-link {
     .link-wrapper {
       width: 13rem;
+    }
+  }
+
+  .log-out {
+    .link-admin {
+      width: 13rem;
+      display: flex;
+      margin: 0 auto;
     }
   }
 

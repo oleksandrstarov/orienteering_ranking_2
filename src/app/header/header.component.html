@@ -6,7 +6,7 @@
 </div>
 <nav mat-tab-nav-bar class="navbar">
   <a mat-tab-link
-     *ngFor="let link of navLinks"
+     *ngFor="let link of userNavLinks"
      [routerLink]="link.path"
      routerLinkActive #rla="routerLinkActive"
      [active]="rla.isActive">
@@ -15,4 +15,22 @@
       <span>{{link.label}}</span>
     </div>
   </a>
+  <ng-container *ngIf="isAdmin">
+    <a mat-tab-link
+       *ngFor="let link of adminNavLinks"
+       [routerLink]="link.path"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      <div class="link-wrapper link-admin">
+        <mat-icon>{{link.icon}} icon</mat-icon>
+        <span>{{link.label}}</span>
+      </div>
+    </a>
+    <div class="log-out">
+      <div class="link-wrapper link-admin" (click)="logOut()">
+        <mat-icon>account_circle icon</mat-icon>
+        <span>Выход</span>
+      </div>
+    </div>
+  </ng-container>
 </nav>

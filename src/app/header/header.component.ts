@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NAV_LINKS } from './local/constants/mock-links.const';
+import { USER_NAV_LINKS } from './local/constants/mock-links.const';
+import { ADMIN_NAV_LINKS } from './local/constants/mock-links.const';
+import { AuthenticationService } from '../core/api/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +10,21 @@ import { NAV_LINKS } from './local/constants/mock-links.const';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  navLinks = NAV_LINKS;
+  userNavLinks = USER_NAV_LINKS;
+  adminNavLinks = ADMIN_NAV_LINKS;
   isMenuOpened = true;
+  isAdmin: boolean;
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
+    this.authenticationService.onAuthorize()
+      .subscribe(res => this.isAdmin = res);
+  }
+
+  logOut(): void {
+    this.authenticationService.logout();
   }
 
   toggle(): void {

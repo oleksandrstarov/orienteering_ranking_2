@@ -5,6 +5,8 @@
   color: $white-color;
   font-size: 1.7rem;
   margin-left: .5rem;
+  background: $primary-color;
+  cursor: pointer;
 }
 
 .copyright {
@@ -14,7 +16,3 @@
   margin-left: .5rem;
 }
 
-.admin-btn {
-  pointer-events: none;
-  opacity: .5;
-}
