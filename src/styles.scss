@@ -40,6 +40,10 @@ app-root {
   height: 100%;
 }
 
+a {
+  color: $primary-color;
+}
+
 .mat-tooltip {
   font-size: 1.3rem;
 }
@@ -54,6 +58,12 @@ app-root {
 
 .mat-icon.fa {
   font-family: FontAwesome;
+}
+
+.date-column {
+  white-space: pre;
+  padding: 0 .5rem;
+  text-align: left;
 }
 
 td.mat-cell.mat-column-status {

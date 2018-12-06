@@ -3,3 +3,13 @@
 .past {
   background: $gray-color;
 }
+
+@media only screen and (max-width: $screen-width-md) {
+  .three-point-text {
+    max-width: 10rem;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

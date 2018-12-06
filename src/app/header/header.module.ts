@@ -5,6 +5,7 @@ import { MatListModule, MatIconModule, MatCardModule, MatTabsModule } from '@ang
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HeaderComponent } from './header.component';
+import { ScrollDirective } from '../shared/directives/scroll.directive';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { HeaderComponent } from './header.component';
     MatTabsModule
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    ScrollDirective
   ],
   exports: [
     HeaderComponent

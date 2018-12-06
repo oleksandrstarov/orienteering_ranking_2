@@ -41,8 +41,8 @@ export class RunnerDetailsService {
         name: el.NAME || 'Субьективные',
         competition: el.COMPETITION,
         group: el.GROUP,
-        time: el.TIME,
-        place: el.PLACE,
+        time: (el.TIME === '00:00:00') ? '' : el.TIME,
+        place: (el.PLACE < 1) ? '' : el.PLACE,
         points: el.POINTS,
         actualResult: el.ACT_RESULT
       })

@@ -2,6 +2,10 @@
 @import '../../assets/styles/variables';
 
 .mat-tab-link {
+  &:hover {
+    background: $light-gray-color;
+  }
+
   padding: 0 1rem;
   min-width: 13rem;
 
@@ -37,6 +41,33 @@
     justify-content: start;
     padding: 12px 0;
   }
+}
+
+.header-title {
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+  position: absolute;
+  left: 3.5rem;
+  z-index: 10;
+  padding-left: 1rem;
+
+  &.visible-title {
+    opacity: 1;
+  }
+}
+
+.logo {
+  display: block;
+  border-bottom: 10px solid $error-color;
+  border-top: 10px solid $white-color;
+  border-right: 10px solid $error-color;
+  border-left: 10px solid $white-color;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 14px;
+  left: 15px;
+  z-index: 10;
 }
 
 @media only screen and (max-width: $screen-width-sm) {

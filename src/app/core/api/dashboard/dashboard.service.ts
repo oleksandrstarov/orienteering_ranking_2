@@ -44,7 +44,7 @@ export class DashboardService {
             fullName: el.FULLNAME,
             id: el.ID,
             place: el.PLACE,
-            points: el.POINTS,
+            points: el.POINTS.toFixed(2),
             sex: el.SEX
           })
         )

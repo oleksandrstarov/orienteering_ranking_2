@@ -1,4 +1,8 @@
 <div fxShow fxHide.gt-sm="true" (click)="toggle()"></div>
+<a [href]="'/dashboard'">
+<div class="logo"></div>
+<h4 appScroll class="header-title">Рейтинг спортсменов<br>Харьковской области</h4>
+</a>
 <div class="container" [class.change]="isMenuOpened" (click)="toggle()">
   <div class="bar1"></div>
   <div class="bar2"></div>

@@ -46,10 +46,11 @@ export class CompetitionViewService {
         new CompetitionViewRunnersModel({
           group: elem.COMP_GROUP,
           date: elem.DATE,
-          timeBehind: elem.TIME_BEHIND || '+0:00',
+          timeBehind: elem.TIME_BEHIND,
           name: elem.NAME,
           points: (elem.POINTS).toFixed(2),
-          time: elem.TIME
+          time: (elem.TIME !== '00:00:00') ? elem.TIME : '-',
+          runnerId: elem.RUNNER
         })
       );
       return memo;

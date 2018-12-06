@@ -56,13 +56,14 @@
   <table mat-table [dataSource]="runnerResults" class="mat-elevation-z1 full-width-table">
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> Дата</th>
-      <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd-MM-yyy'}}
+      <td mat-cell *matCellDef="let element" class="date-column"> {{element.date | date: 'dd-MM-yyy'}}
       </td>
     </ng-container>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Соревнования</th>
       <td mat-cell *matCellDef="let element">
-        {{element.name}}
+        <ng-container *ngIf="element.competition !== 0"><a [href]="'/competition/' + element.competition" class="three-point-text">{{element.name}}</a></ng-container>
+        <ng-container *ngIf="element.competition === 0">{{element.name}}</ng-container>
       </td>
     </ng-container>
     <ng-container matColumnDef="group">
