@@ -5,6 +5,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 
 import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-router.module';
@@ -12,6 +13,8 @@ import { AppComponent } from './app.component';
 import { FooterModule } from './footer/footer.module';
 import { SharedModule } from './shared/shared.module';
 import { DelayInterceptor } from './core/interceptors/delay-interceptor';
+import { LoginModule } from './login/login.module';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,11 +32,14 @@ import { DelayInterceptor } from './core/interceptors/delay-interceptor';
     MatListModule,
     HeaderModule,
     FooterModule,
-    SharedModule
+    SharedModule,
+    LoginModule
   ],
   exports: [],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: DelayInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: DelayInterceptor, multi: true },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
