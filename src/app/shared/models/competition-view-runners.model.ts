@@ -5,6 +5,7 @@ export class CompetitionViewRunnersModel {
   name: string;
   points: number;
   time: string;
+  runnerId: number;
 
   constructor (data: any) {
     Object.assign(this, data);

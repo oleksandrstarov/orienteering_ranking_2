@@ -1,1 +1,7 @@
 @import '../../../../assets/styles/variables';
+
+.mat-chip {
+  &:hover {
+    cursor: pointer;
+  }
+}

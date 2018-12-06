@@ -64,6 +64,7 @@ export class DashboardComponent implements OnInit {
     this.topWoman = topWoman;
     this.attendersAllTime = attenders.filter(el => el.period === this.allTime);
     this.attendersYearly = attenders.filter(el => el.period === this.yearly);
+
     this.novices = novices;
     this.runnersUp = runnersUp;
     this.runnersDown = runnersDown;

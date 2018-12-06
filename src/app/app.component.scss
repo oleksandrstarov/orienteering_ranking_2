@@ -12,11 +12,12 @@ header {
 
 .container-wrapper {
   position: relative;
-  max-width: 110em;
+  max-width: 120em;
   width: 100%;
   margin: 0 auto;
-  padding: 1.5em;
+  padding: 0 1.5em;
   display: block;
+  box-sizing: border-box;
 }
 
 .cdk-global-scrollblock {
@@ -40,6 +41,6 @@ header {
 
 @media only screen and (max-width: $screen-width-md) {
   .container-wrapper {
-    width: auto;
+    max-width: 90rem;
   }
 }
