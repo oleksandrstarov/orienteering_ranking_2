@@ -26,6 +26,7 @@ export class RunnerDetailsService {
           name: res.details[0].FULLNAME,
           id: res.details[0].ID,
           place: res.details[0].PLACE,
+          sex: res.details[0].SEX,
           allStarts: res.results.filter(el => !!el.COMPETITION).length,
           team: res.details[0].TEAM,
           runnerResults: this.getRunnerResults(res.results),

@@ -48,6 +48,7 @@
         </div>
       </div>
       <div fxFlex="1 0 0" class="wrapper-base-margin margin">
+        <app-runner-compare [currentRunnerDetails]="runnerDetails"></app-runner-compare>
       </div>
     </div>
   </mat-card-content>
@@ -62,7 +63,7 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Соревнования</th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="element.competition !== 0"><a [href]="'/competition/' + element.competition" class="three-point-text">{{element.name}}</a></ng-container>
+        <ng-container *ngIf="element.competition !== 0"><a [routerLink]="['/competition', element.competition]" class="three-point-text">{{element.name}}</a></ng-container>
         <ng-container *ngIf="element.competition === 0">{{element.name}}</ng-container>
       </td>
     </ng-container>
@@ -95,7 +96,7 @@
   </table>
 </div>
 
-<div style="width: 100%">
+<div style="width: 100%;">
   <canvas
     baseChart
     [chartType]="'line'"

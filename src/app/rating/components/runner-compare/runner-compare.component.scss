@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/variables';
+
+.compare-table {
+  width: 100%;
+  font-size: 1.4rem;
+  border: 1px solid $light-gray-color;
+  border-collapse: collapse;
+
+  td,
+  th {
+    padding: 1rem;
+    border-bottom: 1px solid $light-gray-color;
+  }
+
+  tr {
+    &:nth-child(2n+1) {
+      background: rgba($light-gray-color, $alpha);
+    }
+
+    td {
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+      }
+    }
+  }
+}

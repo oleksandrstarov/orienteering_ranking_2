@@ -8,18 +8,28 @@ import {
   MatSortModule,
   MatTableModule,
   MatGridListModule,
-  MatDividerModule, MatListModule, MatIconModule, MatCardModule, MatTooltipModule
+  MatDividerModule,
+  MatListModule,
+  MatIconModule,
+  MatCardModule,
+  MatTooltipModule,
+  MatAutocompleteModule,
+  MatOptionModule,
+  MatButtonModule, MatDialogModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { RatingRoutingModule } from './rating-router.module';
 import { RatingComponent } from './rating.component';
 import { RunnerViewComponent } from './components/runner-view/runner-view.component';
+import { RunnerCompareComponent } from './components/runner-compare/runner-compare.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     RatingRoutingModule,
     MatSortModule,
@@ -36,11 +46,16 @@ import { SharedModule } from '../shared/shared.module';
     FlexLayoutModule,
     MatTooltipModule,
     ChartsModule,
-    SharedModule
+    SharedModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   declarations: [
     RatingComponent,
-    RunnerViewComponent
+    RunnerViewComponent,
+    RunnerCompareComponent
   ],
   exports: []
 })
