@@ -1,0 +1,58 @@
+<mat-form-field>
+  <input type="text"
+         placeholder="Сравнить с ..."
+         aria-label="Number" matInput
+         [formControl]="myControl"
+         [matAutocomplete]="auto"
+         (click)="getRunnersForSelect()">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions" [value]="option.fullName">
+      {{option.fullName}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<button mat-button (click)="compareRunners()">Сравнить</button>
+
+<ng-template #compareRunnersModal>
+  <ng-container></ng-container>
+  <h2 mat-dialog-title>Сравнение с {{currentRunnerDetails.name}}</h2>
+  <mat-dialog-content>
+    <table border="0" class="compare-table">
+      <tr>
+        <th></th>
+        <th>{{currentRunnerDetails.name}}</th>
+        <th>{{compareRunnerDetails.fullName}}</th>
+      </tr>
+      <tr>
+        <td>Текущий рейтинг</td>
+        <td>{{currentRunnerDetails.rank}}</td>
+        <td>{{compareRunnerDetails.currentRank}}</td>
+      </tr>
+      <tr>
+        <td>Место</td>
+        <td>{{currentRunnerDetails.place}}</td>
+        <td>{{compareRunnerDetails.currentPlace}}</td>
+      </tr>
+      <ng-container *ngIf="allCompetitions">
+        <tr>
+          <td>Общих стартов</td>
+          <td colspan="2" align="center">{{allCompetitions}}</td>
+        </tr>
+        <tr>
+          <td>Победы</td>
+          <td>{{currentRunnerWins}}</td>
+          <td>{{comparedRunnerWins}}</td>
+        </tr>
+        <tr>
+          <td>Средние очки в общих стартах</td>
+          <td>{{averagePointsComparedRunner}}</td>
+          <td>{{averagePointsCurrrentRunner}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Закрыть</button>
+  </mat-dialog-actions>
+</ng-template>
+

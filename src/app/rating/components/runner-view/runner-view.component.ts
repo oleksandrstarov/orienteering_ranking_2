@@ -8,6 +8,7 @@ import { RunnerDetailsModel } from '../../../shared/models/runner-details.model'
 import { DISPLAYED_COLUMNS } from '../../../shared/const/displayed-columns.const';
 import { CHART_COLOR_SETTINGS } from '../../../shared/const/chart-color-settings.const';
 import { CHART_OPTIONS } from '../../../shared/const/chart-options.const';
+import { GenderEnum } from '../../../shared/enums/gender.enum';
 
 @Component({
   selector: 'app-runner-view',
@@ -19,6 +20,7 @@ export class RunnerViewComponent implements OnInit {
   runnerDetails: any;
   runnerResults: any;
   isLoaded = false;
+  runnerGender: GenderEnum;
   chartColors: any[] = CHART_COLOR_SETTINGS;
   chartOptions = CHART_OPTIONS;
   chartData = [
@@ -28,8 +30,8 @@ export class RunnerViewComponent implements OnInit {
   chartLabels = [];
   readonly displayedColumns = DISPLAYED_COLUMNS.runnerResults;
 
-  constructor(private route: ActivatedRoute, private service: RunnerDetailsService) {
-  }
+  constructor(private route: ActivatedRoute,
+              private service: RunnerDetailsService) {}
 
   ngOnInit(): void {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'), 10);
@@ -37,7 +39,7 @@ export class RunnerViewComponent implements OnInit {
       .pipe(
         finalize(() => this.isLoaded = true)
       )
-      .subscribe(({ birth, rank, name, id, place, allStarts, team, runnerResults, runnerStats }) => {
+      .subscribe(({ birth, rank, name, id, place, sex, allStarts, team, runnerResults, runnerStats }) => {
         this.runnerDetails = new RunnerDetailsModel({
           ...this.runnerDetails,
           birth,
@@ -45,6 +47,7 @@ export class RunnerViewComponent implements OnInit {
           name,
           id,
           place,
+          sex,
           allStarts,
           team
         });
@@ -52,6 +55,7 @@ export class RunnerViewComponent implements OnInit {
         this.chartData[0].data = runnerStats.points;
         this.chartData[1].data = runnerStats.places;
         this.chartLabels = runnerStats.date;
+        this.runnerGender = this.runnerDetails.sex;
       });
   }
 }

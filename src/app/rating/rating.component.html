@@ -9,12 +9,12 @@
         <span *ngIf="dataSourceMenData">Корректировка: <b>-{{dataSourceMenData.filteredData[0].correction}}</b></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <form class="example-form form-justify">
+    <div class="example-form form-justify">
       <mat-checkbox (change)="showSubjectiveMan($event)" color="primary">Скрыть субъективные</mat-checkbox>
       <mat-form-field>
         <input matInput (keyup)="applyFilterMan($event.target.value)" placeholder="Поиск по имени или клубу">
       </mat-form-field>
-    </form>
+    </div>
     <table mat-table [dataSource]="dataSourceMen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
@@ -59,12 +59,12 @@
         <span *ngIf="dataSourceWomenData">Корректировка: <b>-{{dataSourceWomenData.filteredData[0].correction}}</b></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <form class="example-form form-justify">
+    <div class="example-form form-justify">
       <mat-checkbox (change)="showSubjectiveWoman($event)" color="primary">Скрыть субъективные</mat-checkbox>
       <mat-form-field>
         <input matInput (keyup)="applyFilterWoman($event.target.value)" placeholder="Поиск по имени или клубу">
       </mat-form-field>
-    </form>
+    </div>
     <table mat-table [dataSource]="dataSourceWomen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>

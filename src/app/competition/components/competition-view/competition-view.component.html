@@ -56,7 +56,7 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Имя</th>
             <td mat-cell *matCellDef="let competition">
-              <a [href]="'/runners/' + competition.runnerId">
+              <a [routerLink]="['/runners', competition.runnerId]">
                 {{competition.name}}
               </a>
             </td>
@@ -99,7 +99,7 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Имя</th>
             <td mat-cell *matCellDef="let competition">
-              <a [href]="'/runners/' + competition.runnerId">
+              <a [routerLink]="['/runners', competition.runnerId]">
                 {{competition.name}}
               </a>
             </td>
