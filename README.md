@@ -55,3 +55,23 @@ Please do not forget to check that you use 2 spaces indentation by default.
 #### .ts .scss linting
 
 There are git-hook set up to check linting of .ts and .scss files before commit. If linting fails - no commit will be done.
+
+#### Admin panel 
+Add new competition:
+1.  Insert the correct url to input
+2.  Push "Add" button
+
+Recalculate competitions:
+1.  Select the required competitions using the checkbox from the first column
+2.  Push "Recalculate" button
+
+Change competition name:
+1.  Select the required competition using the rudio button from the second column
+2.  Change competition name in input
+3.  Push "Save Competition" button
+
+Update all competitions:
+1.  Push "Total Drop" button
+
+Switch between competitions and runners panels:
+1.  Push "Show Admin Runners" / "Show Admin Competitions" button
