@@ -1,0 +1,16 @@
+.new-competition-form .add-link {
+  margin-top: 9px;
+}
+
+.error {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.link-input {
+  width: calc(100% - 8rem);
+}
+
+.form-width {
+  width: 100%;
+}

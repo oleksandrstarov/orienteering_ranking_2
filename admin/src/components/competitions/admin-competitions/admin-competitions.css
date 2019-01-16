@@ -1,0 +1,8 @@
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons-wrapper form {
+  width: calc(100% - 24rem);
+}
