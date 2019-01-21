@@ -2,9 +2,10 @@ import * as moment from 'moment';
 
 export default class AdminService {
 
-  async getResponse(url, data) {
 
-    const res = await fetch(url, data);
+  async getResponse(url, data) {
+    const baseURL = 'http://localhost:8080/admin';
+    const res = await fetch(`${baseURL}${url}`, data);
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}, received ${res.status}`)
     }
@@ -14,7 +15,7 @@ export default class AdminService {
   // admin competitions functions
 
   async getCompetitions() {
-    const response = await this.getResponse(`http://localhost:8080/admin/competitions`, {method: 'GET'});
+    const response = await this.getResponse(`/competitions`, {method: 'GET'});
     return response
       .sort((first, second) => (first.DATE < second.DATE) ? 1 : -1)
       .map(res => {
@@ -32,7 +33,7 @@ export default class AdminService {
   }
 
   async saveCompetition(data) {
-    await this.getResponse(`http://localhost:8080/admin/competitions/updateCompetitionDetails`, {
+    await this.getResponse(`/competitions/updateCompetitionDetails`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({data: data})
@@ -40,7 +41,7 @@ export default class AdminService {
   }
 
   async addCompetition(data) {
-    await this.getResponse(`http://localhost:8080/admin/competitions/addCompetition`, {
+    await this.getResponse(`/competitions/addCompetition`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({data: data})
@@ -48,7 +49,7 @@ export default class AdminService {
   }
 
   async recalculateCompetitions(data) {
-    await this.getResponse(`http://localhost:8080/admin/competitions/recalculate`, {
+    await this.getResponse(`/competitions/recalculate`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({data: data})
@@ -56,7 +57,7 @@ export default class AdminService {
   }
 
   async totalDropCompetitions() {
-    await this.getResponse(`http://localhost:8080/admin/competitions/drop`, {
+    await this.getResponse(`/competitions/drop`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({})
@@ -65,10 +66,10 @@ export default class AdminService {
 
   // admin runners functions
   async getRunners() {
-    const response = await this.getResponse(`http://localhost:8080/admin/runners`, {method: 'GET'});
+    const response = await this.getResponse(`/runners`, {method: 'GET'});
     return response.man
       .concat(response.woman)
-      .sort((first, second) => (first.FULLNAME > second.FULLNAME) ? 1 : -1)
+      .sort((first, second) => (first.FULLNAME > second.FULLNAME) ? 1 : ((second.FULLNAME > first.FULLNAME) ? -1 : 0))
       .map(res => {
       return {
         curPlace: res.CUR_PLACE,
@@ -82,10 +83,70 @@ export default class AdminService {
         sex: res.SEX,
         subjective: res.SUBJECTIVE,
         team: res.TEAM,
-        checked: false
+        checked: false,
+        isVisible: true
       }
     });
   }
 
+  async saveMergedRunners(data) {
+    data.map(el => {
+      el.duplicates = el.duplicates.map(runner => {
+        return {
+        CUR_PLACE: runner.curPlace,
+        CUR_RANK: runner.curRank,
+        FULLNAME: runner.name,
+        ID: runner.id,
+        PLACE: runner.place,
+        PLACE_DIFF: runner.placeDiff,
+        POINTS: runner.points,
+        POINTS_DIFF: runner.pointsDiff,
+        SEX: runner.sex,
+        SUBJECTIVE: runner.subjective,
+        TEAM: runner.team
+      }});
+      el.main = {
+        CUR_PLACE: el.main.curPlace,
+        CUR_RANK: el.main.curRank,
+        FULLNAME: el.main.name,
+        ID: el.main.id,
+        PLACE: el.main.place,
+        PLACE_DIFF: el.main.placeDiff,
+        POINTS: el.main.points,
+        POINTS_DIFF: el.main.pointsDiff,
+        SEX: el.main.sex,
+        SUBJECTIVE: el.main.subjective,
+        TEAM: el.main.team
+      };
+      return {
+        duplicates: el.duplicates,
+        main: el.main
+      };
+    });
+    await this.getResponse(`/runners/merge`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+  }
 
+  async updateSingleRunner(data) {
+    await this.getResponse(`/runners/update`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({data: {
+          CUR_PLACE: data.curPlace,
+          CUR_RANK: data.curRank,
+          FULLNAME: data.name,
+          ID: data.id,
+          PLACE: data.place,
+          PLACE_DIFF: data.placeDiff,
+          POINTS: data.points,
+          POINTS_DIFF: data.pointsDiff,
+          SEX: data.sex,
+          SUBJECTIVE: data.subjective,
+          TEAM: data.team
+        }})
+    });
+  }
 }

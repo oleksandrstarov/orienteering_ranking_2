@@ -21,7 +21,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="Admin wrapper db-controls">
-        { this.state.showCompetitions ? <AdminCompetitions/> : <AdminRunners/>}
+        { this.state.showCompetitions ? <AdminRunners/> : <AdminCompetitions/>}
         <Button className='change-panels-button'
                 onClick={() => this.switchAdminPanels()}
                 color="primary"
