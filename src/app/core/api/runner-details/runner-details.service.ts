@@ -21,14 +21,14 @@ export class RunnerDetailsService {
     return this.http.get(`${this.baseUrl}/${id}`)
       .pipe(
         map((res: any) => ({
-          birth: res.details[0].BIRTH_DATE,
-          rank: res.details[0].CUR_RANK,
-          name: res.details[0].FULLNAME,
-          id: res.details[0].ID,
-          place: res.details[0].PLACE,
-          sex: res.details[0].SEX,
-          allStarts: res.results.filter(el => !!el.COMPETITION).length,
-          team: res.details[0].TEAM,
+          birth: res.details[0].birthDate,
+          rank: res.details[0].curRank,
+          name: res.details[0].fullname,
+          id: res.details[0].id,
+          place: res.details[0].place,
+          sex: res.details[0].sex,
+          allStarts: res.results.filter(el => !!el.competition).length,
+          team: res.details[0].team,
           runnerResults: this.getRunnerResults(res.results),
           runnerStats: this.getRunnerStats(res.stats)
         }))
@@ -36,24 +36,20 @@ export class RunnerDetailsService {
   }
 
   private getRunnerResults(data: any[]): RunnerResultsModel[] {
-    return data.map(el => (
-      new RunnerResultsModel({
-        date: new Date(el.DATE),
-        name: el.NAME || 'Субьективные',
-        competition: el.COMPETITION,
-        group: el.GROUP,
-        time: (el.TIME === '00:00:00') ? '' : el.TIME,
-        place: (el.PLACE < 1) ? '' : el.PLACE,
-        points: el.POINTS,
-        actualResult: el.ACT_RESULT
-      })
-    ));
+    return data
+      .map(el => {
+        el.date = new Date(el.date);
+        el.name = el.name || 'Субьективные';
+        el.time = (el.time === '00:00:00') ? '' : el.time;
+        el.place = (el.place < 1) ? '' : el.place;
+        return el;
+      });
   }
 
   private getRunnerStats(data: any[]): any {
-    return data.reduce((memo, { ENTRY_DATE: date, PLACE: place, POINTS: point }) => {
-      memo.date.push(moment(new Date(date)).locale(LOCALIZATION_SETTINGS.language).format(LOCALIZATION_SETTINGS.dateFormat));
-      memo.points.push(point);
+    return data.reduce((memo, { entryDate, place, points }) => {
+      memo.date.push(moment(new Date(entryDate)).locale(LOCALIZATION_SETTINGS.language).format(LOCALIZATION_SETTINGS.dateFormat));
+      memo.points.push(points);
       memo.places.push(place);
       return memo;
     }, {

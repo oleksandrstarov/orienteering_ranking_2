@@ -1,0 +1,8 @@
+/src/serviceWorker.js
+/src/App.test.js
+/src/index.js
+/src/components/services
+../backend
+../src
+*.test.js
+*js

@@ -1,26 +1,25 @@
-var compression = require('compression'),
-  express = require('express'),
-  morgan = require('morgan'),
-  session = require('express-session'),
-  bodyParser = require('body-parser'),
-  path = require('path'),
-  db = require('./dbUtils.js'),
-  dataUpdater = require('./dataUpdater.js'),
-  moment = require('moment');
-
+const compression = require('compression');
+const express = require('express');
+const morgan = require('morgan');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const path = require('path');
+const moment = require('moment');
+const db = require('./dbUtils.js');
+const dataUpdater = require('./dataUpdater.js');
 
 this.serverSettings = {
   hostname: '0.0.0.0'
 };
 
-var serverProps = {
+const serverProps = {
   cacheTime: 1200
 };
 
-var hostname = this.serverSettings.hostname || process.env.IP || 'localhost';
-var port = this.serverSettings.port || process.env.PORT || 8080;
+const hostname = this.serverSettings.hostname || process.env.IP || 'localhost';
+const port = this.serverSettings.port || process.env.PORT || 8080;
 
-var app = express();
+const app = express();
 app.use(compression());
 app.use(session({
   secret: '2C41-4D24-WppQ38S',
@@ -31,36 +30,37 @@ app.use(session({
   }
 }));
 morgan('combined', {
-  skip: function (req, res) {
+  skip (req, res) {
     return res.statusCode < 400;
   }
 });
 app.use(morgan('combined'));
-app.use(express.static(__dirname + "./../../dist"));
+app.use(express.static(`${__dirname  }./../../dist`));
 app.use(bodyParser.json());
 
-var auth = function (req, res, next) {
+const auth = function (req, res, next) {
+  return next();
   if (req.session && req.session.user === "admin01" && req.session.admin) {
     return next();
-  } else {
+  } 
     return res.sendStatus(401);
-  }
+  
 };
-var recalculating = dataUpdater.isUpdating;
+const recalculating = dataUpdater.isUpdating;
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
   res.header('Access-Control-Allow-Headers', 'content-type');
   if (recalculating()) {
     res.sendStatus(434);
     return;
   }
   next();
-});
+});dw
 
 app.get('/runners', function (req, res) {
-  var runners = JSON.stringify(db.getDataFromCache('runners'));
+  const runners = JSON.stringify(db.getDataFromCache('runners'));
   res.setHeader('Cache-Control', `public, max-age=${serverProps.cacheTime}`);
   res.end(runners);
 });
@@ -85,7 +85,7 @@ app.get('/runner/:id/:compare', function (req, res) {
 });
 
 app.get('/competitions', function (req, res) {
-  var competitions = JSON.stringify(db.getDataFromCache('competitions'));
+  const competitions = JSON.stringify(db.getDataFromCache('competitions'));
   res.setHeader('Cache-Control', `public, max-age=${serverProps.cacheTime}`);
   res.end(competitions);
 });
@@ -106,7 +106,7 @@ app.get('/stats/dashboard-info', function (req, res) {
 
 
 app.get('/stats', function (req, res) {
-  var statistics = JSON.stringify({stats: db.getDataFromCache('statistics')});
+  const statistics = JSON.stringify({stats: db.getDataFromCache('statistics')});
   res.setHeader('Cache-Control', `public, max-age=${serverProps.cacheTime}`);
   res.end(statistics);
 });
@@ -118,13 +118,13 @@ app.get('/about', function (req, res) {
 });
 
 
-/////////////////////////////////////////////Admin///////////////////////////////////////////////
+// ///////////////////////////////////////////Admin///////////////////////////////////////////////
 
 app.put('/admin/runners/merge', auth, function (req, res) {
   dataUpdater.mergeDuplicates(req.body, function (error) {
     db.fillCache(function () {
       db.getRunnersList(function (err, data) {
-        res.end(JSON.stringify({error: error + err, data: data}));
+        res.end(JSON.stringify({error: error + err, data}));
       });
     })
 
@@ -134,7 +134,7 @@ app.put('/admin/runners/merge', auth, function (req, res) {
 app.put('/admin/runners/update', auth, function (req, res) {
   db.updateRunnerDetails(req.body.data, function (error) {
     db.fillCache(function () {
-      res.end(JSON.stringify({error: error}));
+      res.end(JSON.stringify({error}));
     });
   });
 });
@@ -143,10 +143,10 @@ app.put('/admin/competitions/addCompetition', auth, function (req, res) {
   dataUpdater.manualImport(req.body.data, function (error) {
     db.fillCache(function () {
       if (error) {
-        res.end(JSON.stringify({error: error}));
+        res.end(JSON.stringify({error}));
       } else {
         db.getCompetitionsList(function (error, data) {
-          res.end(JSON.stringify({data: data, error: null}));
+          res.end(JSON.stringify({data, error: null}));
         });
       }
     });
@@ -164,10 +164,10 @@ app.put('/admin/competitions/updateCompetitionDetails', auth, function (req, res
 app.put('/admin/competitions/recalculate', auth, function (req, res) {
   dataUpdater.recalculateCompetitions(req.body.data, function (error) {
     if (error) {
-      res.end(JSON.stringify({error: error}));
+      res.end(JSON.stringify({error}));
     } else {
       db.getCompetitionsList(function (error, data) {
-        res.end(JSON.stringify({data: data, error: null}));
+        res.end(JSON.stringify({data, error: null}));
       });
     }
   });
@@ -176,7 +176,7 @@ app.put('/admin/competitions/recalculate', auth, function (req, res) {
 app.put('/admin/competitions/drop', auth, function (req, res) {
   dataUpdater.dropData(function (error) {
     if (error) {
-      res.end(JSON.stringify({error: error}));
+      res.end(JSON.stringify({error}));
     }
   });
 });
@@ -208,12 +208,12 @@ app.put('/adminLogin', function (req, res) {
 });
 
 app.get('*', function (req, res) {
-  res.status(404).sendFile(path.resolve(__dirname + "./../../dist/404.html"));
+  res.status(404).sendFile(path.resolve(`${__dirname  }./../../dist/404.html`));
 });
 
 module.exports.startServer = function () {
   app.listen(port, hostname, function () {
-    console.log('server running at http://' + hostname + ":" + port + "/");
+    console.log(`server running at http://${  hostname  }:${  port  }/`);
     console.log(__dirname);
   });
 };

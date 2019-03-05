@@ -1,6 +1,6 @@
 export class LeaderModel {
   duration: number;
-  fullName: string;
+  fullname: string;
   id: number;
   place: number;
   points: number;

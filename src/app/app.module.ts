@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { DelayInterceptor } from './core/interceptors/delay-interceptor';
 import { LoginModule } from './login/login.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { ServerDataUpdateInterceptor } from './core/interceptors/server-data-update.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: DelayInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerDataUpdateInterceptor, multi: true },
     CookieService
   ],
   bootstrap: [AppComponent]

@@ -5,8 +5,6 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
 import { LeaderModel } from '../../../shared/models/leader.model';
-import { AttendersModel } from '../../../shared/models/attenders.model';
-import { NoviceModel } from '../../../shared/models/novice.model';
 import { GenderEnum } from '../../../shared/enums/gender.enum';
 
 @Injectable({
@@ -24,10 +22,10 @@ export class DashboardService {
       .pipe(map((res: any) => ({
         topMan: this.getLeaders(res.stats.leaders, GenderEnum.MAN),
         topWoman: this.getLeaders(res.stats.leaders, GenderEnum.WOMAN),
-        attenders: this.getAttenders(res.stats.attenders),
-        novices: this.getNovices(res.stats.progress.novices),
-        runnersUp: this.getNovices(res.stats.progress.up),
-        runnersDown: this.getNovices(res.stats.progress.down)
+        attenders: res.stats.attenders,
+        novices: res.stats.progress.novices,
+        runnersUp: res.stats.progress.up,
+        runnersDown: res.stats.progress.down
       })));
   }
 
@@ -37,42 +35,11 @@ export class DashboardService {
 
   private getLeaders(data: any[], sex: string): LeaderModel[] {
     return data
-      .filter(el => el.SEX === sex)
-      .map(el => (
-          new LeaderModel({
-            duration: Math.floor(el.DURATION),
-            fullName: el.FULLNAME,
-            id: el.ID,
-            place: el.PLACE,
-            points: el.POINTS.toFixed(2),
-            sex: el.SEX
-          })
-        )
-      );
-  }
-
-  private getAttenders(data: any[]): AttendersModel[] {
-    return data
-      .map(el => (
-        new AttendersModel({
-          amount: el.AMOUNT,
-          fullName: el.FULLNAME,
-          id: el.ID,
-          period: el.PERIOD
-        })
-      ));
-  }
-
-  private getNovices(data: any[]): NoviceModel[] {
-    return data
-      .map(el => (
-        new NoviceModel({
-          fullName: el.FULLNAME,
-          id: el.ID,
-          currentPlace: el.CUR_PLACE,
-          place: el.PLACE,
-          placeDiff: el.PLACE_DIFF
-        })
-      ));
+      .filter(el => el.sex === sex)
+      .map(el => {
+        el.duration = Math.floor(el.duration);
+        el.points = el.points.toFixed(2);
+        return el;
+      });
   }
 }

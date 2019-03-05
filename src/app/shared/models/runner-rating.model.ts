@@ -3,7 +3,7 @@ import { RunnerStateEnum } from '../enums/runner-state.enum';
 export class RunnerRatingModel {
   currentPlace: number;
   currentRank: number;
-  fullName: string;
+  fullname: string;
   id: number;
   place: number;
   placeDiff: number;

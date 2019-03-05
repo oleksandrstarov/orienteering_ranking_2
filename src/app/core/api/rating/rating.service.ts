@@ -49,9 +49,9 @@ export class RatingService {
     let pointsComparedRunnerAcc = 0;
 
     data.forEach(el => {
-      pointsCurrentRunnerAcc += el.POINTS;
-      pointsComparedRunnerAcc += el.OPPONENT_POINTS;
-      el.PLACE > el.OPPONENT_PLACE ? compareRunners.winsCurrentRunner++ : compareRunners.winsComparedRunner++;
+      pointsCurrentRunnerAcc += el.points;
+      pointsComparedRunnerAcc += el.opponentPoints;
+      el.place > el.opponentPlace ? compareRunners.winsCurrentRunner++ : compareRunners.winsComparedRunner++;
     });
 
     compareRunners.competitionsCount = data.length;
@@ -63,21 +63,10 @@ export class RatingService {
 
   private getRunners(data: any[]): RunnerRatingModel[] {
     return data
-      .map(el => (
-        new RunnerRatingModel({
-          currentPlace: el.CUR_PLACE,
-          currentRank: (el.CUR_RANK - data[0].CUR_RANK).toFixed(2),
-          fullName: el.FULLNAME,
-          id: el.ID,
-          place: el.PLACE,
-          placeDiff: el.PLACE_DIFF,
-          points: el.POINTS,
-          pointsDiff: el.POINTS_DIFF,
-          subjective: el.SUBJECTIVE,
-          team: el.TEAM,
-          correction: data[0].CUR_RANK
-        })
-      ));
+      .map(el => {
+        el.currentRank = (el.curRank - data[0].curRank).toFixed(2);
+        el.correction = data[0].curRank;
+        return el;
+      });
   }
-
 }

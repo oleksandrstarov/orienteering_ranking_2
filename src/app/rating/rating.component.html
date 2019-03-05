@@ -18,11 +18,11 @@
     <table mat-table [dataSource]="dataSourceMen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
-        <td mat-cell *matCellDef="let element"> {{element.currentPlace}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.curPlace}}</td>
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя</th>
-        <td mat-cell *matCellDef="let element"><a [routerLink]="element.id">{{element.fullName}}</a></td>
+        <td mat-cell *matCellDef="let element"><a [routerLink]="element.id">{{element.fullname}}</a></td>
       </ng-container>
       <ng-container matColumnDef="club">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Клуб</th>
@@ -68,11 +68,11 @@
     <table mat-table [dataSource]="dataSourceWomen" matSort class="mat-elevation-z1 full-width-table">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> №</th>
-        <td mat-cell *matCellDef="let element"> {{element.currentPlace}}</td>
+        <td mat-cell *matCellDef="let element"> {{element.curPlace}}</td>
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя</th>
-        <td mat-cell *matCellDef="let element"><a [routerLink]="element.id">{{element.fullName}}</a></td>
+        <td mat-cell *matCellDef="let element"><a [routerLink]="element.id">{{element.fullname}}</a></td>
       </ng-container>
       <ng-container matColumnDef="club">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Клуб</th>

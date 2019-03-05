@@ -1,0 +1,9 @@
+.input.input-name-width label,
+.input.input-name-width div input {
+  font-size: 1.4rem;
+}
+
+.select-gender select,
+.select-gender select option{
+  font-size: 1.4rem;
+}
