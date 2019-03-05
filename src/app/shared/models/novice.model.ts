@@ -1,5 +1,5 @@
 export class NoviceModel {
-  fullName: string;
+  fullname: string;
   currentPlace: number;
   id: number;
   place?: number;

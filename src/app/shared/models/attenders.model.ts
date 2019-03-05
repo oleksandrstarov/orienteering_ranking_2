@@ -1,6 +1,6 @@
 export class AttendersModel {
   amount: number;
-  fullName: string;
+  fullname: string;
   id: number;
   period: string;
 

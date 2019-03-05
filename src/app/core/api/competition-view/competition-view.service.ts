@@ -25,9 +25,9 @@ export class CompetitionViewService {
   getCompetitionInfo(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`)
       .pipe(map((res: any) => ({
-        name: res.details[0].NAME,
-        date: new Date(res.details[0].DATE),
-        url: res.details[0].URL,
+        name: res.details[0].name,
+        date: new Date(res.details[0].date),
+        url: res.details[0].url,
         members: res.results.length
       })));
   }
@@ -36,23 +36,23 @@ export class CompetitionViewService {
     const competitors = { man: {}, woman: {} };
 
     return data.reduce((memo, elem) => {
-      const groupGender = elem.COMP_GROUP[0];
+      const groupGender = elem.compGroup[0];
       const target = groupGender === this.womanGroupIdentifier ? memo.woman : memo.man;
 
-      if (!target[elem.COMP_GROUP]) {
-        target[elem.COMP_GROUP] = [];
+      if (!target[elem.compGroup]) {
+        target[elem.compGroup] = [];
       }
-      target[elem.COMP_GROUP].push(
+      target[elem.compGroup].push(
         new CompetitionViewRunnersModel({
-          group: elem.COMP_GROUP,
-          date: elem.DATE,
-          timeBehind: elem.TIME_BEHIND,
-          name: elem.NAME,
-          points: (elem.POINTS).toFixed(2),
-          time: (elem.TIME !== '00:00:00') ? elem.TIME : '-',
-          runnerId: elem.RUNNER
-        })
-      );
+          group: elem.compGroup,
+          date: elem.date,
+          timeBehind: elem.timeBehind,
+          name: elem.name,
+          points: (elem.points).toFixed(2),
+          time: (elem.time !== '00:00:00') ? elem.time : '-',
+          runnerId: elem.runner
+        }
+      ));
       return memo;
     }, competitors);
   }

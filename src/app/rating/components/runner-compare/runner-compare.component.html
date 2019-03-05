@@ -6,8 +6,8 @@
          [matAutocomplete]="auto"
          (click)="getRunnersForSelect()">
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredOptions" [value]="option.fullName">
-      {{option.fullName}}
+    <mat-option *ngFor="let option of filteredOptions" [value]="option.fullname">
+      {{option.fullname}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
@@ -21,7 +21,7 @@
       <tr>
         <th></th>
         <th>{{currentRunnerDetails.name}}</th>
-        <th>{{compareRunnerDetails.fullName}}</th>
+        <th>{{compareRunnerDetails.fullname}}</th>
       </tr>
       <tr>
         <td>Текущий рейтинг</td>

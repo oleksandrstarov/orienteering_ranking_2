@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminCompetitionComponent } from './admin-competition/admin-competition.component';
-import { AdminRunnersComponent } from './admin-runners/admin-runners.component';
+import { AdminModuleComponent } from './admin-module/admin-module.component';
 
 const routes: Routes = [
-  { path: 'competition', component: AdminCompetitionComponent },
-  { path: 'runners', component: AdminRunnersComponent },
+  { path: ':competition', component: AdminModuleComponent },
+  { path: ':runners', component: AdminModuleComponent },
   { path: '**', redirectTo: 'competition', pathMatch: 'full' }
 ];
 
@@ -14,4 +13,4 @@ const routes: Routes = [
   exports: [RouterModule],
   imports: [RouterModule.forChild(routes)]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

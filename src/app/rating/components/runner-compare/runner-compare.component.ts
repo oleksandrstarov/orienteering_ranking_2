@@ -74,6 +74,6 @@ export class RunnerCompareComponent implements OnInit {
 
   private filter(value: string): any[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.fullName.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option.fullname.toLowerCase().includes(filterValue));
   }
 }

@@ -1,0 +1,42 @@
+.link {
+  width: 40vw;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.MuiTable-root-148 td,
+.MuiTable-root-148 th {
+  padding: 1.5rem;
+}
+
+.controls-padding span {
+  padding: 0;
+}
+
+td .controls-padding {
+  padding: 0;
+}
+
+.controls-padding label {
+  margin: 0;
+}
+
+.base-margin th {
+  font-size: 1.2rem;
+}
+
+.base-margin td {
+  font-size: 1.4rem;
+}
+
+td.padding-td,
+th.padding-td {
+  padding: 0 0 0 15px;
+}
+
+.date {
+  width: 7.5rem;
+  display: block;
+}

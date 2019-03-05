@@ -1,0 +1,32 @@
+.runners-list {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.trash-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.trash-button span {
+  font-size: 2.4rem;
+  margin-bottom: -5px;
+  transition: transform .2s ease-in-out;
+}
+
+.trash-button span:hover {
+  font-size: 2.4rem;
+  margin-bottom: -5px;
+  transform: rotate(90deg);
+}
+
+.duplicates-runners {
+  font-size: 1.2rem;
+  margin-left: 3rem;
+}
+
+.base-margin.sticky-top {
+  position: sticky;
+  top: 20px;
+}

@@ -4,8 +4,7 @@ import { MatCardModule, MatChipsModule, MatIconModule, MatSortModule, MatTableMo
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AdminRoutingModule } from './admin-router.module';
-import { AdminCompetitionComponent } from './admin-competition/admin-competition.component';
-import { AdminRunnersComponent } from './admin-runners/admin-runners.component';
+import { AdminModuleComponent } from './admin-module/admin-module.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -21,8 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     MatChipsModule
   ],
   declarations: [
-    AdminCompetitionComponent,
-    AdminRunnersComponent
+    AdminModuleComponent
   ],
   exports: []
 
